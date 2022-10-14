@@ -24,7 +24,7 @@
 <meta property="og:description" content="HTTP知识学习状态码 HTTP 20X200 OK请求成功，应用最为广泛 如果是GET请求的话，也代表着资源获取成功 201 Created一般在POST请求中使用，代表资源创建成功 可以参考https:&#x2F;&#x2F;q.shanyue.tech&#x2F;http&#x2F;20x.html#_201-created在POST请求后返回201 204 No ContentNo Content，即服务器不会发送响应体（Res">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-14T07:07:26.000Z">
-<meta property="article:modified_time" content="2022-10-14T07:11:29.312Z">
+<meta property="article:modified_time" content="2022-10-14T07:32:40.046Z">
 <meta property="article:author" content="Seddon">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content="状态码">
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          409 字
+          1.2k 字
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          4 分钟
+          11 分钟
         
       </span>
     
@@ -289,7 +289,18 @@
 <h3 id="206-Partial-Content"><a href="#206-Partial-Content" class="headerlink" title="206 Partial Content"></a>206 Partial Content</h3><p>partial:部分的</p>
 <p>当客户端指定 <code>Range</code> 范围请求头时，服务器端将会返回部分资源，即<code>Partial Content</code>，此时状态码为 206。</p>
 <p>主要是在针对较大的音视频资源，使用206表示<strong>部分内容。</strong></p>
+<h2 id="状态码-HTTP-30X"><a href="#状态码-HTTP-30X" class="headerlink" title="状态码 HTTP 30X"></a>状态码 HTTP 30X</h2><p>30X为重定向部分。</p>
+<h3 id="301-Moved-Permanently"><a href="#301-Moved-Permanently" class="headerlink" title="301 Moved Permanently"></a>301 Moved Permanently</h3><p>永久重定向，<strong>该操作比较危险</strong>，需要谨慎操作：如果设置了301，但是一段时间后又想取消，但是浏览器中已经有了缓存，还是会重定向。</p>
+<h3 id="302-Found"><a href="#302-Found" class="headerlink" title="302 Found"></a>302 Found</h3><p>临时重定向，但是会在重定向的时候改变 method：<strong>把 POST 改成 GET</strong>，于是有了 307。</p>
+<h3 id="307-Temporary-Redirect"><a href="#307-Temporary-Redirect" class="headerlink" title="307 Temporary Redirect"></a>307 Temporary Redirect</h3><p>临时重定向，在重定向时不会改变 method。</p>
+<h3 id="308-Permanent-Redirect"><a href="#308-Permanent-Redirect" class="headerlink" title="308 Permanent Redirect"></a>308 Permanent Redirect</h3><p>永久重定向，在重定向时不会改变 method。</p>
+<h3 id="Location-Header"><a href="#Location-Header" class="headerlink" title="Location Header"></a>Location Header</h3><p>在HTTP重定向时，会使用<code>Location</code>响应头来指明重定向后的地址。HTTP的Header不区分大小写，因此以下的<code>location</code>与<code>Location</code>相同。</p>
+<h3 id="Response-Body"><a href="#Response-Body" class="headerlink" title="Response Body"></a>Response Body</h3><p>301&#x2F;302&#x2F;307&#x2F;308 响应有 Response Body 吗？</p>
+<p>有，如上示例，知乎的重定向就包含响应体。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># 知乎的响应体是一段文字</span><br>$ curl https://www.zhihu.com<br>Redirecting to &lt;a href=<span class="hljs-string">&quot;//www.zhihu.com/signin?next=%2F&quot;</span>&gt;//www.zhihu.com/signin?next=%2F&lt;/a&gt;.<br><br><span class="hljs-comment"># 可通过 content-length 响应头获取响应体的长度</span><br>$ curl -s --<span class="hljs-built_in">head</span> https://www.zhihu.com | grep content-length<br>content-length: 93<br></code></pre></td></tr></table></figure>
 
+<h3 id="Client-and-follow-redirect"><a href="#Client-and-follow-redirect" class="headerlink" title="Client and follow redirect"></a>Client and follow redirect</h3><p>在客户端发送请求时，如果发现某网址经重定向，则可再次向重定向后的网址发送请求。一些 HTTP 客户端工具，则会自动集成该功能，比如 curl 通过 –location 即可。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">$ curl --<span class="hljs-built_in">head</span> --location https://zhihu.com<br></code></pre></td></tr></table></figure>
                 
               </div>
             
