@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>HTTP知识学习(状态码)</title>
+    <link href="/2022/10/14/HTTP%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0-%E7%8A%B6%E6%80%81%E7%A0%81/"/>
+    <url>/2022/10/14/HTTP%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0-%E7%8A%B6%E6%80%81%E7%A0%81/</url>
+    
+    <content type="html"><![CDATA[<h1 id="HTTP知识学习"><a href="#HTTP知识学习" class="headerlink" title="HTTP知识学习"></a>HTTP知识学习</h1><h2 id="状态码-HTTP-20X"><a href="#状态码-HTTP-20X" class="headerlink" title="状态码 HTTP 20X"></a>状态码 HTTP 20X</h2><h3 id="200-OK"><a href="#200-OK" class="headerlink" title="200 OK"></a>200 OK</h3><p>请求成功，应用最为广泛</p><p>如果是<code>GET</code>请求的话，也代表着<strong>资源获取成功</strong></p><h3 id="201-Created"><a href="#201-Created" class="headerlink" title="201 Created"></a>201 Created</h3><p>一般在<code>POST</code>请求中使用，代表<strong>资源创建成功</strong></p><p>可以参考<a href="https://q.shanyue.tech/http/20x.html#_201-created">https://q.shanyue.tech/http/20x.html#_201-created</a><br>在<code>POST</code>请求后返回201</p><h3 id="204-No-Content"><a href="#204-No-Content" class="headerlink" title="204 No Content"></a>204 No Content</h3><p>No Content，即服务器不会发送响应体（Response Body）。</p><p>它有以下场景：</p><ol><li>PUT 请求，修改资源的某个状态，此时 204 代表修改成功，无需响应体。见 RFC7231之 204 状态码(opens new window)</li><li>DELETE&#x2F;OPTION 请求</li><li>打点 API</li></ol><h3 id="206-Partial-Content"><a href="#206-Partial-Content" class="headerlink" title="206 Partial Content"></a>206 Partial Content</h3><p>partial:部分的</p><p>当客户端指定 <code>Range</code> 范围请求头时，服务器端将会返回部分资源，即<code>Partial Content</code>，此时状态码为 206。</p><p>主要是在针对较大的音视频资源，使用206表示<strong>部分内容。</strong></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>前端</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>前端</tag>
+      
+      <tag>状态码</tag>
+      
+      <tag>HTTP</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>第一篇文章</title>
     <link href="/2022/10/14/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/"/>
     <url>/2022/10/14/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
