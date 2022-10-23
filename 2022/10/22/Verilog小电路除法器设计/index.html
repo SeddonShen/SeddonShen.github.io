@@ -16,24 +16,21 @@
   <meta name="author" content="Seddon">
   <meta name="keywords" content="">
   
-    <meta name="description" content="HTTP知识学习 HeaderHTTP 缓存分为以下两种，两者都是通过 HTTP 响应头控制缓存。  强制缓存 协商缓存  强制缓存再次请求时无需再向服务器发送请求 1234          client         serverGET &#x2F;a.ab389z.js -------&gt;                &lt;------- 200 OK(再也不会发请求) 与之相关的 Resp">
+    <meta name="description" content="1234567891011121314151617181920212223242526module Non_restoring_Divider#(parameter N &#x3D; 4)(	input 	   [2 * N-2:0] dividend_i,	input 	   [N-1:0] divisor_i,	output  [N-1:0] quotient_o,	output  [2 * N-2:0">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTTP知识学习(Header)">
-<meta property="og:url" content="http://seedonshen.me/2022/10/15/HTTP%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0-Header/index.html">
+<meta property="og:title" content="Verilog小电路除法器设计">
+<meta property="og:url" content="http://seedonshen.me/2022/10/22/Verilog%E5%B0%8F%E7%94%B5%E8%B7%AF%E9%99%A4%E6%B3%95%E5%99%A8%E8%AE%BE%E8%AE%A1/index.html">
 <meta property="og:site_name" content="Seddon&#39;s Blog">
-<meta property="og:description" content="HTTP知识学习 HeaderHTTP 缓存分为以下两种，两者都是通过 HTTP 响应头控制缓存。  强制缓存 协商缓存  强制缓存再次请求时无需再向服务器发送请求 1234          client         serverGET &#x2F;a.ab389z.js -------&gt;                &lt;------- 200 OK(再也不会发请求) 与之相关的 Resp">
+<meta property="og:description" content="1234567891011121314151617181920212223242526module Non_restoring_Divider#(parameter N &#x3D; 4)(	input 	   [2 * N-2:0] dividend_i,	input 	   [N-1:0] divisor_i,	output  [N-1:0] quotient_o,	output  [2 * N-2:0">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-10-15T03:47:35.000Z">
-<meta property="article:modified_time" content="2022-10-15T03:56:16.029Z">
+<meta property="article:published_time" content="2022-10-22T08:45:34.000Z">
+<meta property="article:modified_time" content="2022-10-23T16:20:49.588Z">
 <meta property="article:author" content="Seddon">
-<meta property="article:tag" content="前端">
-<meta property="article:tag" content="HTTP">
-<meta property="article:tag" content="Header">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>HTTP知识学习(Header) - Seddon&#39;s Blog</title>
+  <title>Verilog小电路除法器设计 - Seddon&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +195,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="HTTP知识学习(Header)"></span>
+            <span id="subtitle" data-typed-text="Verilog小电路除法器设计"></span>
           
         </div>
 
@@ -209,8 +206,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-10-15 11:47" pubdate>
-          2022年10月15日 中午
+        <time datetime="2022-10-22 16:45" pubdate>
+          2022年10月22日 下午
         </time>
       </span>
     
@@ -221,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          694 字
+          1.9k 字
         
       </span>
     
@@ -232,7 +229,7 @@
         
         
         
-          6 分钟
+          16 分钟
         
       </span>
     
@@ -270,44 +267,17 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">HTTP知识学习(Header)</h1>
+            <h1 style="display: none">Verilog小电路除法器设计</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="HTTP知识学习-Header"><a href="#HTTP知识学习-Header" class="headerlink" title="HTTP知识学习 Header"></a>HTTP知识学习 Header</h1><p>HTTP 缓存分为以下两种，两者都是通过 HTTP 响应头控制缓存。</p>
-<ul>
-<li>强制缓存</li>
-<li>协商缓存</li>
-</ul>
-<h2 id="强制缓存"><a href="#强制缓存" class="headerlink" title="强制缓存"></a>强制缓存</h2><p>再次请求时无需再向服务器发送请求</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sh">          client         server<br>GET /a.ab389z.js -------&gt;<br>                &lt;------- 200 OK<br>(再也不会发请求)<br></code></pre></td></tr></table></figure>
-<h3 id="与之相关的-Response-Headers"><a href="#与之相关的-Response-Headers" class="headerlink" title="与之相关的 Response Headers"></a>与之相关的 Response Headers</h3><ul>
-<li>Expires</li>
-</ul>
-<p><strong>使用绝对时间</strong>，且有固定的格式 <a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc822#section-5.1">https://tools.ietf.org/html/rfc822#section-5.1</a></p>
-<ul>
-<li>Cache-Control</li>
-</ul>
-<p>具有强大的缓存控制能力<br>其常用字段：</p>
-<ol>
-<li>no-cache，每次请求需要校验服务器资源的新鲜度</li>
-<li>max-age&#x3D;31536000，浏览器在一年内都不需要向服务器请求资源</li>
-</ol>
-<h2 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h2><p>再次请求时，需要向服务器校验新鲜度，如果资源是新鲜的，返回<code>304</code>，从浏览器获取资源</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sh">           client         server<br>GET /a.js   -----------&gt;<br>                   &lt;----------- 200 OK<br>GET /a.js   -----------&gt;<br>                   &lt;----------- 304 Not Modified<br></code></pre></td></tr></table></figure>
+                <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs Verilog"><span class="hljs-keyword">module</span> Non_restoring_Divider<br>#(<span class="hljs-keyword">parameter</span> N = <span class="hljs-number">4</span>)<br>(<br>	<span class="hljs-keyword">input</span> 	   [<span class="hljs-number">2</span> * N-<span class="hljs-number">2</span>:<span class="hljs-number">0</span>] dividend_i,<br>	<span class="hljs-keyword">input</span> 	   [N-<span class="hljs-number">1</span>:<span class="hljs-number">0</span>] divisor_i,<br>	<span class="hljs-keyword">output</span>  [N-<span class="hljs-number">1</span>:<span class="hljs-number">0</span>] quotient_o,<br>	<span class="hljs-keyword">output</span>  [<span class="hljs-number">2</span> * N-<span class="hljs-number">2</span>:<span class="hljs-number">0</span>] remainder_o<br>);<br><br><span class="hljs-keyword">genvar</span> i;<br><br><span class="hljs-comment">// reg  [2 * N-2:0] tempR [N:0];</span><br><span class="hljs-keyword">logic</span>  [<span class="hljs-number">2</span> * N-<span class="hljs-number">2</span>:<span class="hljs-number">0</span>] tempR [N:<span class="hljs-number">0</span>];<br><span class="hljs-keyword">assign</span> tempR[<span class="hljs-number">0</span>] = dividend_i;<br><span class="hljs-keyword">assign</span> tempR[<span class="hljs-number">1</span>] = tempR[<span class="hljs-number">0</span>] - (divisor_i &lt;&lt; (N-<span class="hljs-number">1</span>));<br><span class="hljs-keyword">assign</span> quotient_o[N-<span class="hljs-number">1</span>] = (tempR[<span class="hljs-number">1</span>][<span class="hljs-number">2</span> * N-<span class="hljs-number">2</span>-<span class="hljs-number">1</span>] == <span class="hljs-number">1&#x27;b1</span>) ? <span class="hljs-number">0</span> : <span class="hljs-number">1</span>;<br><br><span class="hljs-keyword">generate</span><br><span class="hljs-keyword">for</span> (i=<span class="hljs-number">2</span>; i &lt;= N; i=i+<span class="hljs-number">1</span>) <span class="hljs-keyword">begin</span>:shift_and_calculate_result<br>	<span class="hljs-keyword">assign</span> tempR[i] = tempR[i-<span class="hljs-number">1</span>][<span class="hljs-number">2</span> * N-<span class="hljs-number">2</span>-<span class="hljs-number">1</span>] == <span class="hljs-number">1</span> ? (tempR[i-<span class="hljs-number">1</span>] + (divisor_i &lt;&lt; (N-i))) : (tempR[i-<span class="hljs-number">1</span>] - (divisor_i &lt;&lt; (N-i)));<br>	<span class="hljs-keyword">assign</span> quotient_o[N-i] = tempR[i][<span class="hljs-number">2</span> * N-<span class="hljs-number">2</span>-<span class="hljs-number">1</span>] == <span class="hljs-number">1</span> ? <span class="hljs-number">0</span> : <span class="hljs-number">1</span>;<br><span class="hljs-keyword">end</span><br><span class="hljs-keyword">endgenerate</span><br><br>	<span class="hljs-keyword">assign</span> remainder_o = tempR[N] + (<span class="hljs-number">1</span> - quotient_o[<span class="hljs-number">0</span>]) * divisor_i;<br><span class="hljs-keyword">endmodule</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="与之相关的-Request-x2F-Response-Headers"><a href="#与之相关的-Request-x2F-Response-Headers" class="headerlink" title="与之相关的 Request&#x2F;Response Headers"></a>与之相关的 Request&#x2F;Response Headers</h3><ul>
-<li><code>Last-Modified</code>&#x2F;<code>If-Modified-Since</code><ul>
-<li>匹配 Response Header 的 <code>Last-Modified</code> 与 Request Header 的 <code>If-Modified-Since</code> 是否一致。</li>
-</ul>
-</li>
-<li>Etag&#x2F;If-None-Match<ul>
-<li>匹配 Response Header 的 <code>Etag</code> 与 Request Header 的 <code>If-None-Match</code> 是否一致。</li>
-</ul>
-</li>
-</ul>
-
+<p>Verilator:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;verilated_vcd_c.h&quot;</span> <span class="hljs-comment">//可选，如果要导出vcd则需要加上</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;VNon_restoring_Divider.h&quot;</span></span><br> <br><span class="hljs-type">vluint64_t</span> main_time = <span class="hljs-number">0</span>;  <span class="hljs-comment">//initial 仿真时间</span><br> VNon_restoring_Divider *top = <span class="hljs-keyword">new</span> <span class="hljs-built_in">VNon_restoring_Divider</span>(<span class="hljs-string">&quot;top&quot;</span>); <span class="hljs-comment">//调用VNon_restoring_Divider.h里面的IO struct</span><br><span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">sc_time_stamp</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> main_time;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> **argv)</span></span><br><span class="hljs-function"></span>&#123;<br>    Verilated::<span class="hljs-built_in">commandArgs</span>(argc, argv); <br>    Verilated::<span class="hljs-built_in">traceEverOn</span>(<span class="hljs-literal">true</span>); <span class="hljs-comment">//导出vcd波形需要加此语句</span><br> <br>    VerilatedVcdC* tfp = <span class="hljs-keyword">new</span> VerilatedVcdC; <span class="hljs-comment">//导出vcd波形需要加此语句</span><br>    top-&gt;<span class="hljs-built_in">trace</span>(tfp, <span class="hljs-number">0</span>);   <br>    tfp-&gt;<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;wave2.vcd&quot;</span>); <span class="hljs-comment">//打开vcd</span><br>    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">sc_time_stamp</span>() &lt; <span class="hljs-number">5</span> &amp;&amp; !Verilated::<span class="hljs-built_in">gotFinish</span>()) &#123; <span class="hljs-comment">//控制仿真时间</span><br>        top-&gt;dividend_i = <span class="hljs-number">15</span> + <span class="hljs-built_in">sc_time_stamp</span>();<br>        top-&gt;divisor_i = <span class="hljs-number">3</span>;<br>        top-&gt;<span class="hljs-built_in">eval</span>(); <span class="hljs-comment">//计算输出</span><br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Quotient:%d Remainder:%d\n&quot;</span>, top-&gt;quotient_o, top-&gt;remainder_o);<br>        tfp-&gt;<span class="hljs-built_in">dump</span>(main_time); <span class="hljs-comment">//dump wave</span><br>        main_time++; <span class="hljs-comment">//推动仿真时间</span><br>    &#125;<br>    top-&gt;<span class="hljs-built_in">final</span>();<br>    tfp-&gt;<span class="hljs-built_in">close</span>();<br>    <span class="hljs-keyword">delete</span> top;<br> <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>Makefile</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">all:</span><br>	@echo <span class="hljs-string">&quot;Write this Makefile by your self.&quot;</span><br>	verilator -Wno-fatal Non_restoring_Divider.v main.c --top-module Non_restoring_Divider --cc --trace --exe<br>	make -C obj_dir -f VNon_restoring_Divider.mk VNon_restoring_Divider<br>	./obj_dir/VNon_restoring_Divider <br><br><br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -315,38 +285,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%89%8D%E7%AB%AF/" class="category-chain-item">前端</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
-      
-        <a href="/tags/HTTP/">#HTTP</a>
-      
-        <a href="/tags/Header/">#Header</a>
-      
-    </div>
   
 </div>
 
@@ -356,8 +294,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>HTTP知识学习(Header)</div>
-      <div>http://seedonshen.me/2022/10/15/HTTP知识学习-Header/</div>
+      <div>Verilog小电路除法器设计</div>
+      <div>http://seedonshen.me/2022/10/22/Verilog小电路除法器设计/</div>
     </div>
     <div class="license-meta">
       
@@ -369,7 +307,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年10月15日</div>
+          <div>2022年10月22日</div>
         </div>
       
       
@@ -401,9 +339,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/10/21/%E5%89%8D%E7%AB%AFVue%E6%9E%84%E5%BB%BA%E6%97%B6%E7%9A%84%E4%B8%80%E4%BA%9B%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" title="前端Vue构建时的一些名词解释">
+                      <a href="/2022/10/24/RISC-V%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E9%9B%86CSR%E5%AF%84%E5%AD%98%E5%99%A8%E5%88%9D%E6%8E%A2/" title="RISC-V特权指令集CSR寄存器初探">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">前端Vue构建时的一些名词解释</span>
+                        <span class="hidden-mobile">RISC-V特权指令集CSR寄存器初探</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -411,8 +349,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/10/14/RISV-V%E4%B8%8BOpenXiangShan%E5%92%8CNutShell%E5%BC%80%E6%BA%90%E5%A4%84%E7%90%86%E5%99%A8CSR%E9%83%A8%E5%88%86%E5%B7%AE%E5%BC%82%E5%88%9D%E6%8E%A2/" title="RISV-V下OpenXiangShan和NutShell开源处理器CSR部分差异初探">
-                        <span class="hidden-mobile">RISV-V下OpenXiangShan和NutShell开源处理器CSR部分差异初探</span>
+                      <a href="/2022/10/21/%E5%89%8D%E7%AB%AFVue%E6%9E%84%E5%BB%BA%E6%97%B6%E7%9A%84%E4%B8%80%E4%BA%9B%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" title="前端Vue构建时的一些名词解释">
+                        <span class="hidden-mobile">前端Vue构建时的一些名词解释</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -433,7 +371,7 @@
         var options = Object.assign(
           {"clientID":"9c919945ea30538e1b5d","clientSecret":"f890c67334c0486d0c727afb3d26ce5eaf49296e","repo":"SeddonShen.github.io","owner":"SeddonShen","admin":["SeddonShen"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
           {
-            id: 'ac2dfa169404e60dd0ac4ed67984a7da'
+            id: 'cddf221eea9fc9236243957b59889c75'
           }
         )
         var gitalk = new Gitalk(options);
