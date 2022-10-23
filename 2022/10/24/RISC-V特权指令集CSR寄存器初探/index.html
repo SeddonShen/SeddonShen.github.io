@@ -16,15 +16,15 @@
   <meta name="author" content="Seddon">
   <meta name="keywords" content="">
   
-    <meta name="description" content="确定需要基本支持的寄存器S ModeM Mode">
+    <meta name="description" content="前提知识 CSR[11:0] encoding space CSR[11:8] 解码 读写 non-existent CSR raise an illegal instruction exception. Attempts to access aCSR without appropriate privilege level or to write a read-only register also">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RISC-V特权指令集CSR寄存器初探">
 <meta property="og:url" content="http://seedonshen.me/2022/10/24/RISC-V%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E9%9B%86CSR%E5%AF%84%E5%AD%98%E5%99%A8%E5%88%9D%E6%8E%A2/index.html">
 <meta property="og:site_name" content="Seddon&#39;s Blog">
-<meta property="og:description" content="确定需要基本支持的寄存器S ModeM Mode">
+<meta property="og:description" content="前提知识 CSR[11:0] encoding space CSR[11:8] 解码 读写 non-existent CSR raise an illegal instruction exception. Attempts to access aCSR without appropriate privilege level or to write a read-only register also">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-23T16:16:22.000Z">
-<meta property="article:modified_time" content="2022-10-23T16:21:49.904Z">
+<meta property="article:modified_time" content="2022-10-23T17:22:40.010Z">
 <meta property="article:author" content="Seddon">
 <meta property="article:tag" content="RISC-V">
 <meta property="article:tag" content="CSR">
@@ -220,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          22 字
+          1.5k 字
         
       </span>
     
@@ -231,7 +231,7 @@
         
         
         
-          1 分钟
+          13 分钟
         
       </span>
     
@@ -274,7 +274,33 @@
             
               <div class="markdown-body">
                 
-                <h1 id="确定需要基本支持的寄存器"><a href="#确定需要基本支持的寄存器" class="headerlink" title="确定需要基本支持的寄存器"></a>确定需要基本支持的寄存器</h1><h2 id="S-Mode"><a href="#S-Mode" class="headerlink" title="S Mode"></a>S Mode</h2><h2 id="M-Mode"><a href="#M-Mode" class="headerlink" title="M Mode"></a>M Mode</h2>
+                <h1 id="前提知识"><a href="#前提知识" class="headerlink" title="前提知识"></a>前提知识</h1><ul>
+<li>CSR[11:0] encoding space</li>
+<li>CSR[11:8] 解码 读写</li>
+<li>non-existent CSR raise an illegal instruction exception.</li>
+<li>Attempts to access a<br>CSR without appropriate privilege level or to write a read-only register also raise illegal instruction exceptions.</li>
+<li>A read&#x2F;write register might also contain some bits that are read-only, in which case writes to the read-only bits <strong>are ignored</strong></li>
+</ul>
+<h1 id="确定需要基本支持的寄存器"><a href="#确定需要基本支持的寄存器" class="headerlink" title="确定需要基本支持的寄存器"></a>确定需要基本支持的寄存器</h1><p>以下寄存器在NutShell中均进行实现</p>
+<h2 id="S-Mode"><a href="#S-Mode" class="headerlink" title="S Mode"></a>S Mode</h2><ol>
+<li>Sstatus    2. Sedeleg    3. Sideleg   4. Sie</li>
+<li>Stvec      6. Scounteren 7. Sscratch  8. Sepc</li>
+<li>Scause     10. Stval     11. Sip      12. Satp</li>
+</ol>
+<h2 id="M-Mode"><a href="#M-Mode" class="headerlink" title="M Mode"></a>M Mode</h2><ol>
+<li>Mvendorid  2. Marchid    3. Mimpid    4. Mhartid</li>
+<li>Mstatus    6. Misa       7. Medeleg   8.Mideleg    </li>
+<li>Mie        10. Mtvec     11. Mcounteren</li>
+<li>Mscratch  13. Mepc      14. Mcause   15. Mtval</li>
+<li>Mip</li>
+</ol>
+<h1 id="从M部分寄存器讲起"><a href="#从M部分寄存器讲起" class="headerlink" title="从M部分寄存器讲起"></a>从M部分寄存器讲起</h1><h2 id="WARL"><a href="#WARL" class="headerlink" title="WARL"></a>WARL</h2><p>P12<br>原文：<br>Some read&#x2F;write CSR fields are only defined for a subset of bit encodings, but allow any value to be written while guaranteeing to return a legal value whenever read. Assuming that writing the CSR has no other side effects, the range of supported values can be determined by attempting to write a desired setting then reading to see if the value was retained. These fields are labeled WARL in the register descriptions.</p>
+<p>Implementations will not raise an exception on writes of unsupported values to a WARL field. Implementations can return any legal value on the read of a WARL field when the last write was of an illegal value, but the legal value returned should deterministically depend on the illegal written value and the architectural state of the hart.</p>
+<h2 id="Machine-ISA-Register-misa"><a href="#Machine-ISA-Register-misa" class="headerlink" title="Machine ISA Register(misa)"></a>Machine ISA Register(misa)</h2><p>Volume2, P32<br>用于当前支持的RISC-V子集的配置信息</p>
+<h2 id="Machine-Vendor-ID-Register-mvendorid"><a href="#Machine-Vendor-ID-Register-mvendorid" class="headerlink" title="Machine Vendor ID Register(mvendorid)"></a>Machine Vendor ID Register(mvendorid)</h2><p>产品供应商的ID，可以设置非商用</p>
+<h2 id="Machine-Implementation-ID-Register-mimpid"><a href="#Machine-Implementation-ID-Register-mimpid" class="headerlink" title="Machine Implementation ID Register(mimpid)"></a>Machine Implementation ID Register(mimpid)</h2><p>提供处理器实现版本的唯一编码</p>
+<h2 id="Hart-ID-Register-mhartid"><a href="#Hart-ID-Register-mhartid" class="headerlink" title="Hart ID Register(mhartid)"></a>Hart ID Register(mhartid)</h2><p>硬件级线程区分相关<br>关于Hart缩写的解释：<br>HARdware Thread<br>详见：<a target="_blank" rel="noopener" href="https://groups.google.com/a/groups.riscv.org/g/sw-dev/c/QKjUDjz_vKo">https://groups.google.com/a/groups.riscv.org/g/sw-dev/c/QKjUDjz_vKo</a></p>
+
                 
               </div>
             
