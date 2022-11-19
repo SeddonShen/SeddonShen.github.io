@@ -16,23 +16,22 @@
   <meta name="author" content="Seddon">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前提知识 CSR[11:0] encoding space CSR[11:8] 解码 读写 non-existent CSR raise an illegal instruction exception. Attempts to access aCSR without appropriate privilege level or to write a read-only register also">
+    <meta name="description" content="介绍Case Class是一种可以用来快速保存数据的类。自带以下方法：  apply（由于其存在所以不需要new） toString equals hashCode copy注⚠️：其默认是public的，且不能被继承。  示例12345678910111213141516171819object test &amp;#123;    def main(args: Array[String]): Unit">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RISC-V特权指令集CSR寄存器初探">
-<meta property="og:url" content="http://seedonshen.me/2022/10/24/RISC-V%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E9%9B%86CSR%E5%AF%84%E5%AD%98%E5%99%A8%E5%88%9D%E6%8E%A2/index.html">
+<meta property="og:title" content="Scala 样例类case class使用">
+<meta property="og:url" content="http://seedonshen.me/2022/11/19/Scala-%E6%A0%B7%E4%BE%8B%E7%B1%BBcase-class%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Seddon&#39;s Blog">
-<meta property="og:description" content="前提知识 CSR[11:0] encoding space CSR[11:8] 解码 读写 non-existent CSR raise an illegal instruction exception. Attempts to access aCSR without appropriate privilege level or to write a read-only register also">
+<meta property="og:description" content="介绍Case Class是一种可以用来快速保存数据的类。自带以下方法：  apply（由于其存在所以不需要new） toString equals hashCode copy注⚠️：其默认是public的，且不能被继承。  示例12345678910111213141516171819object test &amp;#123;    def main(args: Array[String]): Unit">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-10-23T16:16:22.000Z">
-<meta property="article:modified_time" content="2022-10-23T17:22:40.010Z">
+<meta property="article:published_time" content="2022-11-19T11:29:34.000Z">
+<meta property="article:modified_time" content="2022-11-19T13:25:51.380Z">
 <meta property="article:author" content="Seddon">
-<meta property="article:tag" content="RISC-V">
-<meta property="article:tag" content="CSR">
+<meta property="article:tag" content="Scala">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>RISC-V特权指令集CSR寄存器初探 - Seddon&#39;s Blog</title>
+  <title>Scala 样例类case class使用 - Seddon&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="RISC-V特权指令集CSR寄存器初探"></span>
+            <span id="subtitle" data-typed-text="Scala 样例类case class使用"></span>
           
         </div>
 
@@ -208,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-10-24 00:16" pubdate>
-          2022年10月24日 凌晨
+        <time datetime="2022-11-19 19:29" pubdate>
+          2022年11月19日 晚上
         </time>
       </span>
     
@@ -220,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          560 字
         
       </span>
     
@@ -231,7 +230,7 @@
         
         
         
-          13 分钟
+          5 分钟
         
       </span>
     
@@ -269,38 +268,20 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">RISC-V特权指令集CSR寄存器初探</h1>
+            <h1 style="display: none">Scala 样例类case class使用</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="前提知识"><a href="#前提知识" class="headerlink" title="前提知识"></a>前提知识</h1><ul>
-<li>CSR[11:0] encoding space</li>
-<li>CSR[11:8] 解码 读写</li>
-<li>non-existent CSR raise an illegal instruction exception.</li>
-<li>Attempts to access a<br>CSR without appropriate privilege level or to write a read-only register also raise illegal instruction exceptions.</li>
-<li>A read&#x2F;write register might also contain some bits that are read-only, in which case writes to the read-only bits <strong>are ignored</strong></li>
+                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Case Class是一种可以用来快速保存数据的类。自带以下方法：</p>
+<ul>
+<li>apply（由于其存在所以不需要new）</li>
+<li>toString</li>
+<li>equals</li>
+<li>hashCode</li>
+<li>copy<br>注⚠️：其默认是public的，且不能被<strong>继承</strong>。</li>
 </ul>
-<h1 id="确定需要基本支持的寄存器"><a href="#确定需要基本支持的寄存器" class="headerlink" title="确定需要基本支持的寄存器"></a>确定需要基本支持的寄存器</h1><p>以下寄存器在NutShell中均进行实现</p>
-<h2 id="S-Mode"><a href="#S-Mode" class="headerlink" title="S Mode"></a>S Mode</h2><ol>
-<li>Sstatus    2. Sedeleg    3. Sideleg   4. Sie</li>
-<li>Stvec      6. Scounteren 7. Sscratch  8. Sepc</li>
-<li>Scause     10. Stval     11. Sip      12. Satp</li>
-</ol>
-<h2 id="M-Mode"><a href="#M-Mode" class="headerlink" title="M Mode"></a>M Mode</h2><ol>
-<li>Mvendorid  2. Marchid    3. Mimpid    4. Mhartid</li>
-<li>Mstatus    6. Misa       7. Medeleg   8.Mideleg    </li>
-<li>Mie        10. Mtvec     11. Mcounteren</li>
-<li>Mscratch  13. Mepc      14. Mcause   15. Mtval</li>
-<li>Mip</li>
-</ol>
-<h1 id="从M部分寄存器讲起"><a href="#从M部分寄存器讲起" class="headerlink" title="从M部分寄存器讲起"></a>从M部分寄存器讲起</h1><h2 id="WARL"><a href="#WARL" class="headerlink" title="WARL"></a>WARL</h2><p>P12<br>原文：<br>Some read&#x2F;write CSR fields are only defined for a subset of bit encodings, but allow any value to be written while guaranteeing to return a legal value whenever read. Assuming that writing the CSR has no other side effects, the range of supported values can be determined by attempting to write a desired setting then reading to see if the value was retained. These fields are labeled WARL in the register descriptions.</p>
-<p>Implementations will not raise an exception on writes of unsupported values to a WARL field. Implementations can return any legal value on the read of a WARL field when the last write was of an illegal value, but the legal value returned should deterministically depend on the illegal written value and the architectural state of the hart.</p>
-<h2 id="Machine-ISA-Register-misa"><a href="#Machine-ISA-Register-misa" class="headerlink" title="Machine ISA Register(misa)"></a>Machine ISA Register(misa)</h2><p>Volume2, P32<br>用于当前支持的RISC-V子集的配置信息</p>
-<h2 id="Machine-Vendor-ID-Register-mvendorid"><a href="#Machine-Vendor-ID-Register-mvendorid" class="headerlink" title="Machine Vendor ID Register(mvendorid)"></a>Machine Vendor ID Register(mvendorid)</h2><p>产品供应商的ID，可以设置非商用</p>
-<h2 id="Machine-Implementation-ID-Register-mimpid"><a href="#Machine-Implementation-ID-Register-mimpid" class="headerlink" title="Machine Implementation ID Register(mimpid)"></a>Machine Implementation ID Register(mimpid)</h2><p>提供处理器实现版本的唯一编码</p>
-<h2 id="Hart-ID-Register-mhartid"><a href="#Hart-ID-Register-mhartid" class="headerlink" title="Hart ID Register(mhartid)"></a>Hart ID Register(mhartid)</h2><p>硬件级线程区分相关<br>关于Hart缩写的解释：<br>HARdware Thread<br>详见：<a target="_blank" rel="noopener" href="https://groups.google.com/a/groups.riscv.org/g/sw-dev/c/QKjUDjz_vKo">https://groups.google.com/a/groups.riscv.org/g/sw-dev/c/QKjUDjz_vKo</a></p>
-
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs Scala"><span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">test</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span></span>(args: <span class="hljs-type">Array</span>[<span class="hljs-type">String</span>]): <span class="hljs-type">Unit</span> = &#123;<br>        <span class="hljs-comment">// 使用样例类</span><br>        <span class="hljs-keyword">val</span> person = user(<span class="hljs-string">&quot;aa&quot;</span>, <span class="hljs-number">11</span>)<br>        <span class="hljs-comment">// 使用fun方法解构刚刚创建的对象的数据内容</span><br>        <span class="hljs-keyword">val</span> temp = fun.unapply(person)<br>        println(<span class="hljs-string">&quot;name：&quot;</span> + temp.get._1 + <span class="hljs-string">&quot;\r\n&quot;</span> + <span class="hljs-string">&quot;age：&quot;</span> + temp.get._2)<br>    &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">fun</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unapply</span></span>(user: user): <span class="hljs-type">Option</span>[(<span class="hljs-type">String</span>, <span class="hljs-type">Int</span>)] = &#123;<br>        println(<span class="hljs-string">&quot;------调用unapply方法------&quot;</span>)<br>        <span class="hljs-type">Some</span>(user.name, user.age)<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">// 定义样例类</span><br><span class="hljs-keyword">case</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">user</span>(<span class="hljs-params">name: <span class="hljs-type">String</span>, age: <span class="hljs-type">Int</span></span>)</span><br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -318,7 +299,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" class="category-chain-item">体系结构</a>
+  <a href="/categories/Scala%E5%AD%A6%E4%B9%A0/" class="category-chain-item">Scala学习</a>
   
   
 
@@ -333,9 +314,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/RISC-V/">#RISC-V</a>
-      
-        <a href="/tags/CSR/">#CSR</a>
+        <a href="/tags/Scala/">#Scala</a>
       
     </div>
   
@@ -347,8 +326,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>RISC-V特权指令集CSR寄存器初探</div>
-      <div>http://seedonshen.me/2022/10/24/RISC-V特权指令集CSR寄存器初探/</div>
+      <div>Scala 样例类case class使用</div>
+      <div>http://seedonshen.me/2022/11/19/Scala-样例类case-class使用/</div>
     </div>
     <div class="license-meta">
       
@@ -360,7 +339,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年10月24日</div>
+          <div>2022年11月19日</div>
         </div>
       
       
@@ -392,9 +371,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/11/19/Scala-%E6%A0%B7%E4%BE%8B%E7%B1%BBcase-class%E4%BD%BF%E7%94%A8/" title="Scala 样例类case class使用">
+                      <a href="/2022/11/19/Scala-%E4%BC%B4%E7%94%9F%E5%AF%B9%E8%B1%A1/" title="Scala 伴生对象">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Scala 样例类case class使用</span>
+                        <span class="hidden-mobile">Scala 伴生对象</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -402,8 +381,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/10/22/Verilog%E5%B0%8F%E7%94%B5%E8%B7%AF%E9%99%A4%E6%B3%95%E5%99%A8%E8%AE%BE%E8%AE%A1/" title="Verilog小电路除法器设计">
-                        <span class="hidden-mobile">Verilog小电路除法器设计</span>
+                      <a href="/2022/10/24/RISC-V%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E9%9B%86CSR%E5%AF%84%E5%AD%98%E5%99%A8%E5%88%9D%E6%8E%A2/" title="RISC-V特权指令集CSR寄存器初探">
+                        <span class="hidden-mobile">RISC-V特权指令集CSR寄存器初探</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -424,7 +403,7 @@
         var options = Object.assign(
           {"clientID":"9c919945ea30538e1b5d","clientSecret":"f890c67334c0486d0c727afb3d26ce5eaf49296e","repo":"SeddonShen.github.io","owner":"SeddonShen","admin":["SeddonShen"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
           {
-            id: '5ba251792de51d92e3b933ad2fd032db'
+            id: '51b83fee4dd1eeb6dda8b3e91b1dd994'
           }
         )
         var gitalk = new Gitalk(options);
