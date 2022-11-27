@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>RISC-V 寄存器与ABI名称</title>
+    <link href="/2022/11/28/RISC-V-%E5%AF%84%E5%AD%98%E5%99%A8%E4%B8%8EABI%E5%90%8D%E7%A7%B0/"/>
+    <url>/2022/11/28/RISC-V-%E5%AF%84%E5%AD%98%E5%99%A8%E4%B8%8EABI%E5%90%8D%E7%A7%B0/</url>
+    
+    <content type="html"><![CDATA[<p><img src="/selfimg/reglist.png"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>体系结构</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>RISC-V</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Scala 伴生对象</title>
     <link href="/2022/11/19/Scala-%E4%BC%B4%E7%94%9F%E5%AF%B9%E8%B1%A1/"/>
     <url>/2022/11/19/Scala-%E4%BC%B4%E7%94%9F%E5%AF%B9%E8%B1%A1/</url>
