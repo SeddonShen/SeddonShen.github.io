@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>关于RiscVTests实验过程中的一些记录</title>
+    <link href="/2022/12/04/%E5%85%B3%E4%BA%8ERiscVTests%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AE%B0%E5%BD%95/"/>
+    <url>/2022/12/04/%E5%85%B3%E4%BA%8ERiscVTests%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AE%B0%E5%BD%95/</url>
+    
+    <content type="html"><![CDATA[<h1 id="rv32mi"><a href="#rv32mi" class="headerlink" title="rv32mi"></a>rv32mi</h1><h2 id="rv32mi-breakpoint-hex"><a href="#rv32mi-breakpoint-hex" class="headerlink" title="rv32mi-breakpoint.hex"></a>rv32mi-breakpoint.hex</h2><p>由于未实现tselect寄存器（实现为0），因此该Test直接通过，后续需要进行修改。</p><h2 id="失败"><a href="#失败" class="headerlink" title="失败"></a>失败</h2><ul><li>should pass rv32mi-csr.hex *** FAILED ***</li><li>should pass rv32mi-illegal.hex *** FAILED ***</li><li>should pass rv32mi-ma_addr.hex *** FAILED ***</li><li>should pass rv32mi-ma_fetch.hex *** FAILED ***</li><li>should pass rv32mi-sbreak.hex *** FAILED ***</li><li>should pass rv32mi-scall.hex *** FAILED ***</li><li>should pass rv32mi-shamt.hex *** FAILED ***</li></ul><h2 id="成功"><a href="#成功" class="headerlink" title="成功"></a>成功</h2><ul><li>should pass rv32mi-mcsr.hex</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>体系结构</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>RISC-V</tag>
+      
+      <tag>CSR</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>RISC-V 寄存器与ABI名称</title>
     <link href="/2022/11/28/RISC-V-%E5%AF%84%E5%AD%98%E5%99%A8%E4%B8%8EABI%E5%90%8D%E7%A7%B0/"/>
     <url>/2022/11/28/RISC-V-%E5%AF%84%E5%AD%98%E5%99%A8%E4%B8%8EABI%E5%90%8D%E7%A7%B0/</url>
