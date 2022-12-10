@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>RISC-V 特权指令的一些随笔</title>
+    <link href="/2022/12/10/RISC-V-%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E7%9A%84%E4%B8%80%E4%BA%9B%E9%9A%8F%E7%AC%94/"/>
+    <url>/2022/12/10/RISC-V-%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E7%9A%84%E4%B8%80%E4%BA%9B%E9%9A%8F%E7%AC%94/</url>
+    
+    <content type="html"><![CDATA[<h2 id="三个模式相互切换的操作"><a href="#三个模式相互切换的操作" class="headerlink" title="三个模式相互切换的操作"></a>三个模式相互切换的操作</h2><p>部分摘自：<a href="https://blog.csdn.net/m0_67403188/article/details/126080659">https://blog.csdn.net/m0_67403188/article/details/126080659</a><br><img src="https://img-blog.csdnimg.cn/5473a6dd24d445779c72fe06e891563a.png"></p><h2 id="MStatus"><a href="#MStatus" class="headerlink" title="MStatus"></a>MStatus</h2><p>当使用mret从trap中返回。会根据MPP的值来确定返回的新的特权模式，然后硬件改写mstatus中的MPP&#x3D;0，MIE&#x3D;MPIE，MPIE&#x3D;进trap前的MIE，并设置PC&#x3D;MEPC。</p><h2 id="MCause"><a href="#MCause" class="headerlink" title="MCause"></a>MCause</h2><p>Machine Cause Register寄存器是一个mxlen位的读写寄存器。当一个trap被带入m模式时，mcause被硬件写入一个代码，指示导致该trap的事件。如果trap是由中断引起的，则设置mcause寄存器中的中断bit位。</p><h2 id="MTVEC"><a href="#MTVEC" class="headerlink" title="MTVEC"></a>MTVEC</h2><p>MTVEC用于存储Trap处理程序的地址。就是存储中断向量表的基地址。<br>当MODE&#x3D;Direct时，所有进入机器模式的trap都会导致pc被设置为BASE字段中的地址。当MODE&#x3D; vector时，所有进入机器模式的同步异常都会导致pc被设置为BASE字段中的地址，而异步中断会导致pc被设置为BASE字段中的地址加上中断cause数的四倍。</p><h2 id="MEPC（Machine-Exception-Program-Counter）"><a href="#MEPC（Machine-Exception-Program-Counter）" class="headerlink" title="MEPC（Machine Exception Program Counter）"></a>MEPC（Machine Exception Program Counter）</h2><p>它保存导致trap的指令的地址。</p><h2 id="MIE"><a href="#MIE" class="headerlink" title="MIE"></a>MIE</h2><p>中断使能寄存器，区别于mstatus.MIE作为全局控制，MIE是局部控制。<br>MEIE：M模式外部中断使能位<br>SEIE：S模式外部中断使能位<br>MTIE：M模式timer中断使能位<br>STIE：S模式外部中断使能位<br>MSIE：M模式软中断使能位<br>SSIE：S模式软中断使能位</p><h2 id="MIP"><a href="#MIP" class="headerlink" title="MIP"></a>MIP</h2><p>中断挂起寄存器，包含关于挂起中断的信息。<br>原文博主的理解：当正在处理一个中断，并且mie关掉中断时，同时设置了mip，此时产生了另一个中断则其会被pending，则MIP里对应的中断信息会被记录。（多个中断？）<br>MEIP：M模式外部中断挂起位<br>SEIP：S模式外部中断挂起位<br>MTIP：M模式timer中断挂起位<br>STIP：S模式外部中断挂起位<br>MSIP：M模式软中断挂起位<br>SSIP：S模式软中断挂起位</p><h2 id="MSCRATCH"><a href="#MSCRATCH" class="headerlink" title="MSCRATCH"></a>MSCRATCH</h2><p>mscratch 寄存器用于机器模式下的程序临时保存某些数据。mscratch 寄存器可以提供一<br>种快速的保存和恢复机制。譬如，在进入机器模式的异常处理程序后，将应用程序的某个通<br>用寄存器的值临时存入 mscratch 寄存器中，然后在退出异常处理程序之前，将 mscratch 寄<br>存器中的值读出恢复至通用寄存器。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>体系结构</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>RISC-V</tag>
+      
+      <tag>CSR</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>关于RiscVTests实验过程中的一些记录</title>
     <link href="/2022/12/04/%E5%85%B3%E4%BA%8ERiscVTests%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AE%B0%E5%BD%95/"/>
     <url>/2022/12/04/%E5%85%B3%E4%BA%8ERiscVTests%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AE%B0%E5%BD%95/</url>
