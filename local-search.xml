@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>RISC-V 中断和异常的一些参考资料</title>
+    <link href="/2022/12/15/RISC-V-%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8%E7%9A%84%E4%B8%80%E4%BA%9B%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/"/>
+    <url>/2022/12/15/RISC-V-%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8%E7%9A%84%E4%B8%80%E4%BA%9B%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/</url>
+    
+    <content type="html"><![CDATA[<p>近期罹患COVID-19，暂未更新博客内容，阅读了一些较为不错的资料，通过此篇文章进行收藏，作为学习和相关文章撰写的一些资料参考。</p><p><a href="https://zhuanlan.zhihu.com/p/461722132">RISC-V的中断和异常（含详细过程）</a></p><p>不定期更新……</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>体系结构</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>RISC-V</tag>
+      
+      <tag>CSR</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>RISC-V 特权指令的一些随笔</title>
     <link href="/2022/12/10/RISC-V-%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E7%9A%84%E4%B8%80%E4%BA%9B%E9%9A%8F%E7%AC%94/"/>
     <url>/2022/12/10/RISC-V-%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E7%9A%84%E4%B8%80%E4%BA%9B%E9%9A%8F%E7%AC%94/</url>
