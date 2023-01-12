@@ -4,6 +4,103 @@
   
   
   <entry>
+    <title>RISC-V 模拟器集锦</title>
+    <link href="/2023/01/12/RISC-V-%E6%A8%A1%E6%8B%9F%E5%99%A8%E9%9B%86%E9%94%A6/"/>
+    <url>/2023/01/12/RISC-V-%E6%A8%A1%E6%8B%9F%E5%99%A8%E9%9B%86%E9%94%A6/</url>
+    
+    <content type="html"><![CDATA[<p>汇总一下，可以作为之后调试使用的一些内容。</p><ul><li>QEMU </li><li>NEMU (南京大学)</li><li>Rare (<a href="https://siriusdemon.github.io/Rare/v10-Page-Table.html">https://siriusdemon.github.io/Rare/v10-Page-Table.html</a>)</li><li>tinyemu (由 QEMU 的作者 Fabrice Bellard 所写 开源小型 易于理解 <a href="https://bellard.org/tinyemu/">https://bellard.org/tinyemu/</a>)</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>体系结构</category>
+      
+      <category>操作系统</category>
+      
+      <category>模拟器</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>RISC-V</tag>
+      
+      <tag>Emulator</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>RISC-V 虚拟内存机制随笔</title>
+    <link href="/2023/01/12/RISC-V-%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E6%9C%BA%E5%88%B6%E9%9A%8F%E7%AC%94/"/>
+    <url>/2023/01/12/RISC-V-%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E6%9C%BA%E5%88%B6%E9%9A%8F%E7%AC%94/</url>
+    
+    <content type="html"><![CDATA[<h1 id="相关知识"><a href="#相关知识" class="headerlink" title="相关知识"></a>相关知识</h1><h2 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a>虚拟内存</h2><p>虚拟内存是计算机系统内存管理的一种技术。它使得应用程序认为它拥有连续的可用的内存（一个连续完整的地址空间），而实际上，它通常是被分隔成多个物理内存碎片，还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换。</p><p>通过内存地址虚拟化，可以使得软件在没有访问某虚拟内存地址时不分配具体的物理内存，而只有在实际访问某虚拟内存地址时，操作系统再动态地分配物理内存，建立虚拟内存到物理内存的页映射关系，这种技术称为按需分页（demand paging）。把不经常访问的数据所占的内存空间临时写到硬盘上，这样可以腾出更多的空闲内存空间给经常访问的数据；当CPU访问到不经常访问的数据时，再把这些数据从硬盘读入到内存中，这种技术称为页换入换出（page swap in&#x2F;out）。这种内存管理技术给了程序员更大的内存“空间”，从而可以让更多的程序在内存中并发运行。</p><h2 id="内存管理单元MMU"><a href="#内存管理单元MMU" class="headerlink" title="内存管理单元MMU"></a>内存管理单元MMU</h2><p>MMU（Memory Management Unit）是一种负责处理中央处理器（CPU）的内存访问请求的计算机硬件。它的功能包括虚拟地址到物理地址的转换（即虚拟内存管理）、内存保护、中央处理器高速缓存的控制。</p><p>MMU位于处理器内核和连接高速缓存以及物理存储器的总线之间。如果处理器没有MMU，CPU内部执行单元产生的内存地址信号将直接通过地址总线发送到芯片引脚，被内存芯片接收，这就是物理地址。</p><p>如果MMU存在且启用，CPU执行单元产生的地址信号在发送到内存芯片之前将被MMU截获，这个地址信号称为虚拟地址，MMU会负责把虚拟地址翻译成相应的物理地址，然后发到内存芯片地址引脚上。<strong>简而言之，当处理器内核取指令或者存取数据的时候，会提供一个虚拟地址，这个地址是可执行代码在编译的时候由链接器生成的。MMU负责将虚拟地址转换为物理地址，以在物理存储器中访问相应的内容。</strong></p><h2 id="分页机制"><a href="#分页机制" class="headerlink" title="分页机制"></a>分页机制</h2><p>分页机制的基本思想是将程序的虚拟地址空间划分为连续的，等长的虚拟页。虚拟页和物理页的页长固定且相等（一般情况下为4KB），从而操作系统可以方便的为每个程序构造页表，即虚拟页到物理页的映射关系。逻辑上，该机制下的虚拟地址有两个部分组成：1.虚拟页号；2.页内偏移。在具体的翻译过程中，MMU首先解析得到虚拟地址中的虚拟页号，并通过虚拟页号查找到对应的物理页，用该物理页的起始地址加上页内偏移得到最终的物理地址。</p><h1 id="操作系统的实际转换流程"><a href="#操作系统的实际转换流程" class="headerlink" title="操作系统的实际转换流程"></a>操作系统的实际转换流程</h1><p>当程序（操作系统）在M特权级初始化完成后，CPU将跳转到内核入口点并在S特权级上执行，此时还并没有开启分页模式，<strong>内核的每次访存是直接的物理内存访问</strong>。</p><p>而在开启分页模式之后，内核代码在访存时只能看到内核地址空间，此时每次访存需要通过 MMU 的地址转换。这两种模式之间的过渡在内核初始化期间完成。</p><p>按照 satp CSR 格式要求 构造一个无符号 64 位无符号整数，使得其分页模式为 SV39 ，且将当前多级页表的根节点所在的物理页号填充进去。在 activate 中，我们将这个值写入当前 CPU 的 satp CSR ，从这一刻开始 SV39 分页模式就被启用了，而且 MMU 会使用内核地址空间的多级页表进行地址转换。</p><pre><code class="hljs">摘自Rcore实验指导：我们必须注意切换 satp CSR 是否是一个 平滑 的过渡：其含义是指，切换 satp 的指令及其下一条指令这两条相邻的指令的虚拟地址是相邻的（由于切换 satp 的指令并不是一条跳转指令， pc 只是简单的自增当前指令的字长），而它们所在的物理地址一般情况下也是相邻的，但是它们所经过的地址转换流程却是不同的——切换 satp 导致 MMU 查的多级页表是不同的。这就要求前后两个地址空间在切换 satp 的指令 附近 的映射满足某种意义上的连续性。    </code></pre><h1 id="地址转换"><a href="#地址转换" class="headerlink" title="地址转换"></a>地址转换</h1><p>Sv39的转换即为下图：<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/12/16735103436281.jpg"><br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/12/16735104088393.jpg"></p><p>注：可深入阅读Rare[3]中的相关过程，会有更深的理解。</p><p>详见The RISC-V Instruction Set Manual, Volume II: Privileged Architecture<br>4.3 4.4 节</p><p>相关资料来自：</p><ul><li>[1] Rcore实验指导书 <a href="http://wyfcyx.gitee.io/rcore-tutorial-book-v3/chapter4/6multitasking-based-on-as.html">http://wyfcyx.gitee.io/rcore-tutorial-book-v3/chapter4/6multitasking-based-on-as.html</a></li><li>[2] 知乎作者 水dong方块 <a href="https://www.zhihu.com/question/25628124/answer/2308945192">https://www.zhihu.com/question/25628124/answer/2308945192</a></li><li>[3] Rare: Rust A Riscv Emulator <a href="https://siriusdemon.github.io/Rare/v10-Page-Table.html">https://siriusdemon.github.io/Rare/v10-Page-Table.html</a></li><li>[4] The RISC-V Instruction Set Manual, Volume II: Privileged Architecture <a href="http://www.five-embeddev.com/riscv-isa-manual/latest/supervisor.html#sv32algorithm">http://www.five-embeddev.com/riscv-isa-manual/latest/supervisor.html#sv32algorithm</a></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>体系结构</category>
+      
+      <category>操作系统</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>RISC-V</tag>
+      
+      <tag>CSR</tag>
+      
+      <tag>虚拟内存</tag>
+      
+      <tag>MMU</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Javascript 事件循环</title>
+    <link href="/2023/01/06/Javascript-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/"/>
+    <url>/2023/01/06/Javascript-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/</url>
+    
+    <content type="html"><![CDATA[<p>事件循环：Javascript是单线程的，但是又需要一种机制来处理多个块的执行。</p><p>且执行每个块时调用Javascript引擎，这种机制称为事件循环，与事件绑定概念毫无关系。</p><p>事件循环分了部分：主线程、宏队列、微队列，异步代码都会被丢进宏&#x2F;微队列</p><ul><li>宏任务：script, setTimeout, setInterval, setImmediate, I&#x2F;0, UI rendering</li><li>微任务：process.nextTick, promise. then(), object.observe, Mutationobserver</li></ul><p>主线程只有一个，且执行顺序为：</p><ul><li>1、先执行主线程</li><li>2、遇到宏任务放到宏队列</li><li>3、遇到微任多放到微队列</li><li>4、主线程执行完毕</li><li>5、优先执行微队列，微队列执行完毕</li><li>6、执行一次宏队列的任务，执行完毕</li><li>7、执行微队列，执行完毕</li><li>8、依次循环。。</li></ul><p>两个队列可以理解为两个数组，不停执行两个数组里面的东西，空了就不执行。</p><p>比较通俗的理解： <a href="https://www.bilibili.com/video/BV1om4y1F7jb">https://www.bilibili.com/video/BV1om4y1F7jb</a></p><p>练习题参考：<a href="https://juejin.cn/pin/7183132179717685307">https://juejin.cn/pin/7183132179717685307</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>前端</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>前端</tag>
+      
+      <tag>同步</tag>
+      
+      <tag>异步</tag>
+      
+      <tag>事件循环</tag>
+      
+      <tag>JS</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>前端学习 Web布局</title>
     <link href="/2023/01/04/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0-Web%E5%B8%83%E5%B1%80/"/>
     <url>/2023/01/04/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0-Web%E5%B8%83%E5%B1%80/</url>

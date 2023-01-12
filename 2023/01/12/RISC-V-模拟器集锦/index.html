@@ -16,26 +16,23 @@
   <meta name="author" content="Seddon">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前端学习 Web布局块级元素、行内元素、行内块级元素。g">
+    <meta name="description" content="汇总一下，可以作为之后调试使用的一些内容。  QEMU  NEMU (南京大学) Rare (https:&#x2F;&#x2F;siriusdemon.github.io&#x2F;Rare&#x2F;v10-Page-Table.html) tinyemu (由 QEMU 的作者 Fabrice Bellard 所写 开源小型 易于理解 https:&#x2F;&#x2F;bellard.org&#x2F;tinyemu&#x2F;)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前端学习 Web布局">
-<meta property="og:url" content="http://seedonshen.me/2023/01/04/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0-Web%E5%B8%83%E5%B1%80/index.html">
+<meta property="og:title" content="RISC-V 模拟器集锦">
+<meta property="og:url" content="http://seedonshen.me/2023/01/12/RISC-V-%E6%A8%A1%E6%8B%9F%E5%99%A8%E9%9B%86%E9%94%A6/index.html">
 <meta property="og:site_name" content="Seddon&#39;s Blog">
-<meta property="og:description" content="前端学习 Web布局块级元素、行内元素、行内块级元素。g">
+<meta property="og:description" content="汇总一下，可以作为之后调试使用的一些内容。  QEMU  NEMU (南京大学) Rare (https:&#x2F;&#x2F;siriusdemon.github.io&#x2F;Rare&#x2F;v10-Page-Table.html) tinyemu (由 QEMU 的作者 Fabrice Bellard 所写 开源小型 易于理解 https:&#x2F;&#x2F;bellard.org&#x2F;tinyemu&#x2F;)">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/05/16728440189745.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/05/16728445105161.jpg">
-<meta property="article:published_time" content="2023-01-04T14:41:45.000Z">
-<meta property="article:modified_time" content="2023-01-06T08:42:32.091Z">
+<meta property="article:published_time" content="2023-01-12T07:10:12.000Z">
+<meta property="article:modified_time" content="2023-01-12T07:12:44.180Z">
 <meta property="article:author" content="Seddon">
-<meta property="article:tag" content="前端">
-<meta property="article:tag" content="布局">
+<meta property="article:tag" content="RISC-V">
+<meta property="article:tag" content="Emulator">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/05/16728440189745.jpg">
   
   
   
-  <title>前端学习 Web布局 - Seddon&#39;s Blog</title>
+  <title>RISC-V 模拟器集锦 - Seddon&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="前端学习 Web布局"></span>
+            <span id="subtitle" data-typed-text="RISC-V 模拟器集锦"></span>
           
         </div>
 
@@ -211,8 +208,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-01-04 22:41" pubdate>
-          2023年1月4日 晚上
+        <time datetime="2023-01-12 15:10" pubdate>
+          2023年1月12日 下午
         </time>
       </span>
     
@@ -223,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          27 字
+          164 字
         
       </span>
     
@@ -234,7 +231,7 @@
         
         
         
-          1 分钟
+          2 分钟
         
       </span>
     
@@ -272,12 +269,18 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">前端学习 Web布局</h1>
+            <h1 style="display: none">RISC-V 模拟器集锦</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="前端学习-Web布局"><a href="#前端学习-Web布局" class="headerlink" title="前端学习 Web布局"></a>前端学习 Web布局</h1><p>块级元素、行内元素、行内块级元素。<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/05/16728440189745.jpg" srcset="/img/loading.gif" lazyload>g<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/05/16728445105161.jpg" srcset="/img/loading.gif" lazyload></p>
+                <p>汇总一下，可以作为之后调试使用的一些内容。</p>
+<ul>
+<li>QEMU </li>
+<li>NEMU (南京大学)</li>
+<li>Rare (<a target="_blank" rel="noopener" href="https://siriusdemon.github.io/Rare/v10-Page-Table.html">https://siriusdemon.github.io/Rare/v10-Page-Table.html</a>)</li>
+<li>tinyemu (由 QEMU 的作者 Fabrice Bellard 所写 开源小型 易于理解 <a target="_blank" rel="noopener" href="https://bellard.org/tinyemu/">https://bellard.org/tinyemu/</a>)</li>
+</ul>
 
                 
               </div>
@@ -296,8 +299,22 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%89%8D%E7%AB%AF/" class="category-chain-item">前端</a>
+  <a href="/categories/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" class="category-chain-item">体系结构</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-chain-item">操作系统</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%A8%A1%E6%8B%9F%E5%99%A8/" class="category-chain-item">模拟器</a>
+  
+  
+
+  
+
   
 
       </span>
@@ -311,9 +328,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
+        <a href="/tags/RISC-V/">#RISC-V</a>
       
-        <a href="/tags/%E5%B8%83%E5%B1%80/">#布局</a>
+        <a href="/tags/Emulator/">#Emulator</a>
       
     </div>
   
@@ -325,8 +342,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>前端学习 Web布局</div>
-      <div>http://seedonshen.me/2023/01/04/前端学习-Web布局/</div>
+      <div>RISC-V 模拟器集锦</div>
+      <div>http://seedonshen.me/2023/01/12/RISC-V-模拟器集锦/</div>
     </div>
     <div class="license-meta">
       
@@ -338,7 +355,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年1月4日</div>
+          <div>2023年1月12日</div>
         </div>
       
       
@@ -370,18 +387,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/01/06/Javascript-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="Javascript 事件循环">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Javascript 事件循环</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/12/15/RISC-V-%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8%E7%9A%84%E4%B8%80%E4%BA%9B%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" title="RISC-V 中断和异常的一些参考资料">
-                        <span class="hidden-mobile">RISC-V 中断和异常的一些参考资料</span>
+                      <a href="/2023/01/12/RISC-V-%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E6%9C%BA%E5%88%B6%E9%9A%8F%E7%AC%94/" title="RISC-V 虚拟内存机制随笔">
+                        <span class="hidden-mobile">RISC-V 虚拟内存机制随笔</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -402,7 +413,7 @@
         var options = Object.assign(
           {"clientID":"9c919945ea30538e1b5d","clientSecret":"f890c67334c0486d0c727afb3d26ce5eaf49296e","repo":"SeddonShen.github.io","owner":"SeddonShen","admin":["SeddonShen"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
           {
-            id: 'aedaf3c0fdfecf9df78227c0db3ccac5'
+            id: 'f8ba5c8b1a3cca2a4ee7161ac723702a'
           }
         )
         var gitalk = new Gitalk(options);
