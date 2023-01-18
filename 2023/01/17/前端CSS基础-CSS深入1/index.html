@@ -16,31 +16,35 @@
   <meta name="author" content="Seddon">
   <meta name="keywords" content="">
   
-    <meta name="description" content="字节寒假青训营重新补一下基础的CSS，看看有没有什么新的发现。课程链接：https:&#x2F;&#x2F;juejin.cn&#x2F;course&#x2F;bytetech&#x2F;7145675320224383006&#x2F;section&#x2F;7145716268698435620 基础概念 选择器 属性 属性值  在页面中使用CSS的方法：  外链 &lt;link&gt; 标签（最推荐） 有一个功能的分工 嵌入 &lt;style&gt;&amp;">
+    <meta name="description" content="选择器特异度用于确定优先用哪个CSS属性。 继承文字相关的一些是可以继承的，比如宽带等和盒模型有关系的就不可以继承了。 显式继承要求所有元素的box-sizing都从父级元素继承。 初始值CSS中，每个属性都有一个初始值。 CSS 求值过程 布局 确定内容的大小和位置的算法。 依据元素、容器、兄弟节点和内容等信息来计算。  布局相关技术 常规流 （一些常规的流）行级、块级、表格布局、FlexBox">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前端CSS基础回顾">
-<meta property="og:url" content="http://seedonshen.me/2023/01/16/%E5%89%8D%E7%AB%AFCSS%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/index.html">
+<meta property="og:title" content="前端CSS基础-CSS深入1">
+<meta property="og:url" content="http://seedonshen.me/2023/01/17/%E5%89%8D%E7%AB%AFCSS%E5%9F%BA%E7%A1%80-CSS%E6%B7%B1%E5%85%A51/index.html">
 <meta property="og:site_name" content="Seddon&#39;s Blog">
-<meta property="og:description" content="字节寒假青训营重新补一下基础的CSS，看看有没有什么新的发现。课程链接：https:&#x2F;&#x2F;juejin.cn&#x2F;course&#x2F;bytetech&#x2F;7145675320224383006&#x2F;section&#x2F;7145716268698435620 基础概念 选择器 属性 属性值  在页面中使用CSS的方法：  外链 &lt;link&gt; 标签（最推荐） 有一个功能的分工 嵌入 &lt;style&gt;&amp;">
+<meta property="og:description" content="选择器特异度用于确定优先用哪个CSS属性。 继承文字相关的一些是可以继承的，比如宽带等和盒模型有关系的就不可以继承了。 显式继承要求所有元素的box-sizing都从父级元素继承。 初始值CSS中，每个属性都有一个初始值。 CSS 求值过程 布局 确定内容的大小和位置的算法。 依据元素、容器、兄弟节点和内容等信息来计算。  布局相关技术 常规流 （一些常规的流）行级、块级、表格布局、FlexBox">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/16/16738767222914.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/16/16738772168977.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/16/16738775074347.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/16/16738775667883.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/16/16738794305900.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/16/16738801965413.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/16/16738803968202.jpg">
-<meta property="article:published_time" content="2023-01-16T13:40:29.000Z">
-<meta property="article:modified_time" content="2023-01-16T14:52:49.544Z">
+<meta property="og:image" content="http://seedonshen.me/media/16739578792948.jpg">
+<meta property="og:image" content="http://seedonshen.me/media/16739581379181.jpg">
+<meta property="og:image" content="http://seedonshen.me/media/16739584149245.jpg">
+<meta property="og:image" content="http://seedonshen.me/media/16739590601940.jpg">
+<meta property="og:image" content="http://seedonshen.me/media/16739591108817.jpg">
+<meta property="og:image" content="http://seedonshen.me/media/16739597241872.jpg">
+<meta property="og:image" content="http://seedonshen.me/media/16739600993898.jpg">
+<meta property="og:image" content="http://seedonshen.me/media/16739605431910.jpg">
+<meta property="og:image" content="http://seedonshen.me/media/16739605678695.jpg">
+<meta property="og:image" content="http://seedonshen.me/media/16739613857029.jpg">
+<meta property="og:image" content="http://seedonshen.me/media/16739614180966.jpg">
+<meta property="article:published_time" content="2023-01-17T12:16:14.000Z">
+<meta property="article:modified_time" content="2023-01-18T12:29:56.684Z">
 <meta property="article:author" content="Seddon">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content="CSS">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/16/16738767222914.jpg">
+<meta name="twitter:image" content="http://seedonshen.me/media/16739578792948.jpg">
   
   
   
-  <title>前端CSS基础回顾 - Seddon&#39;s Blog</title>
+  <title>前端CSS基础-CSS深入1 - Seddon&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -205,7 +209,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="前端CSS基础回顾"></span>
+            <span id="subtitle" data-typed-text="前端CSS基础-CSS深入1"></span>
           
         </div>
 
@@ -216,8 +220,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-01-16 21:40" pubdate>
-          2023年1月16日 晚上
+        <time datetime="2023-01-17 20:16" pubdate>
+          2023年1月17日 晚上
         </time>
       </span>
     
@@ -228,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          580 字
         
       </span>
     
@@ -239,7 +243,7 @@
         
         
         
-          12 分钟
+          5 分钟
         
       </span>
     
@@ -277,60 +281,45 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">前端CSS基础回顾</h1>
+            <h1 style="display: none">前端CSS基础-CSS深入1</h1>
             
             
               <div class="markdown-body">
                 
-                <p>字节寒假青训营重新补一下基础的CSS，看看有没有什么新的发现。<br>课程链接：<br><a target="_blank" rel="noopener" href="https://juejin.cn/course/bytetech/7145675320224383006/section/7145716268698435620">https://juejin.cn/course/bytetech/7145675320224383006/section/7145716268698435620</a></p>
-<h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><ul>
-<li>选择器</li>
-<li>属性</li>
-<li>属性值<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/16/16738767222914.jpg" srcset="/img/loading.gif" lazyload></li>
+                <h1 id="选择器特异度"><a href="#选择器特异度" class="headerlink" title="选择器特异度"></a>选择器特异度</h1><p>用于确定优先用哪个CSS属性。<br><img src="/media/16739578792948.jpg" srcset="/img/loading.gif" lazyload></p>
+<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p><img src="/media/16739581379181.jpg" srcset="/img/loading.gif" lazyload><br>文字相关的一些是可以继承的，比如宽带等和盒模型有关系的就不可以继承了。</p>
+<h2 id="显式继承"><a href="#显式继承" class="headerlink" title="显式继承"></a>显式继承</h2><p><img src="/media/16739584149245.jpg" srcset="/img/loading.gif" lazyload><br>要求所有元素的<code>box-sizing</code>都从父级元素继承。</p>
+<h1 id="初始值"><a href="#初始值" class="headerlink" title="初始值"></a>初始值</h1><p>CSS中，每个属性都有一个初始值。<br><img src="/media/16739590601940.jpg" srcset="/img/loading.gif" lazyload></p>
+<h1 id="CSS-求值过程"><a href="#CSS-求值过程" class="headerlink" title="CSS 求值过程"></a>CSS 求值过程</h1><p><img src="/media/16739591108817.jpg" srcset="/img/loading.gif" lazyload><br><img src="/media/16739597241872.jpg" srcset="/img/loading.gif" lazyload></p>
+<h1 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h1><ul>
+<li>确定内容的大小和位置的算法。</li>
+<li>依据元素、容器、兄弟节点和内容等信息来计算。</li>
 </ul>
-<p>在页面中使用CSS的方法：</p>
+<h2 id="布局相关技术"><a href="#布局相关技术" class="headerlink" title="布局相关技术"></a>布局相关技术</h2><ul>
+<li>常规流 （一些常规的流）行级、块级、表格布局、FlexBox、Grid布局</li>
+<li>浮动 </li>
+<li>绝对定位</li>
+</ul>
+<h2 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h2><p><img src="/media/16739600993898.jpg" srcset="/img/loading.gif" lazyload></p>
+<h3 id="循环依赖"><a href="#循环依赖" class="headerlink" title="循环依赖"></a>循环依赖</h3><p>比如父级用<code>auto</code>指定了宽度或者高度（依赖子级），但是本级设置的宽度或高度使用的是百分比（依赖父级）这样就无法正确计算，因为产生了循环依赖。</p>
+<h3 id="padding"><a href="#padding" class="headerlink" title="padding"></a>padding</h3><ul>
+<li>百分数相对于元素宽度</li>
+</ul>
+<h3 id="border-边框"><a href="#border-边框" class="headerlink" title="border 边框"></a>border 边框</h3><p><img src="/media/16739605431910.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>边框颜色不一样会斜着切过来。<br><img src="/media/16739605678695.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>把其他三边设置透明，可以得到三角形。</p>
+<h3 id="margin-外边距"><a href="#margin-外边距" class="headerlink" title="margin 外边距"></a>margin 外边距</h3><p>设置水平居中。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">margin-left</span>: auto<br>margin-right: auto<br></code></pre></td></tr></table></figure>
+<h3 id="margin-collapse"><a href="#margin-collapse" class="headerlink" title="margin collapse"></a>margin collapse</h3><p>上面的下边距100px和下面的上边距100px。<br>则中间是100px，而不是200px。<br>外边距事实上会进行折叠，会选择两者中最大的值。</p>
+<h2 id="box-sizing-border-box"><a href="#box-sizing-border-box" class="headerlink" title="box-sizing: border-box"></a>box-sizing: border-box</h2><p><img src="/media/16739613857029.jpg" srcset="/img/loading.gif" lazyload><br>使用border来作为宽度。<br>实际效果对比：<br><img src="/media/16739614180966.jpg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="overflow处理"><a href="#overflow处理" class="headerlink" title="overflow处理"></a>overflow处理</h2><p>虽然设置了box的宽高，但实际上内部内容仍然可能溢出。可以设置</p>
 <ul>
-<li>外链 <code>&lt;link&gt;</code> 标签（最推荐） 有一个功能的分工</li>
-<li>嵌入 <code>&lt;style&gt;&lt;style&gt;</code></li>
-<li>内联 <code>&lt;p style=&quot;&quot;&gt;&lt;/p&gt;</code>（较不推荐）</li>
+<li>visible</li>
+<li>hidden</li>
+<li>scroll（滚动）</li>
+<li>auto</li>
 </ul>
-<h1 id="CSS工作流程"><a href="#CSS工作流程" class="headerlink" title="CSS工作流程"></a>CSS工作流程</h1><p><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/16/16738772168977.jpg" srcset="/img/loading.gif" lazyload><br>加载和解析HTML后，会创建DOM树，同时加载解析CSS，把样式添加到DOM树中，得到所谓的渲染树，最后展示页面。</p>
-<h1 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h1><p>找出页面中的元素，以便设置样式。<br>标签名、类名、id、属性、DOM树位置。<br>需要注意**统配选择器 ***</p>
-<h2 id="根据属性特定的值做匹配"><a href="#根据属性特定的值做匹配" class="headerlink" title="根据属性特定的值做匹配"></a>根据属性特定的值做匹配</h2><p>只选中type是password的input<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/16/16738775074347.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>匹配以#开头、以.jpg结尾的href属性<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/16/16738775667883.jpg" srcset="/img/loading.gif" lazyload></p>
-<h1 id="伪类"><a href="#伪类" class="headerlink" title="伪类"></a>伪类</h1><p>不基于标签和属性定位元素<br>类别：</p>
-<ul>
-<li>状态伪类</li>
-<li>结构性伪类</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs css">&lt;style&gt;<br><span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:link</span> &#123;<br>    <span class="hljs-comment">/* 默认链接状态等*/</span><br>    <span class="hljs-attribute">color</span>: black;<br>&#125;<br><br><span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:visited</span> &#123;<br>    <span class="hljs-comment">/* 访问过*/</span><br>    <span class="hljs-attribute">color</span>: black;<br>&#125;<br><br><span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:hover</span> &#123;<br>    <span class="hljs-comment">/* 鼠标放上去*/</span><br>    <span class="hljs-attribute">color</span>: black;<br>&#125;<br><br><span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:active</span> &#123;<br>    <span class="hljs-comment">/* 被点过之后*/</span><br>    <span class="hljs-attribute">color</span>: black;<br>&#125;<br><span class="hljs-selector-pseudo">:focus</span> &#123;<br>    <span class="hljs-comment">/* 用于输入框被focus等*/</span><br>    <span class="hljs-attribute">color</span>: black;<br>&#125;<br><span class="hljs-selector-tag">li</span><span class="hljs-selector-pseudo">:first</span>-child&#123;<br><span class="hljs-comment">/* li的第一个孩子*/</span><br>&#125;<br><span class="hljs-selector-tag">li</span><span class="hljs-selector-pseudo">:last-child</span>&#123;<br><span class="hljs-comment">/* li的第最后一个孩子*/</span><br>&#125;<br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
-
-<h1 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h1><p>常见组合：</p>
-<ul>
-<li>直接组合 AB</li>
-<li>后代组合 A B</li>
-<li>亲子组合 A &gt; B</li>
-<li>兄弟选择器 A ~ B</li>
-<li>相邻选择器 A + B<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/16/16738794305900.jpg" srcset="/img/loading.gif" lazyload></li>
-</ul>
-<h1 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h1><h2 id="HSL"><a href="#HSL" class="headerlink" title="HSL"></a>HSL</h2><p>RGB难以直接看出颜色，可以使用HSL颜色表示进行方便的调试。<br> <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">hsl(<span class="hljs-number">211</span>,<span class="hljs-number">66%</span>,<span class="hljs-number">50%</span>)<br></code></pre></td></tr></table></figure></p>
-<h2 id="直接指定值"><a href="#直接指定值" class="headerlink" title="直接指定值"></a>直接指定值</h2><p> black、white等</p>
-<h2 id="Alpha透明度"><a href="#Alpha透明度" class="headerlink" title="Alpha透明度"></a>Alpha透明度</h2><p> 实际上是不透明度，alpha为1的时候是不透明的。<br> <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css">rgba(<span class="hljs-number">255</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0.47</span>)<br>hsla(<span class="hljs-number">0</span>,<span class="hljs-number">100%</span>,<span class="hljs-number">50%</span>,<span class="hljs-number">0.47</span>)<br></code></pre></td></tr></table></figure></p>
-<h1 id="字体-font-family"><a href="#字体-font-family" class="headerlink" title="字体 font-family"></a>字体 font-family</h1><h2 id="通用字体"><a href="#通用字体" class="headerlink" title="通用字体"></a>通用字体</h2><p> serif：衬线体<br> sans-serif：无衬线体<br> Monospace：等宽字体（Coding常用）<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/16/16738801965413.jpg" srcset="/img/loading.gif" lazyload><br>小技巧：混排中英文时，英文字体写在中文字体前面。<br>也可以使用Webfont，中文字体较大，通常裁切。</p>
-<h2 id="font-size"><a href="#font-size" class="headerlink" title="font-size"></a>font-size</h2><p>单位：px,em(相对单位 和上级相乘)</p>
-<h2 id="font-weight"><a href="#font-weight" class="headerlink" title="font-weight"></a>font-weight</h2><p>字重 100 ～ 900 就是字的粗细<br>注： 400是normal 700是bold<br>显示没效果可能是字体不适配。</p>
-<h2 id="line-height"><a href="#line-height" class="headerlink" title="line-height"></a>line-height</h2><p>行高，默认多行字体都要改一下。<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/16/16738803968202.jpg" srcset="/img/loading.gif" lazyload></p>
-<h2 id="text-align"><a href="#text-align" class="headerlink" title="text-align"></a>text-align</h2><ul>
-<li>居中、左、右</li>
-<li><code>text-align:justify</code> 分散对齐（可能最后一行就不生效了哈，毕竟那样很丑）</li>
-</ul>
-<h1 id="空白符的处理（易错）"><a href="#空白符的处理（易错）" class="headerlink" title="空白符的处理（易错）"></a>空白符的处理（易错）</h1><p>多个连续的换行、空格默认会被替换为一个。<br>white-space</p>
-<ul>
-<li>nowrap</li>
-<li>pre</li>
-<li>pre-warp</li>
-<li>pre-line 保留换行和空格 ······</li>
-</ul>
+<p>四种属性</p>
 
                 
               </div>
@@ -378,8 +367,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>前端CSS基础回顾</div>
-      <div>http://seedonshen.me/2023/01/16/前端CSS基础回顾/</div>
+      <div>前端CSS基础-CSS深入1</div>
+      <div>http://seedonshen.me/2023/01/17/前端CSS基础-CSS深入1/</div>
     </div>
     <div class="license-meta">
       
@@ -391,7 +380,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年1月16日</div>
+          <div>2023年1月17日</div>
         </div>
       
       
@@ -423,9 +412,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/01/17/%E5%89%8D%E7%AB%AFCSS%E5%9F%BA%E7%A1%80-CSS%E6%B7%B1%E5%85%A51/" title="前端CSS基础-CSS深入1">
+                      <a href="/2023/01/18/%E5%89%8D%E7%AB%AFCSS%E5%9F%BA%E7%A1%80-CSS%E6%B7%B1%E5%85%A52/" title="前端CSS基础-CSS深入2">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">前端CSS基础-CSS深入1</span>
+                        <span class="hidden-mobile">前端CSS基础-CSS深入2</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -433,8 +422,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/12/RISC-V-%E6%A8%A1%E6%8B%9F%E5%99%A8%E9%9B%86%E9%94%A6/" title="RISC-V 模拟器集锦">
-                        <span class="hidden-mobile">RISC-V 模拟器集锦</span>
+                      <a href="/2023/01/16/%E5%89%8D%E7%AB%AFCSS%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/" title="前端CSS基础回顾">
+                        <span class="hidden-mobile">前端CSS基础回顾</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -455,7 +444,7 @@
         var options = Object.assign(
           {"clientID":"9c919945ea30538e1b5d","clientSecret":"f890c67334c0486d0c727afb3d26ce5eaf49296e","repo":"SeddonShen.github.io","owner":"SeddonShen","admin":["SeddonShen"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
           {
-            id: 'a516ea8ae2a423d9d2ea4996de8e390d'
+            id: '4f5cc1304ffb77ed0a17b8c35c0bf1cf'
           }
         )
         var gitalk = new Gitalk(options);

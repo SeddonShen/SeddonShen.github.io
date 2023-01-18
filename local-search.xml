@@ -4,6 +4,46 @@
   
   
   <entry>
+    <title>前端CSS基础-CSS深入2</title>
+    <link href="/2023/01/18/%E5%89%8D%E7%AB%AFCSS%E5%9F%BA%E7%A1%80-CSS%E6%B7%B1%E5%85%A52/"/>
+    <url>/2023/01/18/%E5%89%8D%E7%AB%AFCSS%E5%9F%BA%E7%A1%80-CSS%E6%B7%B1%E5%85%A52/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>前端CSS基础-CSS深入1</title>
+    <link href="/2023/01/17/%E5%89%8D%E7%AB%AFCSS%E5%9F%BA%E7%A1%80-CSS%E6%B7%B1%E5%85%A51/"/>
+    <url>/2023/01/17/%E5%89%8D%E7%AB%AFCSS%E5%9F%BA%E7%A1%80-CSS%E6%B7%B1%E5%85%A51/</url>
+    
+    <content type="html"><![CDATA[<h1 id="选择器特异度"><a href="#选择器特异度" class="headerlink" title="选择器特异度"></a>选择器特异度</h1><p>用于确定优先用哪个CSS属性。<br><img src="/media/16739578792948.jpg"></p><h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p><img src="/media/16739581379181.jpg"><br>文字相关的一些是可以继承的，比如宽带等和盒模型有关系的就不可以继承了。</p><h2 id="显式继承"><a href="#显式继承" class="headerlink" title="显式继承"></a>显式继承</h2><p><img src="/media/16739584149245.jpg"><br>要求所有元素的<code>box-sizing</code>都从父级元素继承。</p><h1 id="初始值"><a href="#初始值" class="headerlink" title="初始值"></a>初始值</h1><p>CSS中，每个属性都有一个初始值。<br><img src="/media/16739590601940.jpg"></p><h1 id="CSS-求值过程"><a href="#CSS-求值过程" class="headerlink" title="CSS 求值过程"></a>CSS 求值过程</h1><p><img src="/media/16739591108817.jpg"><br><img src="/media/16739597241872.jpg"></p><h1 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h1><ul><li>确定内容的大小和位置的算法。</li><li>依据元素、容器、兄弟节点和内容等信息来计算。</li></ul><h2 id="布局相关技术"><a href="#布局相关技术" class="headerlink" title="布局相关技术"></a>布局相关技术</h2><ul><li>常规流 （一些常规的流）行级、块级、表格布局、FlexBox、Grid布局</li><li>浮动 </li><li>绝对定位</li></ul><h2 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h2><p><img src="/media/16739600993898.jpg"></p><h3 id="循环依赖"><a href="#循环依赖" class="headerlink" title="循环依赖"></a>循环依赖</h3><p>比如父级用<code>auto</code>指定了宽度或者高度（依赖子级），但是本级设置的宽度或高度使用的是百分比（依赖父级）这样就无法正确计算，因为产生了循环依赖。</p><h3 id="padding"><a href="#padding" class="headerlink" title="padding"></a>padding</h3><ul><li>百分数相对于元素宽度</li></ul><h3 id="border-边框"><a href="#border-边框" class="headerlink" title="border 边框"></a>border 边框</h3><p><img src="/media/16739605431910.jpg"></p><p>边框颜色不一样会斜着切过来。<br><img src="/media/16739605678695.jpg"></p><p>把其他三边设置透明，可以得到三角形。</p><h3 id="margin-外边距"><a href="#margin-外边距" class="headerlink" title="margin 外边距"></a>margin 外边距</h3><p>设置水平居中。</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">margin-left</span>: auto<br>margin-right: auto<br></code></pre></td></tr></table></figure><h3 id="margin-collapse"><a href="#margin-collapse" class="headerlink" title="margin collapse"></a>margin collapse</h3><p>上面的下边距100px和下面的上边距100px。<br>则中间是100px，而不是200px。<br>外边距事实上会进行折叠，会选择两者中最大的值。</p><h2 id="box-sizing-border-box"><a href="#box-sizing-border-box" class="headerlink" title="box-sizing: border-box"></a>box-sizing: border-box</h2><p><img src="/media/16739613857029.jpg"><br>使用border来作为宽度。<br>实际效果对比：<br><img src="/media/16739614180966.jpg"></p><h2 id="overflow处理"><a href="#overflow处理" class="headerlink" title="overflow处理"></a>overflow处理</h2><p>虽然设置了box的宽高，但实际上内部内容仍然可能溢出。可以设置</p><ul><li>visible</li><li>hidden</li><li>scroll（滚动）</li><li>auto</li></ul><p>四种属性</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>前端</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>前端</tag>
+      
+      <tag>CSS</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>前端CSS基础回顾</title>
     <link href="/2023/01/16/%E5%89%8D%E7%AB%AFCSS%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/"/>
     <url>/2023/01/16/%E5%89%8D%E7%AB%AFCSS%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/</url>
