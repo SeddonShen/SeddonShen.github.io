@@ -16,43 +16,32 @@
   <meta name="author" content="Seddon">
   <meta name="keywords" content="">
   
-    <meta name="description" content="布局方式 块级 vs. 行级CSS中的概念    块级box 行级box    不和其他盒子并列摆放 和其他行级盒子一起放在一行 或 拆开成多行   适用所有的盒模型属性 盒模型中的width、height不适用   HTML里面的概念，如Div，一般一个HTML标签生成啦一个box    块级元素 行级元素    生成块级盒子 生成行级盒子、内容分散在多个行盒中   body、article、d">
+    <meta name="description" content="RESTful APIRepresentational State Transfer HTTP2最小单位—帧 消息和数据流 新的特性 跨域 优化与稳定  QUIC 优化传输体验（很有意义） 目前还在研究阶段，应用还不是很多">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前端CSS基础-CSS深入2">
-<meta property="og:url" content="http://seedonshen.me/2023/01/18/%E5%89%8D%E7%AB%AFCSS%E5%9F%BA%E7%A1%80-CSS%E6%B7%B1%E5%85%A52/index.html">
+<meta property="og:title" content="HTTP协议学习">
+<meta property="og:url" content="http://seedonshen.me/2023/01/20/HTTP%E5%8D%8F%E8%AE%AE%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Seddon&#39;s Blog">
-<meta property="og:description" content="布局方式 块级 vs. 行级CSS中的概念    块级box 行级box    不和其他盒子并列摆放 和其他行级盒子一起放在一行 或 拆开成多行   适用所有的盒模型属性 盒模型中的width、height不适用   HTML里面的概念，如Div，一般一个HTML标签生成啦一个box    块级元素 行级元素    生成块级盒子 生成行级盒子、内容分散在多个行盒中   body、article、d">
+<meta property="og:description" content="RESTful APIRepresentational State Transfer HTTP2最小单位—帧 消息和数据流 新的特性 跨域 优化与稳定  QUIC 优化传输体验（很有意义） 目前还在研究阶段，应用还不是很多">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740456092308.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740467234870.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740467588960.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740470053942.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740470536682.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740471471190.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740471745611.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740472475720.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740473398520.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740473562535.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740474448762.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740475147694.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740477847007.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740478814318.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740480003322.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740480430314.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740482693685.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740483248107.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740483584251.jpg">
-<meta property="article:published_time" content="2023-01-18T12:28:02.000Z">
-<meta property="article:modified_time" content="2023-01-20T16:06:26.563Z">
+<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16742276226382.jpg">
+<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16742279025727.jpg">
+<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16742279956434.jpg">
+<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16742280728400.jpg">
+<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16742288093686.jpg">
+<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16742304495991.jpg">
+<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16742304905836.jpg">
+<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16742305412187.jpg">
+<meta property="article:published_time" content="2023-01-20T15:13:01.000Z">
+<meta property="article:modified_time" content="2023-01-20T16:04:00.979Z">
 <meta property="article:author" content="Seddon">
 <meta property="article:tag" content="前端">
-<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="HTTP">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740456092308.jpg">
+<meta name="twitter:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16742276226382.jpg">
   
   
   
-  <title>前端CSS基础-CSS深入2 - Seddon&#39;s Blog</title>
+  <title>HTTP协议学习 - Seddon&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -217,7 +206,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="前端CSS基础-CSS深入2"></span>
+            <span id="subtitle" data-typed-text="HTTP协议学习"></span>
           
         </div>
 
@@ -228,8 +217,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-01-18 20:28" pubdate>
-          2023年1月18日 晚上
+        <time datetime="2023-01-20 23:13" pubdate>
+          2023年1月20日 晚上
         </time>
       </span>
     
@@ -240,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          805 字
+          99 字
         
       </span>
     
@@ -251,7 +240,7 @@
         
         
         
-          7 分钟
+          1 分钟
         
       </span>
     
@@ -289,96 +278,21 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">前端CSS基础-CSS深入2</h1>
+            <h1 style="display: none">HTTP协议学习</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="布局方式-块级-vs-行级"><a href="#布局方式-块级-vs-行级" class="headerlink" title="布局方式 块级 vs. 行级"></a>布局方式 块级 vs. 行级</h1><p>CSS中的概念</p>
-<table>
-<thead>
-<tr>
-<th>块级box</th>
-<th>行级box</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>不和其他盒子并列摆放</td>
-<td>和其他行级盒子一起放在一行 或 拆开成多行</td>
-</tr>
-<tr>
-<td>适用所有的盒模型属性</td>
-<td>盒模型中的width、height不适用</td>
-</tr>
-</tbody></table>
-<p>HTML里面的概念，如Div，一般一个HTML标签生成啦一个box</p>
-<table>
-<thead>
-<tr>
-<th>块级<strong>元素</strong></th>
-<th>行级<strong>元素</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>生成块级盒子</td>
-<td>生成行级盒子、内容分散在多个行盒中</td>
-</tr>
-<tr>
-<td>body、article、div、main、section、h1-6、p、ul、li等</td>
-<td>盒span、em、strong、cite、code</td>
-</tr>
-<tr>
-<td>display:block</td>
-<td>display:inline</td>
-</tr>
-</tbody></table>
-<h1 id="display-属性"><a href="#display-属性" class="headerlink" title="display 属性"></a>display 属性</h1><table>
-<thead>
-<tr>
-<th>display</th>
-<th>属性</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>block</td>
-<td>块级盒子</td>
-</tr>
-<tr>
-<td>inline</td>
-<td>行级盒子</td>
-</tr>
-<tr>
-<td>inline-block</td>
-<td>本身是行级，可以放在行盒中；可以设置宽高；作为一个整体不会被拆散成行</td>
-</tr>
-<tr>
-<td>none</td>
-<td>排版时完全忽略</td>
-</tr>
-</tbody></table>
-<h1 id="行级排版上下文"><a href="#行级排版上下文" class="headerlink" title="行级排版上下文"></a>行级排版上下文</h1><p>注意：<strong>只包含行级盒子的容器会创建一个IFC</strong><br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740456092308.jpg" srcset="/img/loading.gif" lazyload></p>
-<h1 id="块级排版上下文"><a href="#块级排版上下文" class="headerlink" title="块级排版上下文"></a>块级排版上下文</h1><p><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740467234870.jpg" srcset="/img/loading.gif" lazyload></p>
-<h2 id="排版规则"><a href="#排版规则" class="headerlink" title="排版规则"></a>排版规则</h2><p><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740467588960.jpg" srcset="/img/loading.gif" lazyload></p>
-<h1 id="Flex-Box"><a href="#Flex-Box" class="headerlink" title="Flex Box"></a>Flex Box</h1><p>当容器内有很多的上下文，现在做布局多用的方式。<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740470053942.jpg" srcset="/img/loading.gif" lazyload></p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>默认从左到右的流向。<br>可以控制流向、对齐等等排版内容。<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740470536682.jpg" srcset="/img/loading.gif" lazyload></p>
-<h2 id="主轴和侧轴"><a href="#主轴和侧轴" class="headerlink" title="主轴和侧轴"></a>主轴和侧轴</h2><p><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740471471190.jpg" srcset="/img/loading.gif" lazyload></p>
-<ul>
-<li>主轴： 通过justify-content对齐<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740471745611.jpg" srcset="/img/loading.gif" lazyload></li>
-<li>侧轴：通过align-items对齐<br>默认值是stretch（单词释义：撑大、拉紧）<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740472475720.jpg" srcset="/img/loading.gif" lazyload></li>
+                <h1 id="RESTful-API"><a href="#RESTful-API" class="headerlink" title="RESTful API"></a>RESTful API</h1><p>Representational State Transfer<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16742276226382.jpg" srcset="/img/loading.gif" lazyload></p>
+<h1 id="HTTP2"><a href="#HTTP2" class="headerlink" title="HTTP2"></a>HTTP2</h1><h2 id="最小单位—帧"><a href="#最小单位—帧" class="headerlink" title="最小单位—帧"></a>最小单位—帧</h2><p><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16742279025727.jpg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="消息和数据流"><a href="#消息和数据流" class="headerlink" title="消息和数据流"></a>消息和数据流</h2><p><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16742279956434.jpg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="新的特性"><a href="#新的特性" class="headerlink" title="新的特性"></a>新的特性</h2><p><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16742280728400.jpg" srcset="/img/loading.gif" lazyload></p>
+<h1 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h1><p><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16742288093686.jpg" srcset="/img/loading.gif" lazyload></p>
+<h1 id="优化与稳定"><a href="#优化与稳定" class="headerlink" title="优化与稳定"></a>优化与稳定</h1><p><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16742304495991.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16742304905836.jpg" srcset="/img/loading.gif" lazyload></p>
+<h1 id="QUIC-优化传输体验（很有意义）"><a href="#QUIC-优化传输体验（很有意义）" class="headerlink" title="QUIC 优化传输体验（很有意义）"></a>QUIC 优化传输体验（很有意义）</h1><ul>
+<li>目前还在研究阶段，应用还不是很多<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16742305412187.jpg" srcset="/img/loading.gif" lazyload></li>
 </ul>
-<h2 id="Flex宽度和高度的计算（重要特性）"><a href="#Flex宽度和高度的计算（重要特性）" class="headerlink" title="Flex宽度和高度的计算（重要特性）"></a>Flex宽度和高度的计算（重要特性）</h2><p><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740473398520.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>下图：把剩余的空间按2:1分给a和b上。<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740473562535.jpg" srcset="/img/loading.gif" lazyload></p>
-<h3 id="缩写属性"><a href="#缩写属性" class="headerlink" title="缩写属性"></a>缩写属性</h3><p>basis:不被压缩和拉伸的时候默认是100px，实际上平常都直接写宽度是100<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740474448762.jpg" srcset="/img/loading.gif" lazyload></p>
-<h1 id="Grid布局"><a href="#Grid布局" class="headerlink" title="Grid布局"></a>Grid布局</h1><p>Flex主要是一条线，单一方向的布局方式，Grid偏向于二维。<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740475147694.jpg" srcset="/img/loading.gif" lazyload></p>
-<h2 id="display-grid"><a href="#display-grid" class="headerlink" title="display: grid"></a>display: grid</h2><p><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740477847007.jpg" srcset="/img/loading.gif" lazyload></p>
-<h2 id="划分网络"><a href="#划分网络" class="headerlink" title="划分网络"></a>划分网络</h2><p><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740478814318.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>第一种：分别设置列和行<br>第三种：最后fr：代表一份，100px除去后各占一份。</p>
-<h2 id="grid-line-网格线"><a href="#grid-line-网格线" class="headerlink" title="grid line 网格线"></a>grid line 网格线</h2><p><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740480003322.jpg" srcset="/img/loading.gif" lazyload><br>表示这条黄色的线：<br>起始点 -&gt; 结束点 (1,1) -&gt; (3,3)</p>
-<p><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740480430314.jpg" srcset="/img/loading.gif" lazyload></p>
-<h1 id="绝对定位-position属性"><a href="#绝对定位-position属性" class="headerlink" title="绝对定位 position属性"></a>绝对定位 position属性</h1><p><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740482693685.jpg" srcset="/img/loading.gif" lazyload></p>
-<h2 id="position-relative"><a href="#position-relative" class="headerlink" title="position: relative"></a>position: relative</h2><p><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740483248107.jpg" srcset="/img/loading.gif" lazyload></p>
-<h2 id="position-absolute"><a href="#position-absolute" class="headerlink" title="position: absolute"></a>position: absolute</h2><p><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/01/21/16740483584251.jpg" srcset="/img/loading.gif" lazyload></p>
-<h2 id="position-fixed"><a href="#position-fixed" class="headerlink" title="position: fixed"></a>position: fixed</h2><p>总是相对于视口去定位，特别适合做导航栏</p>
 
                 
               </div>
@@ -414,7 +328,7 @@
       
         <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
       
-        <a href="/tags/CSS/">#CSS</a>
+        <a href="/tags/HTTP/">#HTTP</a>
       
     </div>
   
@@ -426,8 +340,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>前端CSS基础-CSS深入2</div>
-      <div>http://seedonshen.me/2023/01/18/前端CSS基础-CSS深入2/</div>
+      <div>HTTP协议学习</div>
+      <div>http://seedonshen.me/2023/01/20/HTTP协议学习/</div>
     </div>
     <div class="license-meta">
       
@@ -439,7 +353,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年1月18日</div>
+          <div>2023年1月20日</div>
         </div>
       
       
@@ -471,9 +385,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/01/20/TypeScript%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" title="TypeScript入门学习">
+                      <a href="/2023/03/09/Cache%E5%8C%85%E5%90%AB%E7%AD%96%E7%95%A5/" title="Cache包含策略">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">TypeScript入门学习</span>
+                        <span class="hidden-mobile">Cache包含策略</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -481,8 +395,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/17/%E5%89%8D%E7%AB%AFCSS%E5%9F%BA%E7%A1%80-CSS%E6%B7%B1%E5%85%A51/" title="前端CSS基础-CSS深入1">
-                        <span class="hidden-mobile">前端CSS基础-CSS深入1</span>
+                      <a href="/2023/01/20/TypeScript%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" title="TypeScript入门学习">
+                        <span class="hidden-mobile">TypeScript入门学习</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -503,7 +417,7 @@
         var options = Object.assign(
           {"clientID":"9c919945ea30538e1b5d","clientSecret":"f890c67334c0486d0c727afb3d26ce5eaf49296e","repo":"SeddonShen.github.io","owner":"SeddonShen","admin":["SeddonShen"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
           {
-            id: '8b227489f145e25c6bac6a8fc027babe'
+            id: '1f753e1a70d9c020f164b680c713ce82'
           }
         )
         var gitalk = new Gitalk(options);
