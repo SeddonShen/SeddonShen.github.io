@@ -1,0 +1,707 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/selfimg/avatar.jpg">
+  <link rel="icon" href="/selfimg/avatar.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Seddon">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Rust 生命周期学习Rust生命周期是Rust学习较为重要的一环，之前看过，但是看的不够深入，现在重新学习一下。 参考学习资料：生命周期-Rust Course 生命周期，简而言之就是引用的有效作用域。在大多数时候，我们无需手动的声明生命周期，因为编译器可以自动进行推导，用类型来类比下： 就像编译器大部分时候可以自动推导类型 &lt;-&gt; 一样，编译器大多数时候也可以自动推导生命周期在多种">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rust 生命周期学习">
+<meta property="og:url" content="http://seedonshen.me/2023/03/23/Rust-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Seddon&#39;s Blog">
+<meta property="og:description" content="Rust 生命周期学习Rust生命周期是Rust学习较为重要的一环，之前看过，但是看的不够深入，现在重新学习一下。 参考学习资料：生命周期-Rust Course 生命周期，简而言之就是引用的有效作用域。在大多数时候，我们无需手动的声明生命周期，因为编译器可以自动进行推导，用类型来类比下： 就像编译器大部分时候可以自动推导类型 &lt;-&gt; 一样，编译器大多数时候也可以自动推导生命周期在多种">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-23T03:32:42.000Z">
+<meta property="article:modified_time" content="2023-03-23T03:58:57.434Z">
+<meta property="article:author" content="Seddon">
+<meta property="article:tag" content="Rust">
+<meta property="article:tag" content="生命周期">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Rust 生命周期学习 - Seddon&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"seedonshen.me","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Seddon&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Rust 生命周期学习"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-23 11:32" pubdate>
+          2023年3月23日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          32 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Rust 生命周期学习</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Rust-生命周期学习"><a href="#Rust-生命周期学习" class="headerlink" title="Rust 生命周期学习"></a>Rust 生命周期学习</h1><p>Rust生命周期是Rust学习较为重要的一环，之前看过，但是看的不够深入，现在重新学习一下。</p>
+<p>参考学习资料：<a target="_blank" rel="noopener" href="https://course.rs/basic/lifetime.html">生命周期-Rust Course</a></p>
+<p>生命周期，简而言之就是引用的有效作用域。在大多数时候，我们无需手动的声明生命周期，因为编译器可以自动进行推导，用类型来类比下：</p>
+<p>就像编译器大部分时候可以自动推导类型 &lt;-&gt; 一样，编译器大多数时候也可以自动推导生命周期<br>在多种类型存在时，编译器往往要求我们手动标明类型 &lt;-&gt; 当多个生命周期存在，且编译器无法推导出某个引用的生命周期时，就需要我们手动标明生命周期</p>
+<h2 id="悬垂指针和生命周期"><a href="#悬垂指针和生命周期" class="headerlink" title="悬垂指针和生命周期"></a>悬垂指针和生命周期</h2><p>生命周期主要是未来避免悬垂引用：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs rust">&#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">r</span>;<br><br>    &#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">x</span> = <span class="hljs-number">5</span>;<br>        r = &amp;x;<br>    &#125;<br><br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;r: &#123;&#125;&quot;</span>, r);<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>let r; 貌似存在null的风险</li>
+<li>r引用的x会在<code>&#125;</code>的时候释放，后面引用就无效了</li>
+<li>这段代码会报错</li>
+</ul>
+<p>在这里 r 拥有更大的作用域，或者说活得更久。如果 Rust 不阻止该悬垂引用的发生，那么当 x 被释放后，r 所引用的值就不再是合法的，会导致我们程序发生异常行为，且该异常行为有时候会很难被发现。</p>
+<h2 id="借用检查"><a href="#借用检查" class="headerlink" title="借用检查"></a>借用检查</h2><p>为了保证 Rust 的所有权和借用的正确性，Rust 使用了一个借用检查器(Borrow checker)，来检查我们程序的借用正确性：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs rust"><br><span class="hljs-meta">#![allow(unused)]</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>&#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">r</span>;                <span class="hljs-comment">// ---------+-- &#x27;a</span><br>                          <span class="hljs-comment">//          |</span><br>    &#123;                     <span class="hljs-comment">//          |</span><br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">x</span> = <span class="hljs-number">5</span>;        <span class="hljs-comment">// -+-- &#x27;b  |</span><br>        r = &amp;x;           <span class="hljs-comment">//  |       |</span><br>    &#125;                     <span class="hljs-comment">// -+       |</span><br>                          <span class="hljs-comment">//          |</span><br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;r: &#123;&#125;&quot;</span>, r); <span class="hljs-comment">//          |</span><br>&#125;                         <span class="hljs-comment">// ---------+</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>这段代码和之前的一模一样，唯一的区别在于<strong>增加了对变量生命周期的注释</strong>。这里，r 变量被赋予了生命周期 ‘a，x 被赋予了生命周期 ‘b，从图示上可以明显看出生命周期 ‘b 比 ‘a 小很多。</p>
+<p>在编译期，Rust 会比较两个变量的生命周期，结果发现 r 明明拥有生命周期 ‘a，但是却引用了一个小得多的生命周期 ‘b，在这种情况下，编译器会认为我们的程序存在风险，因此拒绝运行。</p>
+<p>如果想要编译通过，也很简单，<strong>只要 ‘b 比 ‘a 大就好</strong>。总之，x 变量只要比 r 活得久，那么 r 就能随意引用 x 且不会存在危险：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs rust"><br><span class="hljs-meta">#![allow(unused)]</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>&#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">x</span> = <span class="hljs-number">5</span>;            <span class="hljs-comment">// ----------+-- &#x27;b</span><br>                          <span class="hljs-comment">//           |</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">r</span> = &amp;x;           <span class="hljs-comment">// --+-- &#x27;a  |</span><br>                          <span class="hljs-comment">//   |       |</span><br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;r: &#123;&#125;&quot;</span>, r); <span class="hljs-comment">//   |       |</span><br>                          <span class="hljs-comment">// --+       |</span><br>&#125;                         <span class="hljs-comment">// ----------+</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>根据之前的结论，我们重新实现了代码，现在 x 的生命周期 ‘b 大于 r 的生命周期 ‘a，因此 r 对 x 的引用是安全的。</p>
+<p>通过之前的内容，我们了解了何为生命周期，也了解了 Rust 如何利用生命周期来确保引用是合法的，下面来看看函数中的生命周期。</p>
+<h2 id="函数中的生命周期"><a href="#函数中的生命周期" class="headerlink" title="函数中的生命周期"></a>函数中的生命周期</h2><p>先来考虑一个例子 - 返回两个字符串切片中较长的那个，该函数的参数是两个字符串切片，返回值也是字符串切片：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">string1</span> = <span class="hljs-type">String</span>::<span class="hljs-title function_ invoke__">from</span>(<span class="hljs-string">&quot;abcd&quot;</span>);<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">string2</span> = <span class="hljs-string">&quot;xyz&quot;</span>;<br><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">result</span> = <span class="hljs-title function_ invoke__">longest</span>(string1.<span class="hljs-title function_ invoke__">as_str</span>(), string2);<br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;The longest string is &#123;&#125;&quot;</span>, result);<br>&#125;<br><br><span class="hljs-meta">#![allow(unused)]</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">longest</span>(x: &amp;<span class="hljs-type">str</span>, y: &amp;<span class="hljs-type">str</span>) <span class="hljs-punctuation">-&gt;</span> &amp;<span class="hljs-type">str</span> &#123;<br>    <span class="hljs-keyword">if</span> x.<span class="hljs-title function_ invoke__">len</span>() &gt; y.<span class="hljs-title function_ invoke__">len</span>() &#123;<br>        x<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        y<br>    &#125;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>会报错</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs error">error[E0106]: missing lifetime specifier<br> --&gt; src/main.rs:9:33<br>  |<br>9 | fn longest(x: &amp;str, y: &amp;str) -&gt; &amp;str &#123;<br>  |               ----     ----     ^ expected named lifetime parameter // 参数需要一个生命周期<br>  |<br>  = help: this function&#x27;s return type contains a borrowed value, but the signature does not say whether it is<br>  borrowed from `x` or `y`<br>  = 帮助： 该函数的返回值是一个引用类型，但是函数签名无法说明，该引用是借用自 `x` 还是 `y`<br>help: consider introducing a named lifetime parameter // 考虑引入一个生命周期<br>  |<br>9 | fn longest&lt;&#x27;a&gt;(x: &amp;&#x27;a str, y: &amp;&#x27;a str) -&gt; &amp;&#x27;a str &#123;<br>  |           ^^^^    ^^^^^^^     ^^^^^^^     ^^^<br></code></pre></td></tr></table></figure>
+<p>报错的问题主要是编译器无法知道该函数的返回值到底引用 x 还是 y ，因为编译器需要知道这些，来确保函数调用后的引用生命周期分析。</p>
+<p>但是其实并不能知道到底是引用x还是引用y，因此，<strong>在存在多个引用时，编译器有时会无法自动推导生命周期，此时就需要我们手动去标注，通过为参数标注合适的生命周期来帮助编译器进行借用检查的分析。</strong></p>
+<h2 id="生命周期的标注语法"><a href="#生命周期的标注语法" class="headerlink" title="生命周期的标注语法"></a>生命周期的标注语法</h2><p>生命周期标注并不会改变任何引用的实际作用域，标记的生命周期只是为了取悦编译器，让编译器不要难为我们。</p>
+<p>例如一个变量，只能活一个花括号，那么就算你给它标注一个活全局的生命周期，它还是会在前面的花括号结束处被释放掉，并不会真的全局存活。</p>
+<p>生命周期的语法也颇为与众不同，以 ‘ 开头，名称往往是一个单独的小写字母，大多数人都用 ‘a 来作为生命周期的名称。 如果是引用类型的参数，那么生命周期会位于引用符号 &amp; 之后，并用一个空格来将生命周期和引用参数分隔开:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-meta">#![allow(unused)]</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br>&amp;<span class="hljs-type">i32</span>        <span class="hljs-comment">// 一个引用</span><br>&amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-type">i32</span>     <span class="hljs-comment">// 具有显式生命周期的引用</span><br>&amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-keyword">mut</span> <span class="hljs-type">i32</span> <span class="hljs-comment">// 具有显式生命周期的可变引用</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>一个生命周期标注，它自身并不具有什么意义，因为生命周期的作用就是告诉编译器多个引用之间的关系。例如，有一个函数，它的第一个参数 first 是一个指向 i32 类型的引用，具有生命周期 ‘a，该函数还有另一个参数 second，它也是指向 i32 类型的引用，并且同样具有生命周期 ‘a。此处生命周期标注仅仅说明，这两个参数 first 和 second 至少活得和’a 一样久，至于到底活多久或者哪个活得更久，抱歉我们都无法得知：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-meta">#![allow(unused)]</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() &#123;<br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">useless</span>&lt;<span class="hljs-symbol">&#x27;a</span>&gt;(first: &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-type">i32</span>, second: &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-type">i32</span>) &#123;&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="函数签名中的生命周期标注"><a href="#函数签名中的生命周期标注" class="headerlink" title="函数签名中的生命周期标注"></a>函数签名中的生命周期标注</h3><p>继续之前的 longest 函数，从两个字符串切片中返回较长的那个：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">fn</span> <span class="hljs-title function_">longest</span>&lt;<span class="hljs-symbol">&#x27;a</span>&gt;(x: &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-type">str</span>, y: &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-type">str</span>) <span class="hljs-punctuation">-&gt;</span> &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-type">str</span> &#123;<br>    <span class="hljs-keyword">if</span> x.<span class="hljs-title function_ invoke__">len</span>() &gt; y.<span class="hljs-title function_ invoke__">len</span>() &#123;<br>        x<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        y<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>需要注意的点如下：</p>
+<ul>
+<li>和泛型一样，使用生命周期参数，需要先声明 &lt;’a&gt;</li>
+<li>x、y 和返回值至少活得和 ‘a 一样久(因为返回值要么是 x，要么是 y)</li>
+</ul>
+<p>该函数签名表明对于某些生命周期 ‘a，函数的两个参数都至少跟 ‘a 活得一样久，同时函数的返回引用也至少跟 ‘a 活得一样久。实际上，这意味着返回值的生命周期与参数生命周期中的较小值一致：虽然两个参数的生命周期都是标注了 ‘a，但是实际上这两个参数的真实生命周期可能是不一样的(生命周期 ‘a 不代表生命周期等于 ‘a，而是大于等于 ‘a)。</p>
+<p><strong>在通过函数签名指定生命周期参数时，我们并没有改变传入引用或者返回引用的真实生命周期，而是告诉编译器当不满足此约束条件时，就拒绝编译通过。</strong></p>
+<p>因此 longest 函数并不知道 x 和 y 具体会活多久，只要知道它们的作用域至少能持续 ‘a 这么长就行。</p>
+<p>当把具体的引用传给 longest 时，那生命周期 ‘a 的大小就是 x 和 y 的作用域的重合部分，换句话说，’a 的大小将等于 x 和 y 中较小的那个。由于返回值的生命周期也被标记为 ‘a，因此返回值的生命周期也是 x 和 y 中作用域较小的那个。</p>
+<p>未完待续……</p>
+<h3 id="深入思考生命周期标注"><a href="#深入思考生命周期标注" class="headerlink" title="深入思考生命周期标注"></a>深入思考生命周期标注</h3>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Rust/" class="category-chain-item">Rust</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Rust/">#Rust</a>
+      
+        <a href="/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">#生命周期</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Rust 生命周期学习</div>
+      <div>http://seedonshen.me/2023/03/23/Rust-生命周期学习/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Seddon</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月23日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/11/%E4%BD%BF%E7%94%A8GPG%E5%AF%B9Github%E8%BF%9B%E8%A1%8C%E7%AD%BE%E5%90%8D/" title="使用GPG对Github进行签名">
+                        <span class="hidden-mobile">使用GPG对Github进行签名</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"9c919945ea30538e1b5d","clientSecret":"f890c67334c0486d0c727afb3d26ce5eaf49296e","repo":"SeddonShen.github.io","owner":"SeddonShen","admin":["SeddonShen"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: '0ebe7ad49b4e0b99fcfb92d407e5269a'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
