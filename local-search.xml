@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>撰写计算机类专利的基本知识</title>
+    <link href="/2023/07/25/%E6%92%B0%E5%86%99%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B1%BB%E4%B8%93%E5%88%A9%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/"/>
+    <url>/2023/07/25/%E6%92%B0%E5%86%99%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B1%BB%E4%B8%93%E5%88%A9%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/</url>
+    
+    <content type="html"><![CDATA[<h1 id="专利文件（五书）"><a href="#专利文件（五书）" class="headerlink" title="专利文件（五书）"></a>专利文件（五书）</h1><ul><li>权利要求书</li><li>说明书</li><li>说明书附图（发明可以没有）</li><li>说明书摘要</li><li>摘要附图（发明可以没有）</li></ul><h1 id="需要明确的关键点"><a href="#需要明确的关键点" class="headerlink" title="需要明确的关键点"></a>需要明确的关键点</h1><p><strong>在写专利之前就需要非常明确的点！</strong></p><ul><li>和现有方案的区别点（哪个步骤不同）</li><li>区别点解决的技术问题</li><li>区别点达到的技术效果</li></ul><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>名称+领域+方案+效果（结尾一个句号 300字以内）<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/07/25/16902712082215.jpg"></p><h2 id="摘要附图"><a href="#摘要附图" class="headerlink" title="摘要附图"></a>摘要附图</h2><p>最具有代表性的一个图</p><h2 id="权利要求书"><a href="#权利要求书" class="headerlink" title="权利要求书"></a>权利要求书</h2><ul><li>权利要求在10个以内，否则需要添加附加费用</li><li>不能有不确定词汇</li><li>权利1是主权，后面的都是从权 对每个步骤进行相对详细的说明<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/07/25/16902713055912.jpg"><br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/07/25/16902714538171.jpg"></li><li>一个多项不能引用另外的多项<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/07/25/16902716306654.jpg"></li></ul><h1 id="说明书"><a href="#说明书" class="headerlink" title="说明书"></a>说明书</h1><h2 id="背景技术"><a href="#背景技术" class="headerlink" title="背景技术"></a>背景技术</h2><p><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/07/25/16902719047835.jpg"></p><ul><li>背景技术进行简单说明</li><li>对现有技术进行描述</li><li>对现有技术存在的问题进行详细描述</li><li>把解决的问题写清楚</li></ul><h2 id="发明内容"><a href="#发明内容" class="headerlink" title="发明内容"></a>发明内容</h2><ul><li>发明内容解决的技术问题</li><li>写清楚技术方案</li></ul><h2 id="附图说明"><a href="#附图说明" class="headerlink" title="附图说明"></a>附图说明</h2><ul><li>根据图进行说明</li><li>可以加附图标记</li></ul><h2 id="具体实施方式"><a href="#具体实施方式" class="headerlink" title="具体实施方式"></a>具体实施方式</h2><ul><li>假设其他人拿到专利怎么做出来</li><li>现有的东西可以略写</li><li>主要是写自己的专利的区别 加了什么特有的东西</li><li>技术解决了什么问题</li></ul><h2 id="说明书附图"><a href="#说明书附图" class="headerlink" title="说明书附图"></a>说明书附图</h2><ul><li>不能有彩色</li></ul><p>参考教程：<a href="https://www.bilibili.com/video/BV1KW4y187F5/">https://www.bilibili.com/video/BV1KW4y187F5/</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>杂项</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>专利</tag>
+      
+      <tag>知识产权</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Rust 生命周期学习</title>
     <link href="/2023/03/23/Rust-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%AD%A6%E4%B9%A0/"/>
     <url>/2023/03/23/Rust-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%AD%A6%E4%B9%A0/</url>
