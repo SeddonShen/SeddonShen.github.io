@@ -16,29 +16,23 @@
   <meta name="author" content="Seddon">
   <meta name="keywords" content="">
   
-    <meta name="description" content="专利文件（五书） 权利要求书 说明书 说明书附图（发明可以没有） 说明书摘要 摘要附图（发明可以没有）  需要明确的关键点在写专利之前就需要非常明确的点！  和现有方案的区别点（哪个步骤不同） 区别点解决的技术问题 区别点达到的技术效果  摘要名称+领域+方案+效果（结尾一个句号 300字以内） 摘要附图最具有代表性的一个图 权利要求书 权利要求在10个以内，否则需要添加附加费用 不能有不确定词汇">
+    <meta name="description" content="常用的一些工具 cbmc https:&#x2F;&#x2F;github.com&#x2F;diffblue&#x2F;cbmc esbmc https:&#x2F;&#x2F;github.com&#x2F;esbmc&#x2F;esbmc cpachecker https:&#x2F;&#x2F;github.com&#x2F;sosy-lab&#x2F;cpachecker smack https:&#x2F;&#x2F;github.com&#x2F;smackers&#x2F;smack  使用情况目前需要对多个文件合并跑BMC，可能使用go">
 <meta property="og:type" content="article">
-<meta property="og:title" content="撰写计算机类专利的基本知识">
-<meta property="og:url" content="http://seedonshen.me/2023/07/25/%E6%92%B0%E5%86%99%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B1%BB%E4%B8%93%E5%88%A9%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:title" content="初识C&#x2F;CPP 下的BMC">
+<meta property="og:url" content="http://seedonshen.me/2024/04/28/%E5%88%9D%E8%AF%86C-CPP-%E4%B8%8B%E7%9A%84BMC/index.html">
 <meta property="og:site_name" content="Seddon&#39;s Blog">
-<meta property="og:description" content="专利文件（五书） 权利要求书 说明书 说明书附图（发明可以没有） 说明书摘要 摘要附图（发明可以没有）  需要明确的关键点在写专利之前就需要非常明确的点！  和现有方案的区别点（哪个步骤不同） 区别点解决的技术问题 区别点达到的技术效果  摘要名称+领域+方案+效果（结尾一个句号 300字以内） 摘要附图最具有代表性的一个图 权利要求书 权利要求在10个以内，否则需要添加附加费用 不能有不确定词汇">
+<meta property="og:description" content="常用的一些工具 cbmc https:&#x2F;&#x2F;github.com&#x2F;diffblue&#x2F;cbmc esbmc https:&#x2F;&#x2F;github.com&#x2F;esbmc&#x2F;esbmc cpachecker https:&#x2F;&#x2F;github.com&#x2F;sosy-lab&#x2F;cpachecker smack https:&#x2F;&#x2F;github.com&#x2F;smackers&#x2F;smack  使用情况目前需要对多个文件合并跑BMC，可能使用go">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/07/25/16902712082215.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/07/25/16902713055912.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/07/25/16902714538171.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/07/25/16902716306654.jpg">
-<meta property="og:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/07/25/16902719047835.jpg">
-<meta property="article:published_time" content="2023-07-25T07:41:39.000Z">
-<meta property="article:modified_time" content="2023-07-25T08:03:37.615Z">
+<meta property="article:published_time" content="2024-04-28T07:08:26.000Z">
+<meta property="article:modified_time" content="2024-04-28T07:11:34.915Z">
 <meta property="article:author" content="Seddon">
-<meta property="article:tag" content="专利">
-<meta property="article:tag" content="知识产权">
+<meta property="article:tag" content="BMC">
+<meta property="article:tag" content="Formal Methods">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/07/25/16902712082215.jpg">
   
   
   
-  <title>撰写计算机类专利的基本知识 - Seddon&#39;s Blog</title>
+  <title>初识C/CPP 下的BMC - Seddon&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="撰写计算机类专利的基本知识"></span>
+            <span id="subtitle" data-typed-text="初识C/CPP 下的BMC"></span>
           
         </div>
 
@@ -214,8 +208,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-25 15:41" pubdate>
-          2023年7月25日 下午
+        <time datetime="2024-04-28 15:08" pubdate>
+          2024年4月28日 下午
         </time>
       </span>
     
@@ -226,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          432 字
+          219 字
         
       </span>
     
@@ -237,7 +231,7 @@
         
         
         
-          4 分钟
+          2 分钟
         
       </span>
     
@@ -275,57 +269,18 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">撰写计算机类专利的基本知识</h1>
+            <h1 style="display: none">初识C/CPP 下的BMC</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="专利文件（五书）"><a href="#专利文件（五书）" class="headerlink" title="专利文件（五书）"></a>专利文件（五书）</h1><ul>
-<li>权利要求书</li>
-<li>说明书</li>
-<li>说明书附图（发明可以没有）</li>
-<li>说明书摘要</li>
-<li>摘要附图（发明可以没有）</li>
+                <h2 id="常用的一些工具"><a href="#常用的一些工具" class="headerlink" title="常用的一些工具"></a>常用的一些工具</h2><ul>
+<li>cbmc <a target="_blank" rel="noopener" href="https://github.com/diffblue/cbmc">https://github.com/diffblue/cbmc</a></li>
+<li>esbmc <a target="_blank" rel="noopener" href="https://github.com/esbmc/esbmc">https://github.com/esbmc/esbmc</a></li>
+<li>cpachecker <a target="_blank" rel="noopener" href="https://github.com/sosy-lab/cpachecker">https://github.com/sosy-lab/cpachecker</a></li>
+<li>smack <a target="_blank" rel="noopener" href="https://github.com/smackers/smack">https://github.com/smackers/smack</a></li>
 </ul>
-<h1 id="需要明确的关键点"><a href="#需要明确的关键点" class="headerlink" title="需要明确的关键点"></a>需要明确的关键点</h1><p><strong>在写专利之前就需要非常明确的点！</strong></p>
-<ul>
-<li>和现有方案的区别点（哪个步骤不同）</li>
-<li>区别点解决的技术问题</li>
-<li>区别点达到的技术效果</li>
-</ul>
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>名称+领域+方案+效果（结尾一个句号 300字以内）<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/07/25/16902712082215.jpg" srcset="/img/loading.gif" lazyload></p>
-<h2 id="摘要附图"><a href="#摘要附图" class="headerlink" title="摘要附图"></a>摘要附图</h2><p>最具有代表性的一个图</p>
-<h2 id="权利要求书"><a href="#权利要求书" class="headerlink" title="权利要求书"></a>权利要求书</h2><ul>
-<li>权利要求在10个以内，否则需要添加附加费用</li>
-<li>不能有不确定词汇</li>
-<li>权利1是主权，后面的都是从权 对每个步骤进行相对详细的说明<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/07/25/16902713055912.jpg" srcset="/img/loading.gif" lazyload><br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/07/25/16902714538171.jpg" srcset="/img/loading.gif" lazyload></li>
-<li>一个多项不能引用另外的多项<br><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/07/25/16902716306654.jpg" srcset="/img/loading.gif" lazyload></li>
-</ul>
-<h1 id="说明书"><a href="#说明书" class="headerlink" title="说明书"></a>说明书</h1><h2 id="背景技术"><a href="#背景技术" class="headerlink" title="背景技术"></a>背景技术</h2><p><img src="https://seddonblog.oss-ap-northeast-1.aliyuncs.com/2023/07/25/16902719047835.jpg" srcset="/img/loading.gif" lazyload></p>
-<ul>
-<li>背景技术进行简单说明</li>
-<li>对现有技术进行描述</li>
-<li>对现有技术存在的问题进行详细描述</li>
-<li>把解决的问题写清楚</li>
-</ul>
-<h2 id="发明内容"><a href="#发明内容" class="headerlink" title="发明内容"></a>发明内容</h2><ul>
-<li>发明内容解决的技术问题</li>
-<li>写清楚技术方案</li>
-</ul>
-<h2 id="附图说明"><a href="#附图说明" class="headerlink" title="附图说明"></a>附图说明</h2><ul>
-<li>根据图进行说明</li>
-<li>可以加附图标记</li>
-</ul>
-<h2 id="具体实施方式"><a href="#具体实施方式" class="headerlink" title="具体实施方式"></a>具体实施方式</h2><ul>
-<li>假设其他人拿到专利怎么做出来</li>
-<li>现有的东西可以略写</li>
-<li>主要是写自己的专利的区别 加了什么特有的东西</li>
-<li>技术解决了什么问题</li>
-</ul>
-<h2 id="说明书附图"><a href="#说明书附图" class="headerlink" title="说明书附图"></a>说明书附图</h2><ul>
-<li>不能有彩色</li>
-</ul>
-<p>参考教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1KW4y187F5/">https://www.bilibili.com/video/BV1KW4y187F5/</a></p>
+<h2 id="使用情况"><a href="#使用情况" class="headerlink" title="使用情况"></a>使用情况</h2><p>目前需要对多个文件合并跑BMC，可能使用goto-cc或者smack的llvm字节码直接跑，还需要常识</p>
 
                 
               </div>
@@ -344,7 +299,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%9D%82%E9%A1%B9/" class="category-chain-item">杂项</a>
+  <a href="/categories/%E9%AA%8C%E8%AF%81/" class="category-chain-item">验证</a>
   
   
 
@@ -359,9 +314,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E4%B8%93%E5%88%A9/">#专利</a>
+        <a href="/tags/BMC/">#BMC</a>
       
-        <a href="/tags/%E7%9F%A5%E8%AF%86%E4%BA%A7%E6%9D%83/">#知识产权</a>
+        <a href="/tags/Formal-Methods/">#Formal Methods</a>
       
     </div>
   
@@ -373,8 +328,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>撰写计算机类专利的基本知识</div>
-      <div>http://seedonshen.me/2023/07/25/撰写计算机类专利的基本知识/</div>
+      <div>初识C/CPP 下的BMC</div>
+      <div>http://seedonshen.me/2024/04/28/初识C-CPP-下的BMC/</div>
     </div>
     <div class="license-meta">
       
@@ -386,7 +341,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年7月25日</div>
+          <div>2024年4月28日</div>
         </div>
       
       
@@ -418,18 +373,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/04/28/%E5%88%9D%E8%AF%86C-CPP-%E4%B8%8B%E7%9A%84BMC/" title="初识C/CPP 下的BMC">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">初识C/CPP 下的BMC</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/23/Rust-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%AD%A6%E4%B9%A0/" title="Rust 生命周期学习">
-                        <span class="hidden-mobile">Rust 生命周期学习</span>
+                      <a href="/2023/07/25/%E6%92%B0%E5%86%99%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B1%BB%E4%B8%93%E5%88%A9%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/" title="撰写计算机类专利的基本知识">
+                        <span class="hidden-mobile">撰写计算机类专利的基本知识</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -450,7 +399,7 @@
         var options = Object.assign(
           {"clientID":"9c919945ea30538e1b5d","clientSecret":"f890c67334c0486d0c727afb3d26ce5eaf49296e","repo":"SeddonShen.github.io","owner":"SeddonShen","admin":["SeddonShen"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
           {
-            id: '855c3a99d8e2b800c51ef61abd196281'
+            id: '4d3d319004c942262849a8661f51d9e6'
           }
         )
         var gitalk = new Gitalk(options);
