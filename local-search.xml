@@ -8,7 +8,7 @@
     <link href="/2024/05/27/DNSSEC%E5%AD%A6%E4%B9%A0/"/>
     <url>/2024/05/27/DNSSEC%E5%AD%A6%E4%B9%A0/</url>
     
-    <content type="html"><![CDATA[<h1 id="DNSSEC"><a href="#DNSSEC" class="headerlink" title="DNSSEC"></a>DNSSEC</h1><p>最近在学域名和系统安全的相关知识，学习到了DNSSEC。摘录了通俗易懂的几篇好文：</p><ul><li>DNSSEC？禁止套娃！ <a href="https://zhuanlan.zhihu.com/p/355579999">https://zhuanlan.zhihu.com/p/355579999</a><br>这篇文章有个提问：</li></ul><p>Q：请问为什么还需要KSK呢？感觉使用KSK没有也一样可以很安全呀。上一级DNS直接对下一级的ZSK进行哈希不可以吗</p><p>A：这样只要rdata变了，就得去上一级更改DS</p><ul><li>DNSSEC 简介，签名的工作原理  <a href="https://www.guozeyu.com/2018/03/dnssec/">https://www.guozeyu.com/2018/03/dnssec/</a></li></ul>]]></content>
+    <content type="html"><![CDATA[<h1 id="DNSSEC"><a href="#DNSSEC" class="headerlink" title="DNSSEC"></a>DNSSEC</h1><p>最近在学域名和系统安全的相关知识，学习到了DNSSEC。摘录了通俗易懂的几篇好文：</p><ul><li>DNSSEC？禁止套娃！ <a href="https://zhuanlan.zhihu.com/p/355579999">https://zhuanlan.zhihu.com/p/355579999</a><br>这篇文章有个提问：</li></ul><p>Q：请问为什么还需要KSK呢？感觉使用KSK没有也一样可以很安全呀。上一级DNS直接对下一级的ZSK进行哈希不可以吗</p><p>A：这样只要rdata变了，就得去上一级更改DS</p><ul><li>DNSSEC 简介，签名的工作原理  <a href="https://www.guozeyu.com/2018/03/dnssec/">https://www.guozeyu.com/2018/03/dnssec/</a></li></ul><h2 id="Deploying-Cryptography-in-Internet-Scale-Systems-A-Case-Study-on-DNSSEC"><a href="#Deploying-Cryptography-in-Internet-Scale-Systems-A-Case-Study-on-DNSSEC" class="headerlink" title="Deploying Cryptography in Internet-Scale Systems: A Case Study on DNSSEC"></a>Deploying Cryptography in Internet-Scale Systems: A Case Study on DNSSEC</h2><p>论文解析见以下PDF</p><div class="row">    <embed src="/pdf/DNSSEC_Case_Study.pdf" width="100%" height="550" type="application/pdf"></div>]]></content>
     
     
     <categories>
