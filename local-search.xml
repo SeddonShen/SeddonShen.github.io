@@ -8,7 +8,7 @@
     <link href="/2024/07/18/LibAFL%E5%92%8CHardWare-Fuzzing%E5%AD%A6%E4%B9%A0-1/"/>
     <url>/2024/07/18/LibAFL%E5%92%8CHardWare-Fuzzing%E5%AD%A6%E4%B9%A0-1/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<h2 id="LibAFL框架"><a href="#LibAFL框架" class="headerlink" title="LibAFL框架"></a>LibAFL框架</h2><ul><li>由Rust编写，个人认为是比较好用，适合在上面进行一些工作的选择</li><li>手册： <a href="https://aflplus.plus/libafl-book/">https://aflplus.plus/libafl-book/</a></li><li>源代码： <a href="https://github.com/AFLplusplus/LibAFL">https://github.com/AFLplusplus/LibAFL</a></li></ul><h2 id="XFuzz"><a href="#XFuzz" class="headerlink" title="XFuzz"></a>XFuzz</h2><h3 id="几个关键的组件库"><a href="#几个关键的组件库" class="headerlink" title="几个关键的组件库"></a>几个关键的组件库</h3><ul><li>xfuzz：源代码</li><li>riscv-arch-test：官方提供的测试用例文件</li><li>riscv-isa-sim：Spike, a RISC-V ISA Simulator</li></ul><h3 id="针对Chisel设计的插桩"><a href="#针对Chisel设计的插桩" class="headerlink" title="针对Chisel设计的插桩"></a>针对Chisel设计的插桩</h3><ul><li>位于xfuzz的instrumentation文件夹下</li><li>移植自：rfuzz、difuzz-rtl、simulator-independent-coverage</li><li>由于FIRRTL的限制，Chisel&lt;&#x3D;3.6.0才支持目前的插桩操作</li><li>All supported Chisel&#x2F;FIRRTL coverage metrics are listed in the CoverPoint.getTransforms function here.</li></ul><h3 id="使用方法详解"><a href="#使用方法详解" class="headerlink" title="使用方法详解"></a>使用方法详解</h3><p>未完待续…</p>]]></content>
     
     
     <categories>
