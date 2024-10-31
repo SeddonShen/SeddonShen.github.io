@@ -16,24 +16,22 @@
   <meta name="author" content="Seddon">
   <meta name="keywords" content="">
   
-    <meta name="description" content="LibAFL框架 由Rust编写，个人认为是比较好用，适合在上面进行一些工作的选择 手册： https:&#x2F;&#x2F;aflplus.plus&#x2F;libafl-book&#x2F; 源代码： https:&#x2F;&#x2F;github.com&#x2F;AFLplusplus&#x2F;LibAFL  XFuzz几个关键的组件库 xfuzz：源代码 riscv-arch-test：官方提供的测试用例文件 riscv-isa-sim：Spike, a R">
+    <meta name="description" content="使用方法1假如拉取原始镜像命令如下 1docker pull whyour&#x2F;qinglong:latest  仅需在原命令前缀加入加速镜像地址 例如： 1docker pull dockermirros.com&#x2F;whyour&#x2F;qinglong:latest  使用方法2一键设置镜像加速：修改文件 &#x2F;etc&#x2F;docker&#x2F;daemon.json（如果不存在则创建） 1s">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LibAFL和HardWare Fuzzing学习 1">
-<meta property="og:url" content="http://seddon.lol/2024/07/18/LibAFL%E5%92%8CHardWare-Fuzzing%E5%AD%A6%E4%B9%A0-1/index.html">
+<meta property="og:title" content="Docker修改mirros地址的方法">
+<meta property="og:url" content="http://seddon.lol/2024/10/31/Docker%E4%BF%AE%E6%94%B9mirros%E5%9C%B0%E5%9D%80%E7%9A%84%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="Seddon&#39;s Blog">
-<meta property="og:description" content="LibAFL框架 由Rust编写，个人认为是比较好用，适合在上面进行一些工作的选择 手册： https:&#x2F;&#x2F;aflplus.plus&#x2F;libafl-book&#x2F; 源代码： https:&#x2F;&#x2F;github.com&#x2F;AFLplusplus&#x2F;LibAFL  XFuzz几个关键的组件库 xfuzz：源代码 riscv-arch-test：官方提供的测试用例文件 riscv-isa-sim：Spike, a R">
+<meta property="og:description" content="使用方法1假如拉取原始镜像命令如下 1docker pull whyour&#x2F;qinglong:latest  仅需在原命令前缀加入加速镜像地址 例如： 1docker pull dockermirros.com&#x2F;whyour&#x2F;qinglong:latest  使用方法2一键设置镜像加速：修改文件 &#x2F;etc&#x2F;docker&#x2F;daemon.json（如果不存在则创建） 1s">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-18T06:40:22.000Z">
-<meta property="article:modified_time" content="2024-07-20T04:36:21.590Z">
+<meta property="article:published_time" content="2024-10-31T06:49:27.000Z">
+<meta property="article:modified_time" content="2024-10-31T06:54:26.415Z">
 <meta property="article:author" content="Seddon">
-<meta property="article:tag" content="Fuzzing">
-<meta property="article:tag" content="LibAFL">
-<meta property="article:tag" content="XFuzz">
+<meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>LibAFL和HardWare Fuzzing学习 1 - Seddon&#39;s Blog</title>
+  <title>Docker修改mirros地址的方法 - Seddon&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="LibAFL和HardWare Fuzzing学习 1"></span>
+            <span id="subtitle" data-typed-text="Docker修改mirros地址的方法"></span>
           
         </div>
 
@@ -209,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-18 14:40" pubdate>
-          2024年7月18日 下午
+        <time datetime="2024-10-31 14:49" pubdate>
+          2024年10月31日 下午
         </time>
       </span>
     
@@ -221,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          453 字
         
       </span>
     
@@ -232,7 +230,7 @@
         
         
         
-          10 分钟
+          4 分钟
         
       </span>
     
@@ -270,33 +268,27 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">LibAFL和HardWare Fuzzing学习 1</h1>
+            <h1 style="display: none">Docker修改mirros地址的方法</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="LibAFL框架"><a href="#LibAFL框架" class="headerlink" title="LibAFL框架"></a>LibAFL框架</h2><ul>
-<li>由Rust编写，个人认为是比较好用，适合在上面进行一些工作的选择</li>
-<li>手册： <a target="_blank" rel="noopener" href="https://aflplus.plus/libafl-book/">https://aflplus.plus/libafl-book/</a></li>
-<li>源代码： <a target="_blank" rel="noopener" href="https://github.com/AFLplusplus/LibAFL">https://github.com/AFLplusplus/LibAFL</a></li>
-</ul>
-<h2 id="XFuzz"><a href="#XFuzz" class="headerlink" title="XFuzz"></a>XFuzz</h2><h3 id="几个关键的组件库"><a href="#几个关键的组件库" class="headerlink" title="几个关键的组件库"></a>几个关键的组件库</h3><ul>
-<li>xfuzz：源代码</li>
-<li>riscv-arch-test：官方提供的测试用例文件</li>
-<li>riscv-isa-sim：Spike, a RISC-V ISA Simulator</li>
-</ul>
-<h3 id="针对Chisel设计的插桩"><a href="#针对Chisel设计的插桩" class="headerlink" title="针对Chisel设计的插桩"></a>针对Chisel设计的插桩</h3><ul>
-<li>位于xfuzz的instrumentation文件夹下</li>
-<li>移植自：rfuzz、difuzz-rtl、simulator-independent-coverage</li>
-<li>由于FIRRTL的限制，Chisel&lt;&#x3D;3.6.0才支持目前的插桩操作</li>
-<li>All supported Chisel&#x2F;FIRRTL coverage metrics are listed in the CoverPoint.getTransforms function here.</li>
-</ul>
-<h3 id="代码阅读详解"><a href="#代码阅读详解" class="headerlink" title="代码阅读详解"></a>代码阅读详解</h3><h4 id="src下的rust源码"><a href="#src下的rust源码" class="headerlink" title="src下的rust源码"></a>src下的rust源码</h4><h5 id="coverage-rs"><a href="#coverage-rs" class="headerlink" title="coverage.rs"></a>coverage.rs</h5><p>这个文件定义了一个Coverage结构体和一些操作这个结构体的方法。Coverage结构体用于跟踪覆盖点，并提供初始化、累积、计算覆盖率和显示覆盖率的功能。通过静态变量ICOVERAGE，可以在全局范围内管理一个Coverage实例，并通过一些函数对其进行操作。</p>
-<p>相当于实现了Fuzzer中覆盖率的定义。</p>
-<h5 id="fuzzer-rs"><a href="#fuzzer-rs" class="headerlink" title="fuzzer.rs"></a>fuzzer.rs</h5><p>fuzzer.rs 文件主要负责配置和运行模糊测试器（fuzzer）。它设置了模糊测试的各个组件，包括调度器、反馈机制、目标检测、状态管理、事件管理器、模糊测试器和执行器，并根据传入的参数处理错误、初始化语料库、设置随机输入和变异器，最终执行模糊测试循环。</p>
-<h5 id="harness-rs"><a href="#harness-rs" class="headerlink" title="harness.rs"></a>harness.rs</h5><p>sim_run 函数的主要功能是准备模拟器需要的参数，调用模拟器的主函数，然后更新覆盖统计信息，并返回模拟器的返回值。</p>
-<h5 id="lib-rs"><a href="#lib-rs" class="headerlink" title="lib.rs"></a>lib.rs</h5><p>lib.rs 文件定义了程序的入口点 main 函数，并通过解析命令行参数来控制程序的行为。程序分为仿真运行和模糊测试两个主要部分。通过使用 clap 库解析命令行参数，并根据参数执行相应的功能，如设置仿真环境、运行仿真、显示覆盖率以及运行模糊测试。</p>
-<h5 id="monitor-rs"><a href="#monitor-rs" class="headerlink" title="monitor.rs"></a>monitor.rs</h5><p>这个文件定义了两个函数 store_testcases 和 store_testcase。store_testcases 函数用于遍历语料库中的每个测试用例，并调用 store_testcase 函数将其存储到指定的输出目录中。store_testcase 函数用于创建输出目录，并根据提供的文件名或计算的 MD5 哈希值将输入保存为文件。</p>
+                <h2 id="使用方法1"><a href="#使用方法1" class="headerlink" title="使用方法1"></a>使用方法1</h2><p>假如拉取原始镜像命令如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker pull whyour/qinglong:latest<br></code></pre></td></tr></table></figure>
+
+<p>仅需在原命令前缀加入加速镜像地址 例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker pull dockermirros.com/whyour/qinglong:latest<br></code></pre></td></tr></table></figure>
+
+<h2 id="使用方法2"><a href="#使用方法2" class="headerlink" title="使用方法2"></a>使用方法2</h2><p>一键设置镜像加速：修改文件 &#x2F;etc&#x2F;docker&#x2F;daemon.json（如果不存在则创建）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo vim /etc/docker/daemon.json<br></code></pre></td></tr></table></figure>
+
+<p>修改JSON文件 更改为以下内容 然后保存</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs config">&#123;&quot;registry-mirrors&quot;: [&quot;https://dockermirros.com&quot;]&#125;<br></code></pre></td></tr></table></figure>
+
+<p>保存好之后 执行以下两条命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo systemctl daemon-reload <span class="hljs-comment">#重载systemd管理守护进程配置文件</span><br>sudo systemctl restart docker <span class="hljs-comment">#重启 Docker 服务</span><br></code></pre></td></tr></table></figure>
+
+<p>详见：<a target="_blank" rel="noopener" href="https://dockerpull.org/">https://dockerpull.org</a> 感谢各类Docker镜像项目。</p>
 
                 
               </div>
@@ -315,8 +307,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95/" class="category-chain-item">模糊测试</a>
+  <a href="/categories/%E6%9D%82%E9%A1%B9/" class="category-chain-item">杂项</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9D%82%E9%A1%B9/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="category-chain-item">环境配置</a>
+  
+  
+
   
 
       </span>
@@ -330,11 +329,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Fuzzing/">#Fuzzing</a>
-      
-        <a href="/tags/LibAFL/">#LibAFL</a>
-      
-        <a href="/tags/XFuzz/">#XFuzz</a>
+        <a href="/tags/Docker/">#Docker</a>
       
     </div>
   
@@ -346,8 +341,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>LibAFL和HardWare Fuzzing学习 1</div>
-      <div>http://seddon.lol/2024/07/18/LibAFL和HardWare-Fuzzing学习-1/</div>
+      <div>Docker修改mirros地址的方法</div>
+      <div>http://seddon.lol/2024/10/31/Docker修改mirros地址的方法/</div>
     </div>
     <div class="license-meta">
       
@@ -359,7 +354,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月18日</div>
+          <div>2024年10月31日</div>
         </div>
       
       
@@ -391,18 +386,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/10/31/Docker%E4%BF%AE%E6%94%B9mirros%E5%9C%B0%E5%9D%80%E7%9A%84%E6%96%B9%E6%B3%95/" title="Docker修改mirros地址的方法">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Docker修改mirros地址的方法</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/05/27/DNSSEC%E5%AD%A6%E4%B9%A0/" title="DNSSEC学习">
-                        <span class="hidden-mobile">DNSSEC学习</span>
+                      <a href="/2024/07/18/LibAFL%E5%92%8CHardWare-Fuzzing%E5%AD%A6%E4%B9%A0-1/" title="LibAFL和HardWare Fuzzing学习 1">
+                        <span class="hidden-mobile">LibAFL和HardWare Fuzzing学习 1</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -423,7 +412,7 @@
         var options = Object.assign(
           {"clientID":"9c919945ea30538e1b5d","clientSecret":"f890c67334c0486d0c727afb3d26ce5eaf49296e","repo":"SeddonShen.github.io","owner":"SeddonShen","admin":["SeddonShen"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
           {
-            id: '16d43c5d17803e2ab7433fe7db93ad78'
+            id: '9bab512719f068272951f2a15e7894f8'
           }
         )
         var gitalk = new Gitalk(options);
