@@ -4,7 +4,7 @@ title: "Shidong Shen's Homepage"
 
 # About Me {#about-me}
 
-I'm a Masters Student at [Institute of Software, Chinese Academy of Sciences](https://www.iscas.ac.cn) and [University of Chinese Academy of Sciences](https://www.ucas.ac.cn). Before that, He has obtained a Bachelor's degree of Computer Science from [Northwestern Polytechnical University](https://www.nwpu.edu.cn) in 2023. 
+I'm a Masters Student at [Institute of Software, Chinese Academy of Sciences](https://www.iscas.ac.cn) and [University of Chinese Academy of Sciences](https://www.ucas.ac.cn) under the supervision of [Prof. Zhilin Wu](https://lcs.ios.ac.cn/~wuzl/). Before that, He has obtained a Bachelor's degree of Computer Science from [Northwestern Polytechnical University](https://www.nwpu.edu.cn) in 2023. 
 
 
 My research interest includes Hardware Formal Verification and Large Language Models for Software Engineering.
