@@ -21,9 +21,9 @@ disableKinds = ["taxonomy", "term", "RSS"]
     title = 'Zero'
 
     [languages.en.params]
-      author = "Lorem ipsum"
-      description = "Ph.D Student in [Lorem ipsum College](https://example.com). Focusing on Computer Vision and Deep Learning."
-      motto = "Most things in the world are not that important. But truth and love matter."
+      author = "Shidong Shen"
+      description = "Master Student in [ISCAS, CAS](https://www.iscas.ac.cn/) and [UCAS](https://www.ucas.ac.cn/). Focusing on Formal Verification and LLM4SE."
+      motto = "Stay Hungry,Stay Foolish."
     
     [[languages.en.menu.main]]
       name = 'About Me'
@@ -45,78 +45,19 @@ disableKinds = ["taxonomy", "term", "RSS"]
       name = 'Educations'
       url = '#educations'
       weight = 5
-    [[languages.en.menu.main]]
-      name = 'Invited Talks'
-      url = '#invited-talks'
-      weight = 6
-    [[languages.en.menu.main]]
-      name = 'Internships'
-      url = '#internships'
-      weight = 7
-      
-  [languages.zh]
-    languageName = '中文'
-    weight = 2
-    title = '学术主页'
-    
-    [languages.zh.params]
-      author = "王小明"
-      description = "某某大学博士生，专注于计算机视觉与深度学习"
-      motto = "世界上大部分事，都没有太大意义。真理与爱除外。"
-    
-    [[languages.zh.menu.main]]
-      name = '关于我'
-      url = '#about-me'
-      weight = 1
-    [[languages.zh.menu.main]]
-      name = '新闻'
-      url = '#news'
-      weight = 2
-    [[languages.zh.menu.main]]
-      name = '发表论文'
-      url = '#publications'
-      weight = 3
-    [[languages.zh.menu.main]]
-      name = '荣誉与奖项'
-      url = '#honors-and-awards'
-      weight = 4
-    [[languages.zh.menu.main]]
-      name = '教育背景'
-      url = '#educations'
-      weight = 5
-    [[languages.zh.menu.main]]
-      name = '受邀报告'
-      url = '#invited-talks'
-      weight = 6
-    [[languages.zh.menu.main]]
-      name = '实习经历'
-      url = '#internships'
-      weight = 7
 
 [params]
-  profilePicture = "images/profile.png"
+  profilePicture = "images/profile.jpg"
   enableDarkMode = true
   
   [[params.social]]
     name = "github"
-    url = "https://github.com/"
+    url = "https://github.com/SeddonShen"
     icon = "fab fa-github"
   [[params.social]]
-    name = "google-scholar"
-    url = "https://scholar.google.com/"
-    icon = "fab fa-google-scholar"
-  [[params.social]]
     name = "email"
-    url = "mailto:example@example.com"
+    url = "mailto:shensd@ios.ac.cn"
     icon = "fas fa-envelope"
-  [[params.social]]
-    name = "linkedin"
-    url = "https://linkedin.com/"
-    icon = "fab fa-linkedin"
-  [[params.social]]
-    name = "zhihu"
-    url = "https://zhihu.com/"
-    icon = "fab fa-zhihu"
 
 [build]
   writeStats = false
