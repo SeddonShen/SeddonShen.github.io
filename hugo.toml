@@ -1,5 +1,5 @@
 baseURL = 'https://seddonshen.github.io'
-title = 'Shidong Shen(申世东)'
+title = 'Shidong Shen (申世东)'
 
 # multi-language support
 defaultContentLanguage = 'en'
@@ -18,7 +18,7 @@ disableKinds = ["taxonomy", "term", "RSS"]
   [languages.en]
     languageName = 'English'
     weight = 1
-    title = 'Shidong Shen(申世东)'
+    title = 'Shidong Shen (申世东)'
 
     [languages.en.params]
       author = "Shidong Shen"
@@ -58,7 +58,10 @@ disableKinds = ["taxonomy", "term", "RSS"]
     name = "email"
     url = "mailto:shensd@ios.ac.cn"
     icon = "fas fa-envelope"
-
+  [[params.social]]
+    name = "orcid"
+    url = "https://orcid.org/0009-0000-0369-021X"
+    icon = "fab fa-orcid"
 [build]
   writeStats = false
 
