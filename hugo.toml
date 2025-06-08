@@ -1,5 +1,5 @@
-baseURL = 'https://geekifan.github.io/zero-academic-page-starter/'
-title = 'Zero'
+baseURL = 'https://seddonshen.github.io'
+title = 'Shidong Shen(申世东)'
 
 # multi-language support
 defaultContentLanguage = 'en'
@@ -18,7 +18,7 @@ disableKinds = ["taxonomy", "term", "RSS"]
   [languages.en]
     languageName = 'English'
     weight = 1
-    title = 'Zero'
+    title = 'Shidong Shen(申世东)'
 
     [languages.en.params]
       author = "Shidong Shen"
