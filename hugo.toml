@@ -22,7 +22,7 @@ disableKinds = ["taxonomy", "term", "RSS"]
 
     [languages.en.params]
       author = "Shidong Shen"
-      description = "Master Student in [ISCAS, CAS](https://www.iscas.ac.cn/) and [UCAS](https://www.ucas.ac.cn/). Focusing on Formal Verification and LLM4SE."
+      description = "Master Student at [ISCAS, CAS](https://www.iscas.ac.cn/) and [UCAS](https://www.ucas.ac.cn/). Focusing on Formal Verification and LLM4SE."
       motto = "Stay Hungry, Stay Foolish."
     
     [[languages.en.menu.main]]
