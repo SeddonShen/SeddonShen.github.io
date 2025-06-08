@@ -1,5 +1,5 @@
 ---
-title: "Shidong Shen's Homepage"
+title: "Shidong Shen (申世东)'s Homepage"
 ---
 
 # About Me {#about-me}
@@ -20,7 +20,7 @@ My research interest includes Hardware Formal Verification and Large Language Mo
 - ***[Formal Verification of RISC-V Processor Chisel Designs](https://link.springer.com/chapter/10.1007/978-981-96-0602-3_8)*** <br>
   Shidong Shen, Yicheng Liu, Lijun Zhang, Fu Song and Zhilin Wu in 10th Dependable Software Engineering. Theories, Tools, and Applications(**SETTA**), *2024.* <br> <a href="https://github.com/iscas-tis/riscv-spec-core" class="no-trailing-icon"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/iscas-tis/riscv-spec-core?style=flat-square&logo=github&label=GitHub%20Stars&labelColor=black"></a>
 
-# ⚙️ Projects
+# ⚙️ Projects  {#projects}
 #### GenshinCPU - Seven-Stage Pipelined MIPS Architecture Processor   <a href="https://github.com/gilgamsh/GenshinCPU" class="no-trailing-icon"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/gilgamsh/GenshinCPU?style=flat-square&logo=github&label=GitHub%20Stars&labelColor=black"></a> 
 - 🛠️ Stack: Verilog/SystemVerilog, C/C++, FPGA | 📕[Report](files/GenshinCPU_designreport.pdf)
 - A seven-stage single-issue processor based on the MIPS32 ISA, contains instruction and data cache, with a frequency of 145MHz, and can run PMON, Ucore, and Linux systems normally
