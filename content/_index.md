@@ -12,7 +12,7 @@ My research interest includes Hardware Formal Verification and Large Language Mo
 **Here is my [resume](files/Shidong.pdf)!**
 
 # 🔥 News {#news}
-- *2025.07*: &nbsp;🎉🎉 one paper have been accepted by ICCAD25!
+- *2025.07*: &nbsp;🎉🎉 One paper has been accepted by ICCAD25!
 - *2025.06*: &nbsp;🎉🎉 Celebrating the launch of my personal website!
 <!-- - *2024.09*: &nbsp;🎉🎉 TBD.  -->
 
