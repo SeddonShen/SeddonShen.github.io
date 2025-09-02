@@ -18,10 +18,10 @@ My research interest includes Hardware Formal Verification and Large Language Mo
 # 📝 Publications {#publications}
 
 - ***BMCFuzz: Hybrid Verification of Processors by Synergistic Integration of Bound Model Checking and Fuzzing*** <br>
-  Shidong Shen, Jinyu Liu, Weizhi Feng, Fu Song and Zhilin Wu in The 2025 International Conference on Computer-Aided Design (**ICCAD**), *2025.* <br> <a href="https://github.com/iscas-versys/BMCFuzz" class="no-trailing-icon"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/iscas-versys/BMCFuzz?style=flat-square&logo=github&label=GitHub%20Stars&labelColor=black"></a>
+  **Shidong Shen**, Jinyu Liu, Weizhi Feng, Fu Song and Zhilin Wu in The 2025 International Conference on Computer-Aided Design (**ICCAD**), *2025.* <br> <a href="https://github.com/iscas-versys/BMCFuzz" class="no-trailing-icon"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/iscas-versys/BMCFuzz?style=flat-square&logo=github&label=GitHub%20Stars&labelColor=black"></a>
 
 - ***[Formal Verification of RISC-V Processor Chisel Designs](https://link.springer.com/chapter/10.1007/978-981-96-0602-3_8)*** <br>
-  Shidong Shen, Yicheng Liu, Lijun Zhang, Fu Song and Zhilin Wu in 10th Dependable Software Engineering. Theories, Tools, and Applications (**SETTA**), *2024.* <br> <a href="https://github.com/iscas-tis/riscv-spec-core" class="no-trailing-icon"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/iscas-tis/riscv-spec-core?style=flat-square&logo=github&label=GitHub%20Stars&labelColor=black"></a>
+  **Shidong Shen**, Yicheng Liu, Lijun Zhang, Fu Song and Zhilin Wu in 10th Dependable Software Engineering. Theories, Tools, and Applications (**SETTA**), *2024.* <br> <a href="https://github.com/iscas-tis/riscv-spec-core" class="no-trailing-icon"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/iscas-tis/riscv-spec-core?style=flat-square&logo=github&label=GitHub%20Stars&labelColor=black"></a>
 
 # ⚙️ Projects  {#projects}
 #### GenshinCPU - Seven-Stage Pipelined MIPS Architecture Processor   <a href="https://github.com/gilgamsh/GenshinCPU" class="no-trailing-icon"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/gilgamsh/GenshinCPU?style=flat-square&logo=github&label=GitHub%20Stars&labelColor=black"></a> 
@@ -67,9 +67,17 @@ My research interest includes Hardware Formal Verification and Large Language Mo
 
 <!-- # 💻 Internships {#internships}
 - *2019.05 - 2020.02*, [Lorem](https://github.com/), China. -->
-<div style="width: 20em; margin: 0 auto;">
-  <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/67eMv1wT1yXhW9jrCPGIVD?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-</div>
-<div style="width: 20em; margin: 0 auto;">
-  <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=jOmuWcrs8vHPpB4re6ett820lzTzqdXhcoVzx1pZRbI&cl=ffffff&w=a"></script>
+<div style="display: flex; justify-content: center; align-items: start; gap: 1em;">
+  <div style="width: 30em;">
+    <iframe data-testid="embed-iframe" style="border-radius:12px" 
+      src="https://open.spotify.com/embed/track/67eMv1wT1yXhW9jrCPGIVD?utm_source=generator" 
+      width="100%" height="352" frameBorder="0" allowfullscreen="" 
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+      loading="lazy"></iframe>
+  </div>
+  <div style="width: 20em;">
+    <script type="text/javascript" id="clustrmaps" 
+      src="//clustrmaps.com/map_v2.js?d=jOmuWcrs8vHPpB4re6ett820lzTzqdXhcoVzx1pZRbI&cl=ffffff&w=a">
+    </script>
+  </div>
 </div>
