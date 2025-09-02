@@ -69,9 +69,9 @@ My research interest includes Hardware Formal Verification and Large Language Mo
 - *2019.05 - 2020.02*, [Lorem](https://github.com/), China. -->
 <div style="display: flex; justify-content: center; align-items: start; gap: 1em;">
   <div style="width: 30em;">
-    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/67eMv1wT1yXhW9jrCPGIVD?utm_source=generator" width="80%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/67eMv1wT1yXhW9jrCPGIVD?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
   </div>
-  <div style="width: 20em;">
+  <div style="width: 15em;">
     <script type="text/javascript" id="clustrmaps" 
       src="//clustrmaps.com/map_v2.js?d=jOmuWcrs8vHPpB4re6ett820lzTzqdXhcoVzx1pZRbI&cl=ffffff&w=a">
     </script>
