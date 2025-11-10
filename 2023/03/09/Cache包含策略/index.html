@@ -19,7 +19,7 @@
     <meta name="description" content="三种包含方式设计多级cache可以有很多种方式，可以根据一个cache的内容是否同时存在于其他级cache来分类，即Cache inclusion policy。 如果较低级别cache中的所有cacheline也存在于较高级别cache中，则称较高级别cache包含（inclusive ）较低级别cache。 如果较高级别的cache仅包含较低级别的cache中不存在的cacheline，则称较">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cache包含策略">
-<meta property="og:url" content="http://seddon.lol/2023/03/09/Cache%E5%8C%85%E5%90%AB%E7%AD%96%E7%95%A5/index.html">
+<meta property="og:url" content="http://seddon.icu/2023/03/09/Cache%E5%8C%85%E5%90%AB%E7%AD%96%E7%95%A5/index.html">
 <meta property="og:site_name" content="Seddon&#39;s Blog">
 <meta property="og:description" content="三种包含方式设计多级cache可以有很多种方式，可以根据一个cache的内容是否同时存在于其他级cache来分类，即Cache inclusion policy。 如果较低级别cache中的所有cacheline也存在于较高级别cache中，则称较高级别cache包含（inclusive ）较低级别cache。 如果较高级别的cache仅包含较低级别的cache中不存在的cacheline，则称较">
 <meta property="og:locale" content="zh_CN">
@@ -69,7 +69,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"seddon.lol","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"seddon.icu","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -328,7 +328,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>Cache包含策略</div>
-      <div>http://seddon.lol/2023/03/09/Cache包含策略/</div>
+      <div>http://seddon.icu/2023/03/09/Cache包含策略/</div>
     </div>
     <div class="license-meta">
       
