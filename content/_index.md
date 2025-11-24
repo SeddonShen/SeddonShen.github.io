@@ -17,8 +17,8 @@ My research interest includes Hardware Formal Verification and Large Language Mo
 
 # 📝 Publications {#publications}
 
-- ***BMCFuzz: Hybrid Verification of Processors by Synergistic Integration of Bound Model Checking and Fuzzing*** <br>
-  **Shidong Shen**, Jinyu Liu, Weizhi Feng, Fu Song and Zhilin Wu in The 2025 International Conference on Computer-Aided Design (**ICCAD**), *2025.* <br> <a href="https://github.com/iscas-versys/BMCFuzz" class="no-trailing-icon"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/iscas-versys/BMCFuzz?style=flat-square&logo=github&label=GitHub%20Stars&labelColor=black"></a>
+- ***[BMCFuzz: Hybrid Verification of Processors by Synergistic Integration of Bound Model Checking and Fuzzing](https://ieeexplore.ieee.org/document/11240887/)*** <br>
+  **Shidong Shen**, Jinyu Liu, Weizhi Feng, Fu Song and Zhilin Wu in 2025 IEEE/ACM International Conference On Computer Aided Design (**ICCAD**), *2025.* <br> <a href="https://github.com/iscas-versys/BMCFuzz" class="no-trailing-icon"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/iscas-versys/BMCFuzz?style=flat-square&logo=github&label=GitHub%20Stars&labelColor=black"></a>
 
 - ***[Formal Verification of RISC-V Processor Chisel Designs](https://link.springer.com/chapter/10.1007/978-981-96-0602-3_8)*** <br>
   **Shidong Shen**, Yicheng Liu, Lijun Zhang, Fu Song and Zhilin Wu in 10th Dependable Software Engineering. Theories, Tools, and Applications (**SETTA**), *2024.* <br> <a href="https://github.com/iscas-tis/riscv-spec-core" class="no-trailing-icon"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/iscas-tis/riscv-spec-core?style=flat-square&logo=github&label=GitHub%20Stars&labelColor=black"></a>
