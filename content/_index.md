@@ -46,6 +46,7 @@ My research interest includes Hardware Formal Verification and Large Language Mo
 <!-- - *2021.10* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
 - *2021.09* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet.  -->
 <!-- - AVIC First Class Scholarship, Northwestern Polytechnical University, *2022* -->
+- **China National Scholarship (Graduate Student)**, *2025*
 - Merit Student, University of Chinese Academy of Sciences, *2024, 2025*
 - Academic Scholarship, University of Chinese Academy of Sciences, *2023, 2024*
 - Outstanding Graduate, Northwestern Polytechnical University, *2023*
@@ -53,7 +54,7 @@ My research interest includes Hardware Formal Verification and Large Language Mo
 - Top 10 Class Monitors, Northwestern Polytechnical University, *2022*
 - Top Student Award, Northwestern Polytechnical University **(Top 20 undergraduate)**, *2021*
 - Tencent Grand Prize Scholarship **(Top 1 in School of Computer Science, NWPU)**, *2021*
-- **China National Scholarship**, *2020, 2021*
+- **China National Scholarship (Undergraduate)**, *2020, 2021*
 - National First Prize, National Student Computer System Capability Challenge (Loongson Cup), *2021*
 - Meritorious Winner (First Prize), Mathematical Modeling Competition for American Students, *2020, 2021*
 - National Second Prize, China Collegiate Computing Contest, *2020, 2021*
@@ -67,11 +68,41 @@ My research interest includes Hardware Formal Verification and Large Language Mo
 
 <!-- # 💻 Internships {#internships}
 - *2019.05 - 2020.02*, [Lorem](https://github.com/), China. -->
-<div style="display: flex; justify-content: center; align-items: start; gap: 1em;">
-  <div style="width: 30em;">
-    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/67eMv1wT1yXhW9jrCPGIVD?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+<style>
+  .media-container {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    gap: 1em;
+    flex-wrap: wrap;
+  }
+  .spotify-wrapper {
+    flex: 1 1 30em;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .clustrmaps-wrapper {
+    flex: 1 1 15em;
+    min-width: 0;
+    max-width: 100%;
+  }
+  @media (max-width: 768px) {
+    .media-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    .spotify-wrapper,
+    .clustrmaps-wrapper {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+</style>
+<div class="media-container">
+  <div class="spotify-wrapper">
+    <iframe data-testid="embed-iframe" style="border-radius:12px; width: 100%; max-width: 100%;" src="https://open.spotify.com/embed/track/67eMv1wT1yXhW9jrCPGIVD?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
   </div>
-  <div style="width: 15em;">
+  <div class="clustrmaps-wrapper">
     <script type="text/javascript" id="clustrmaps" 
       src="//clustrmaps.com/map_v2.js?d=jOmuWcrs8vHPpB4re6ett820lzTzqdXhcoVzx1pZRbI&cl=ffffff&w=a">
     </script>
