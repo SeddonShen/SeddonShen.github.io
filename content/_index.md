@@ -4,7 +4,7 @@ title: "Shidong Shen (申世东)'s Homepage"
 
 # About Me {#about-me}
 
-I'm a Master's student at [Verification of System Software Group](https://versys.ios.ac.cn/) at the [Institute of Software, Chinese Academy of Sciences](https://www.iscas.ac.cn) (ISCAS) and [University of Chinese Academy of Sciences](https://www.ucas.ac.cn) (UCAS), supervised by [Prof. Zhilin Wu](https://lcs.ios.ac.cn/~wuzl/). I previously earned a Bachelor's degree in Computer Science and Technology (Honors Program) from [Northwestern Polytechnical University](https://www.nwpu.edu.cn) (NWPU) in 2023. 
+I'm a Master's student in the [Verification of System Software Group](https://versys.ios.ac.cn/) at the [Institute of Software, Chinese Academy of Sciences](https://www.iscas.ac.cn) (ISCAS) and [University of Chinese Academy of Sciences](https://www.ucas.ac.cn) (UCAS), supervised by [Prof. Zhilin Wu](https://lcs.ios.ac.cn/~wuzl/). I previously earned a Bachelor's degree in Computer Science and Technology (Honors Program) from [Northwestern Polytechnical University](https://www.nwpu.edu.cn) (NWPU) in 2023. 
 
 My research interest includes Hardware Formal Verification and Large Language Models for Software Engineering. 
 
