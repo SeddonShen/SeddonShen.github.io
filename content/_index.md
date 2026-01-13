@@ -10,6 +10,8 @@ My research interest includes Hardware Formal Verification and Large Language Mo
 
 **Here is my [resume](files/Shidong.pdf)!**
 
+Our lab is [hiring hardware verification research interns](https://versys.ios.ac.cn/blog/HWhiring/)!
+
 # 🔥 News {#news}
 - *2025.07*: &nbsp;🎉🎉 One paper has been accepted by ICCAD25!
 - *2025.06*: &nbsp;🎉🎉 Celebrating the launch of my personal website!
