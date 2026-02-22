@@ -6,18 +6,21 @@ title: "Shidong Shen (申世东)'s Homepage"
 
 I'm a Master's student in the [Verification of System Software Group](https://versys.ios.ac.cn/) at the [Institute of Software, Chinese Academy of Sciences](https://www.iscas.ac.cn) (ISCAS) and [University of Chinese Academy of Sciences](https://www.ucas.ac.cn) (UCAS), supervised by [Prof. Zhilin Wu](https://lcs.ios.ac.cn/~wuzl/). I previously earned a Bachelor's degree in Computer Science and Technology (Honors Program) from [Northwestern Polytechnical University](https://www.nwpu.edu.cn) (NWPU) in 2023. 
 
-My research interest includes Hardware Formal Verification and Large Language Models for Software Engineering. 
+My research interest includes Hardware [Formal Verification](https://en.wikipedia.org/wiki/Formal_verification) and Large Language Models for Software Engineering. 
 
 **Here is my [resume](files/Shidong.pdf)!**
 
 Our lab is [hiring hardware verification research interns](https://versys.ios.ac.cn/blog/HWhiring/)!
 
 # 🔥 News {#news}
+- *2026.02*: &nbsp;🎉🎉 One paper has been accepted by FM2026. Congrats to WZ!
 - *2025.07*: &nbsp;🎉🎉 One paper has been accepted by ICCAD25!
 - *2025.06*: &nbsp;🎉🎉 Celebrating the launch of my personal website!
 <!-- - *2024.09*: &nbsp;🎉🎉 TBD.  -->
 
 # 📝 Publications {#publications}
+- **Can LLM Aid in Solving Constraints with Inductive Definitions?** <br>
+  Weizhi Feng, **Shidong Shen**, Jiaxiang Liu, Taolue Chen, Fu Song and Zhilin Wu in 27th International Symposium on Formal Methods(**FM**), 2026.
 
 - ***[BMCFuzz: Hybrid Verification of Processors by Synergistic Integration of Bound Model Checking and Fuzzing](https://ieeexplore.ieee.org/document/11240887/)*** <br>
   **Shidong Shen**, Jinyu Liu, Weizhi Feng, Fu Song and Zhilin Wu in 2025 IEEE/ACM International Conference On Computer Aided Design (**ICCAD**), *2025.* <br> <a href="https://github.com/iscas-versys/BMCFuzz" class="no-trailing-icon"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/iscas-versys/BMCFuzz?style=flat-square&logo=github&label=GitHub%20Stars&labelColor=black"></a>
