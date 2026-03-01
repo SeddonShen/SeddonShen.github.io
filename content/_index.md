@@ -13,12 +13,18 @@ My research interest includes Hardware Formal Verification and Large Language Mo
 Our lab is [hiring hardware verification research interns](https://versys.ios.ac.cn/blog/HWhiring/)!
 
 # 🔥 News {#news}
+
+- *2026.03*: &nbsp;🎉🎉 One paper has been accepted by JSA26!
 - *2026.02*: &nbsp;🎉🎉 One paper has been accepted by FM2026. Congrats to WZ!
 - *2025.07*: &nbsp;🎉🎉 One paper has been accepted by ICCAD25!
 - *2025.06*: &nbsp;🎉🎉 Celebrating the launch of my personal website!
 <!-- - *2024.09*: &nbsp;🎉🎉 TBD.  -->
 
 # 📝 Publications {#publications}
+
+- "χRVFormal: Formal Verification of RISC-V Processor Chisel Designs" <br>
+  **Shidong Shen**, Shijie Chen, Yicheng Liu, Lijun Zhang, Fu Song, Zhilin Wu in Journal of Systems Architecture (Accepted), 2026.
+
 - **Can LLM Aid in Solving Constraints with Inductive Definitions?** <br>
   Weizhi Feng, **Shidong Shen**, Jiaxiang Liu, Taolue Chen, Fu Song and Zhilin Wu in 27th International Symposium on Formal Methods(**FM**), 2026.
 
@@ -65,8 +71,7 @@ Our lab is [hiring hardware verification research interns](https://versys.ios.ac
 - National Second Prize, China Collegiate Computing Contest, *2020, 2021*
 # 📖 Educations {#educations}
 - *2023.09 - 2026.06 (expected)*, Master Degree of Computer Science and Technology, [Institute of Software, Chinese Academy of Sciences](https://www.iscas.ac.cn) and [University of Chinese Academy of Sciences](https://www.ucas.ac.cn).
-- *2019.09 - 2023.06*, Bachelor Degree of Computer Science and Technology (Honors Program), [Northwestern Polytechnical University](https://www.nwpu.edu.cn). 
-
+- *2019.09 - 2023.06*, Bachelor Degree of Computer Science and Technology (Honors Program), [Northwestern Polytechnical University](https://www.nwpu.edu.cn).
 <!-- # 💬 Invited Talks {#invited-talks}
 - *2021.06*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
 - *2021.03*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet.  \| [\[video\]](https://github.com/) -->
