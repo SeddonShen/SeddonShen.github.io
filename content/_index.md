@@ -22,11 +22,12 @@ Our lab is [hiring hardware verification research interns](https://versys.ios.ac
 
 # 📝 Publications {#publications}
 
-- "χRVFormal: Formal Verification of RISC-V Processor Chisel Designs" <br>
-  **Shidong Shen**, Shijie Chen, Yicheng Liu, Lijun Zhang, Fu Song, Zhilin Wu in Journal of Systems Architecture (Accepted), 2026.
+- ***[χRVFormal: Formal Verification of RISC-V Processor Chisel Designs](https://doi.org/10.1016/j.sysarc.2026.103761)*** <br>
+  **Shidong Shen**, Shijie Chen, Yicheng Liu, Lijun Zhang, Fu Song, Zhilin Wu in Journal of Systems Architecture (**JSA**), *2026*. <br> 
+  <a href="https://github.com/iscas-tis/ChiRVFormal" class="no-trailing-icon"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/iscas-tis/riscv-spec-core?style=flat-square&logo=github&label=GitHub%20Stars&labelColor=black"></a>
 
 - **Can LLM Aid in Solving Constraints with Inductive Definitions?** <br>
-  Weizhi Feng, **Shidong Shen**, Jiaxiang Liu, Taolue Chen, Fu Song and Zhilin Wu in 27th International Symposium on Formal Methods(**FM**), 2026.
+  Weizhi Feng, **Shidong Shen**, Jiaxiang Liu, Taolue Chen, Fu Song and Zhilin Wu in 27th International Symposium on Formal Methods(**FM**), *2026*.
 
 - ***[BMCFuzz: Hybrid Verification of Processors by Synergistic Integration of Bound Model Checking and Fuzzing](https://ieeexplore.ieee.org/document/11240887/)*** <br>
   **Shidong Shen**, Jinyu Liu, Weizhi Feng, Fu Song and Zhilin Wu in 2025 IEEE/ACM International Conference On Computer Aided Design (**ICCAD**), *2025.* <br> <a href="https://github.com/iscas-versys/BMCFuzz" class="no-trailing-icon"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/iscas-versys/BMCFuzz?style=flat-square&logo=github&label=GitHub%20Stars&labelColor=black"></a>
