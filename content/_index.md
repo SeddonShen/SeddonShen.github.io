@@ -26,7 +26,7 @@ Our lab is [hiring hardware verification research interns](https://versys.ios.ac
   **Shidong Shen**, Shijie Chen, Yicheng Liu, Lijun Zhang, Fu Song, Zhilin Wu in Journal of Systems Architecture (**JSA**), *2026*. <br> 
   <a href="https://github.com/iscas-tis/ChiRVFormal" class="no-trailing-icon"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/iscas-tis/ChiRVFormal?style=flat-square&logo=github&label=GitHub%20Stars&labelColor=black"></a>
 
-- **Can LLM Aid in Solving Constraints with Inductive Definitions?** <br>
+- **[Can LLM Aid in Solving Constraints with Inductive Definitions?](https://arxiv.org/abs/2603.03668)** <br>
   Weizhi Feng, **Shidong Shen**, Jiaxiang Liu, Taolue Chen, Fu Song and Zhilin Wu in 27th International Symposium on Formal Methods(**FM**), *2026*. <br> 
   <a href="https://github.com/fengwz17/LLM4Ind" class="no-trailing-icon"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/fengwz17/LLM4Ind?style=flat-square&logo=github&label=GitHub%20Stars&labelColor=black"></a>
 
