@@ -4,13 +4,12 @@ title: "Shidong Shen (申世东)'s Homepage"
 
 # About Me {#about-me}
 
-I'm a Master's student in the [Verification of System Software Group](https://versys.ios.ac.cn/) at the [Institute of Software, Chinese Academy of Sciences](https://www.iscas.ac.cn) (ISCAS) and [University of Chinese Academy of Sciences](https://www.ucas.ac.cn) (UCAS), supervised by [Prof. Zhilin Wu](https://lcs.ios.ac.cn/~wuzl/). I previously earned a Bachelor's degree in Computer Science and Technology (Honors Program) from [Northwestern Polytechnical University](https://www.nwpu.edu.cn) (NWPU) in 2023. 
+I was a Master's student in the [Verification of System Software Group](https://versys.ios.ac.cn/) at the [Institute of Software, Chinese Academy of Sciences](https://www.iscas.ac.cn) (ISCAS) and [University of Chinese Academy of Sciences](https://www.ucas.ac.cn) (UCAS), supervised by [Prof. Zhilin Wu](https://lcs.ios.ac.cn/~wuzl/). I previously earned a Bachelor's degree in Computer Science and Technology (Honors Program) from [Northwestern Polytechnical University](https://www.nwpu.edu.cn) (NWPU) in 2023. 
 
 My research interest includes Hardware Formal Verification and Large Language Models for Software Engineering. 
 
-**Here is my [resume](files/Shidong.pdf)!**
+<!-- Here is my [resume](files/Shidong.pdf)! -->
 
-Our lab is [hiring hardware verification research interns](https://versys.ios.ac.cn/blog/HWhiring/)!
 
 # 🔥 News {#news}
 
@@ -72,7 +71,7 @@ Our lab is [hiring hardware verification research interns](https://versys.ios.ac
 - Meritorious Winner (First Prize), Mathematical Modeling Competition for American Students, *2020, 2021*
 - National Second Prize, China Collegiate Computing Contest, *2020, 2021*
 # 📖 Educations {#educations}
-- *2023.09 - 2026.06 (expected)*, Master Degree of Computer Science and Technology, [Institute of Software, Chinese Academy of Sciences](https://www.iscas.ac.cn) and [University of Chinese Academy of Sciences](https://www.ucas.ac.cn).
+- *2023.09 - 2026.06*, Master Degree of Computer Science and Technology, [Institute of Software, Chinese Academy of Sciences](https://www.iscas.ac.cn) and [University of Chinese Academy of Sciences](https://www.ucas.ac.cn).
 - *2019.09 - 2023.06*, Bachelor Degree of Computer Science and Technology (Honors Program), [Northwestern Polytechnical University](https://www.nwpu.edu.cn).
 <!-- # 💬 Invited Talks {#invited-talks}
 - *2021.06*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
