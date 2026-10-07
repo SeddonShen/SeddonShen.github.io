@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>拆开 11 个 AI 编程助手之后 —— 《Harness Engineering》精读笔记</title>
+<style>
+/* ============ 基础 ============ */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font:16px/1.9 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;
+  color:#2a2318;background:#f5efe3;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:#ecd09a}
+a{color:#96530f;text-decoration:none;border-bottom:1px solid rgba(150,83,15,.35)}
+a:hover{border-bottom-color:#96530f}
+strong{color:#3d2c12}
+#bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#96530f,#c98a2e);width:0;z-index:99;transition:width .15s}
+
+/* ============ 头部 ============ */
+.hero{max-width:1150px;margin:0 auto;padding:64px 28px 34px}
+.kicker{font-size:13px;letter-spacing:.22em;color:#96530f;font-weight:600;margin-bottom:14px}
+h1{
+  font-family:Georgia,"Times New Roman","Songti SC","Noto Serif SC",serif;
+  font-size:clamp(28px,4.4vw,44px);line-height:1.32;color:#241b0e;font-weight:700;max-width:820px;
+}
+.hero .sub{margin-top:18px;font-size:16.5px;color:#6b5b42;max-width:720px}
+.chips{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  font-size:12.5px;padding:4px 12px;border-radius:999px;border:1px solid #d8c9a8;
+  background:#fbf6ea;color:#7a6134;white-space:nowrap
+}
+.chip.hot{background:#96530f;color:#f8efdb;border-color:#96530f}
+
+/* ============ 布局 ============ */
+.layout{display:grid;grid-template-columns:212px minmax(0,1fr);gap:48px;max-width:1150px;margin:0 auto;padding:10px 28px 100px}
+nav.toc{position:sticky;top:20px;align-self:start;font-size:13.5px;line-height:2.1;height:fit-content}
+nav.toc .toc-title{font-size:11.5px;letter-spacing:.2em;color:#a3906c;margin-bottom:8px;font-weight:700}
+nav.toc a{display:block;color:#7c6c52;border:none;border-left:2px solid transparent;padding-left:12px}
+nav.toc a:hover{color:#96530f}
+nav.toc a.active{color:#96530f;border-left-color:#96530f;font-weight:600;background:linear-gradient(90deg,rgba(150,83,15,.07),transparent)}
+main{min-width:0;max-width:800px}
+
+/* ============ 章节排版 ============ */
+section{margin-bottom:78px;scroll-margin-top:26px}
+.sec-no{font-family:Georgia,serif;font-size:13px;color:#b08a3e;letter-spacing:.18em;font-weight:700;margin-bottom:6px}
+h2{
+  font-family:Georgia,"Songti SC","Noto Serif SC",serif;font-size:27px;line-height:1.45;
+  color:#241b0e;margin-bottom:6px;font-weight:700
+}
+h3{font-size:19px;color:#3a2a12;margin:38px 0 12px;font-weight:700}
+h3 .en{font-size:13px;color:#a3906c;font-weight:400;margin-left:8px;letter-spacing:.04em}
+p{margin:14px 0;color:#3b3121}
+.lead{font-size:17.5px;color:#33291a}
+ul,ol{padding-left:26px;margin:12px 0;color:#3b3121}
+li{margin:7px 0}
+li::marker{color:#b08a3e}
+em{font-style:normal;background:linear-gradient(transparent 62%,#eed9a4 62%);padding:0 2px}
+code{
+  font-family:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;font-size:.86em;
+  background:#efe4cd;padding:2px 6px;border-radius:4px;color:#7c4708;white-space:nowrap
+}
+blockquote{
+  margin:22px 0;padding:14px 22px;border-left:3px solid #c98a2e;background:#f9f2e2;
+  border-radius:0 8px 8px 0;color:#4a3a20;font-size:15.5px
+}
+blockquote .src{display:block;margin-top:8px;font-size:12.5px;color:#857456}
+
+/* ============ 组件 ============ */
+.note{
+  margin:20px 0;padding:14px 18px;background:#eef3e6;border:1px solid #cfdcc0;
+  border-radius:10px;font-size:14.5px;color:#3c4a30
+}
+.note b{color:#2f3d24}
+.warn{
+  margin:20px 0;padding:14px 18px;background:#f9e9dd;border:1px solid #e4c8b2;
+  border-radius:10px;font-size:14.5px;color:#5c3a22
+}
+.tldr{
+  margin:26px 0;padding:22px 26px;background:#fbf6ea;border:1px solid #e0d2b4;border-radius:14px
+}
+.tldr h4{font-family:Georgia,"Songti SC",serif;font-size:16px;color:#241b0e;margin-bottom:10px}
+.tldr li{margin:9px 0}
+
+/* 七子系统卡片 */
+.subgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px;margin:20px 0}
+.sub-card{
+  background:#fdf9f0;border:1px solid #e3d6ba;border-radius:12px;padding:16px 18px;cursor:pointer;
+  transition:border-color .15s, box-shadow .15s;position:relative
+}
+.sub-card:hover{border-color:#c9a86a;box-shadow:0 3px 14px rgba(120,80,20,.08)}
+.sub-card .idx{
+  position:absolute;top:14px;right:16px;font-family:Georgia,serif;font-size:26px;color:#e5d5b5;font-weight:700;line-height:1
+}
+.sub-card h4{font-size:15.5px;color:#2e2210;padding-right:36px}
+.sub-card h4 .en{display:block;font-size:12px;color:#a3906c;font-weight:400;letter-spacing:.03em}
+.sub-card .one{font-size:13.5px;color:#7c6c52;margin-top:6px}
+.sub-card .more{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed #ddcfae;font-size:13.5px;color:#5c4e36}
+.sub-card.open .more{display:block}
+.sub-card .tap{font-size:12px;color:#b08a3e;margin-top:10px}
+.sub-card.open .tap{display:none}
+.sub-card .more b{color:#96530f}
+
+/* 系统表格 */
+.tbl-wrap{overflow-x:auto;margin:20px 0;border:1px solid #e0d2b4;border-radius:12px;background:#fdf9f0}
+table{border-collapse:collapse;width:100%;font-size:13.8px;min-width:680px}
+th{background:#f0e5cd;color:#5a4626;text-align:left;padding:10px 14px;font-weight:700;white-space:nowrap;border-bottom:1px solid #ddcda6}
+td{padding:10px 14px;border-bottom:1px solid #efe5cd;color:#43371f;vertical-align:top}
+tr:last-child td{border-bottom:none}
+td .sys{font-weight:700;color:#2e2210;white-space:nowrap}
+td .dim{color:#a3947a;font-size:12px}
+
+/* 大数字(两大缺席) */
+.zeros{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+.zero-card{background:#fdf9f0;border:1px solid #e3d6ba;border-radius:14px;padding:22px 24px;text-align:center}
+.zero-card .n{font-family:Georgia,serif;font-size:56px;font-weight:700;color:#96530f;line-height:1.1}
+.zero-card .n small{font-size:22px;color:#b08a3e}
+.zero-card .t{font-size:15px;font-weight:700;color:#3a2a12;margin-top:4px}
+.zero-card .d{font-size:13.5px;color:#7c6c52;margin-top:6px}
+@media (max-width:640px){.zeros{grid-template-columns:1fr}}
+
+/* 折叠八卦 */
+details{
+  margin:16px 0;background:#fbf6ea;border:1px solid #e3d6ba;border-radius:12px;padding:0;overflow:hidden
+}
+details summary{
+  cursor:pointer;padding:13px 18px;font-weight:600;font-size:14.5px;color:#5a4626;list-style:none;
+  display:flex;align-items:center;gap:8px;user-select:none
+}
+details summary::before{content:"▸";color:#b08a3e;transition:transform .15s;font-size:12px}
+details[open] summary::before{transform:rotate(90deg)}
+details summary::-webkit-details-marker{display:none}
+details .inner{padding:2px 20px 16px;font-size:14.5px;color:#4a3d26}
+details .inner p{margin:10px 0}
+
+/* 18 条建议 */
+.rec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px;margin:20px 0}
+.rec{
+  background:#fdf9f0;border:1px solid #e3d6ba;border-radius:10px;padding:13px 15px;font-size:13.8px;color:#4a3d26
+}
+.rec .rn{
+  display:inline-block;font-family:Georgia,serif;font-weight:700;color:#96530f;
+  font-size:13px;border:1px solid #d9bd8b;border-radius:6px;padding:0 7px;margin-right:8px;background:#f7ecd7
+}
+.rec b{color:#2e2210}
+.rec .done{
+  display:inline-block;margin-left:6px;font-size:11px;color:#fff;background:#5d7a4b;border-radius:5px;padding:1px 7px;vertical-align:1px
+}
+.rec-group{margin:26px 0 10px;font-size:13px;letter-spacing:.15em;color:#a3906c;font-weight:700}
+
+/* 代码块 */
+.codewrap{margin:22px 0;border-radius:12px;overflow:hidden;border:1px solid #3a2f1e;box-shadow:0 8px 30px rgba(60,40,10,.16)}
+.codehead{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;
+  background:#33291a;padding:9px 16px;font-size:12.5px;color:#c9b58a
+}
+.codehead .fname{font-family:"SF Mono",Menlo,monospace}
+.codehead .hint{color:#8a795b;font-size:11.5px}
+pre.code{
+  background:#241d13;color:#eee3cc;padding:14px 0;overflow-x:auto;
+  font-family:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;font-size:13px;line-height:1.75;
+  max-height:640px;overflow-y:auto
+}
+pre.code.tall{max-height:none}
+.cl{display:flex;white-space:pre}
+.cl .no{flex:0 0 40px;text-align:right;padding-right:16px;color:#7a6b4d;user-select:none}
+.cl .tx{flex:1;padding-right:18px}
+.cl.on{background:rgba(201,138,46,.16);box-shadow:inset 3px 0 0 #c98a2e}
+.cl:hover{background:rgba(255,255,255,.04)}
+.tk-k{color:#e2a1e0}
+.tk-s{color:#a8d08d}
+.tk-c{color:#8a7a5b;font-style:italic}
+.tk-n{color:#7fc7e8}
+.tk-d{color:#f0b45c}
+.tk-v{color:#ee9c76}
+.tk-f{color:#ffd98c}
+pre.mini{
+  background:#241d13;color:#eee3cc;border-radius:10px;padding:14px 16px;overflow-x:auto;
+  font-family:"SF Mono",Menlo,Consolas,monospace;font-size:12.8px;line-height:1.75;margin:12px 0;
+  white-space:pre
+}
+
+/* 90 行精讲 */
+.wt{
+  background:#fdf9f0;border:1px solid #e3d6ba;border-radius:12px;padding:18px 20px;margin:14px 0;
+  cursor:pointer;transition:border-color .15s
+}
+.wt:hover{border-color:#c9a86a}
+.wt.active{border-color:#96530f;box-shadow:0 4px 18px rgba(150,83,15,.12)}
+.wt .wt-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.wt .wt-tag{font-family:"SF Mono",Menlo,monospace;font-size:12.5px;color:#96530f;background:#f4e6c8;border-radius:6px;padding:1px 8px}
+.wt h4{font-size:16px;color:#2e2210}
+.wt .wt-body{font-size:14.5px;color:#4a3d26;margin-top:4px}
+.wt pre.mini{margin:10px 0 4px}
+.badge{
+  display:inline-block;font-size:11px;border-radius:5px;padding:1px 7px;margin-left:6px;vertical-align:1px;
+  font-family:Georgia,serif;font-weight:700
+}
+.b-r{background:#efe0c2;color:#7c4f10}
+.b-abs{background:#e3ecf3;color:#39637f}
+.b-mine{background:#e7eef0;color:#3f7180;border:1px dashed #9dbfc9}
+
+/* 思考题 */
+.quiz{background:#f4ede0;border:1px solid #ddcfae;border-radius:12px;padding:16px 20px;margin:18px 0}
+.quiz .q{font-weight:700;color:#3a2a12;font-size:14.5px}
+.quiz button{
+  margin-top:10px;background:none;border:1px solid #c9a86a;color:#96530f;border-radius:7px;
+  padding:4px 14px;font-size:13px;cursor:pointer;font-family:inherit
+}
+.quiz button:hover{background:#f0e1c2}
+.quiz .ans{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed #d5c5a0;font-size:14px;color:#5c4e36}
+.quiz.show .ans{display:block}
+
+/* 循环动画图 */
+.loopfig{margin:24px auto;max-width:560px;background:#fdf9f0;border:1px solid #e3d6ba;border-radius:14px;padding:18px}
+.loopfig figcaption{text-align:center;font-size:13px;color:#8a795b;margin-top:8px}
+
+/* 页脚 */
+footer{border-top:1px solid #e0d2b4;margin-top:30px;padding:30px 28px 50px;text-align:center;font-size:13px;color:#a3947a}
+footer a{color:#96530f;border:none}
+
+@media (max-width:960px){
+  .layout{grid-template-columns:1fr;gap:8px}
+  nav.toc{position:static;display:none}
+  .hero{padding-top:44px}
+}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+
+<header class="hero">
+  <div class="kicker">论 文 精 读 笔 记 · ARXIV:2609.00006 · 2026 年 7 月版</div>
+  <h1>拆开 11 个 AI 编程助手之后：<br>《Harness Engineering》精读笔记</h1>
+  <p class="sub">一群法国工程师没看任何宣传稿,直接把 Claude Code、Codex、Gemini CLI 等 11 个系统的源码拆开读了一遍——大约 400 万行。这是那份 83 页解剖报告的完整解读,最后附赠他们写的 90 行"最小 agent",我们会逐行啃掉它。</p>
+  <div class="chips">
+    <span class="chip hot">11 + 1 个系统</span>
+    <span class="chip">≈400 万行源码</span>
+    <span class="chip">83 页 · 13 条观察 · 29 个模式</span>
+    <span class="chip">18 条设计建议</span>
+    <span class="chip hot">90 行最小 Harness ★</span>
+  </div>
+</header>
+
+<div class="layout">
+<nav class="toc" id="toc">
+  <div class="toc-title">目 录</div>
+  <a href="#s0" data-t="s0">0 · 导读:先说结论</a>
+  <a href="#s1" data-t="s1">1 · Harness 到底是什么</a>
+  <a href="#s2" data-t="s2">2 · 解剖台上:11+1 个系统</a>
+  <a href="#s3" data-t="s3">3 · 两大缺席(全文最反直觉)</a>
+  <a href="#s4" data-t="s4">4 · 七大子系统逐个逛</a>
+  <a href="#s5" data-t="s5">5 · 90 天:收敛变成模仿</a>
+  <a href="#s6" data-t="s6">6 · 18 条设计建议</a>
+  <a href="#s7" data-t="s7">7 · 90 行最小 Harness 逐行精讲 ★</a>
+  <a href="#s8" data-t="s8">8 · 读完之后:我的想法</a>
+</nav>
+
+<main>
+
+<!-- ================= 0 导读 ================= -->
+<section id="s0">
+  <div class="sec-no">§ 0</div>
+  <h2>导读:先说结论,再慢慢讲</h2>
+  <p class="lead">假设你完全没读过这篇论文,我们从一个最日常的场景说起。</p>
+  <p>你平时用的 Claude Code、Codex CLI、Gemini CLI,听起来像是"一个 AI 在帮你写代码"。但拆开看,里面其实是两个东西:<em>一个语言模型</em>,加上<em>包裹它的一整层运行时</em>——决定给模型看什么、给它哪些工具、上下文装满了怎么办、哪些命令要先征求你同意、要不要派几个分身并行干活。论文把这层"壳"正式命名为 <strong>harness</strong>。</p>
+  <p>这个词的本义是<strong>马具</strong>:套在马身上的缰绳、马鞍、马镫那一套。马(模型)负责跑,harness 负责让你<em>驾驭</em>这匹马。这个比喻贯穿全文,也比"框架""脚手架"之类的翻译都更贴切——harness 不是让马跑得更快的引擎,而是让马的力气<strong>可用、可控、可协作</strong>的那套装备。</p>
+
+  <div class="tldr">
+    <h4>⏱ 三分钟版本(论文的全部核心)</h4>
+    <ol>
+      <li><strong>Agent = 模型 + harness。</strong>harness 有七个标准子系统:循环、模型集成、工具、上下文管理、安全、编排、扩展。11 个系统全都长这个骨架,无一例外。</li>
+      <li><strong>两个刺眼的"没有"贯穿全部 400 万行代码:</strong>没有任何一个系统 import LangChain 这类通用 agent 框架;也没有任何一个用向量 embedding 做"RAG 检索代码库"。大家全部用<em>手写循环 + ripgrep/glob 这类确定性检索</em>。</li>
+      <li><strong>收敛正在变成模仿:</strong>Codex 逐字抄走了 Claude Code 的 hook 命名体系,还做了"导入 Claude Code 会话"的功能。行业从各自探索变成了围绕一个事实标准收敛。</li>
+      <li><strong>2026 上半年,harness 完成了从"工具"到"平台"的转身</strong>:变成可 import 的 SDK、有了插件市场和企业治理层,甚至出现了用一套 API 编排 11 个厂商 harness 的"元 harness"。</li>
+      <li><strong>论文最后给了 18 条设计建议 + 一个约 90 行 Python 的最小可用 harness</strong>,一个框架依赖都没有,却直接落实了 18 条建议里的 10 条。这份笔记的第 7 节会把它一行行啃碎。</li>
+    </ol>
+  </div>
+
+  <p><strong>这份笔记怎么读:</strong>按顺序读就行,§1–§2 建立概念,§3 是全文最有意思的发现,§4 是七大子系统的细节之旅(八卦都收在折叠条里,想看再点开),§7 是重头戏——那 90 行代码。引用格式如 <code>§9.5</code>、<code>观察 9</code> 均指论文原文章节,方便你回原文对质。</p>
+  <div class="note"><b>关于可信度:</b>这篇论文自己承认不 benchmark、不排名,只做解剖和比较("It does not benchmark or rank; it describes and compares how the systems are built")。另外它读的是 2026 年 4 月和 7 月两个时间点的源码快照——这个领域三个月就能变一副面孔,论文里有专门一章讲这 90 天里发生了什么。</div>
+</section>
+
+<!-- ================= 1 Harness 是什么 ================= -->
+<section id="s1">
+  <div class="sec-no">§ 1</div>
+  <h2>Harness 到底是什么:一句话定义和七件套</h2>
+  <p>论文摘要第一句就把定义给全了,值得原样放这儿:</p>
+  <blockquote>“An agent is a model plus a harness: the runtime that couples an LLM to the world through a loop, tools, context management, safety controls, orchestration, and extension surfaces.”<span class="src">—— 摘要。译:agent 就是模型加马具——一个通过循环、工具、上下文管理、安全控制、编排和扩展接口,把 LLM 耦合到真实世界上的运行时。</span></blockquote>
+  <p>注意这句里冒号后面的六个词,加上"循环"所在的那个整体,就是论文反复使用的<strong>七大子系统</strong>骨架。为了防止概念混淆,论文还专门划了四个"不是"(§2.2),我按自己的理解转述一下:</p>
+  <ul>
+    <li><strong>不是通用框架。</strong>LangChain、LlamaIndex 那类抽象层——事实上 11 个系统一个都没用(§3 细讲)。</li>
+    <li><strong>不是脚手架(scaffold)。</strong>脚手架是生成项目目录结构的模板;harness 是一直运行着、每秒钟都在做决策的运行时。</li>
+    <li><strong>不是测评外壳(eval harness)。</strong>评测领域也用 harness 这个词,指包裹模型跑 benchmark 的脚本,和这里的"生产运行时"是两回事。</li>
+    <li><strong>不是编排器(orchestrator)。</strong>多 agent 编排只是七个子系统<em>之一</em>,把整个 harness 等同于编排是把局部当整体。</li>
+  </ul>
+  <p>我个人觉得最有用的心智模型是:<strong>harness 是驾驶舱,不是发动机。</strong>发动机(模型)决定马力上限,驾驶舱决定这匹马力能不能安全地变成位移。论文后面所有内容,都是在描述这 11 家公司分别怎么造驾驶舱。</p>
+
+  <h3>七个子系统:点开每一张卡看"最简"和"最繁"</h3>
+  <p>论文 §2.3 给每个子系统都标了<strong>最小实现</strong>和<strong>最大实现</strong>——这个对比本身就特别说明问题:同一个子系统,不同公司的投入差出三个数量级。</p>
+  <div class="subgrid" id="subgrid">
+    <div class="sub-card">
+      <div class="idx">Ⅰ</div>
+      <h4>代理循环<span class="en">Agent Loop</span></h4>
+      <div class="one">心脏。一个 while 循环:问模型 → 拿到工具调用 → 执行 → 把结果塞回上下文 → 再问。</div>
+      <div class="more"><b>最简:</b>Mini-SWE-Agent,约 100 行代码,循环本体约 50 行。<br><b>最繁:</b>Codex,110 万行 Rust。<br>但最魔幻的是:两者的 SWE-bench 成绩在同一个档次(§4.1 细讲这个悖论)。9/11 的系统是朴素迭代式循环,反思式(每次行动后自我检查)和"协调者-工人"式是少数派。</div>
+      <div class="tap">点击展开 ▾</div>
+    </div>
+    <div class="sub-card">
+      <div class="idx">Ⅱ</div>
+      <h4>模型集成<span class="en">LLM Integration</span></h4>
+      <div class="one">神经接口:系统提示词怎么写、多模型怎么路由、prompt 缓存怎么省钱、结构化输出怎么解析。</div>
+      <div class="more"><b>最简:</b>一条固定系统提示词。<br><b>最繁:</b>Claude Code 会 fork SDK 把缓存断点钉在固定前缀上;Pi 给每家模型维护一套"方言"兼容开关;Codex 的提示词干脆从服务端下发,跟着模型版本走。<br>论文观察 2:厂商自家的深度优化(缓存断点、思考预算)——耦合是绕不开的,问题只是耦合在哪里。</div>
+      <div class="tap">点击展开 ▾</div>
+    </div>
+    <div class="sub-card">
+      <div class="idx">Ⅲ</div>
+      <h4>工具系统<span class="en">Tools &amp; Actions</span></h4>
+      <div class="one">手和脚。bash、读写文件、搜索——模型通过它们真正碰到你的电脑。</div>
+      <div class="more"><b>最简:</b>Mini-SWE-Agent 只有 1 个工具(bash,一切皆命令行)。<br><b>最繁:</b>OpenClaw 109+ 个工具(毕竟它要做媒体处理和多渠道消息)。<br>共识核心五件套:bash + read + write + search/replace + grep/glob。工具超过 ~15 个就得做"延迟加载"(Claude Code 的 ToolSearch 把初始提示词砍掉约 40%)。</div>
+      <div class="tap">点击展开 ▾</div>
+    </div>
+    <div class="sub-card">
+      <div class="idx">Ⅳ</div>
+      <h4>记忆与上下文<span class="en">Memory &amp; Context</span></h4>
+      <div class="one">工作记忆:对话历史就是 agent 唯一的"脑子",但它会装满——满了怎么办?</div>
+      <div class="more"><b>最简:</b>什么都不做,装满为止(Aider 就是这么耿直)。<br><b>最繁:</b>OpenHands 的"凝结(condensation)"微代理链、Hermes 的 lineage compaction(压缩即开新会话,历史永不销毁)。<br>7 个系统收敛到同一个方案:阈值压缩(§4.4)。论文观察 5:前沿已经从"压缩"转移到"持久记忆"。</div>
+      <div class="tap">点击展开 ▾</div>
+    </div>
+    <div class="sub-card">
+      <div class="idx">Ⅴ</div>
+      <h4>安全与权限<span class="en">Safety &amp; Permissions</span></h4>
+      <div class="one">刹车和保险丝:哪些动作要问你、哪些直接拒绝、哪些进沙箱。</div>
+      <div class="more"><b>最简:</b>Aider 只有一个交互确认模式,外加三段式 lint 当隐式安全网。<br><b>最繁:</b>Codex 四层堆栈:Starlark 策略引擎 → hooks → 审批门 → 操作系统级沙箱(Linux 内置 Bubblewrap / macOS Seatbelt)。<br>论文观察 6:OS 级沙箱是全语料里"每行功能代码最贵"的能力之一。</div>
+      <div class="tap">点击展开 ▾</div>
+    </div>
+    <div class="sub-card">
+      <div class="idx">Ⅵ</div>
+      <h4>多 agent 编排<span class="en">Orchestration</span></h4>
+      <div class="one">分身术:主 agent 派子 agent,各自带独立上下文去探索,回来汇报。</div>
+      <div class="more"><b>最简:</b>没有(Mini-SWE、Aider、Pi 的核心都是单 agent)。<br><b>最繁:</b>Claude Code 的递归组合(子 agent 再派子 agent,fork 时字节级继承父提示词以共享缓存);Codex 的线程树 + map-reduce 扇出。<br>论文 §11.1 识别出六种编排模式(§4.6 有清单)。</div>
+      <div class="tap">点击展开 ▾</div>
+    </div>
+    <div class="sub-card">
+      <div class="idx">Ⅶ</div>
+      <h4>扩展机制<span class="en">Extensibility</span></h4>
+      <div class="one">外接槽位:让第三方(和你自己)给 harness 加技能、加工具、加钩子。</div>
+      <div class="more"><b>最简:</b>Aider 几乎没有扩展机制。<br><b>最繁:</b>Claude Code 四件套:插件 + MCP + Skills + hooks。<br>两个标准的战争有了阶段性结果:SKILL.md 技能(9/11)反超 MCP(8/11),这是 2026 年才发生的事(§4.7)。</div>
+      <div class="tap">点击展开 ▾</div>
+    </div>
+  </div>
+  <p>还有一个概念提前打个招呼:<strong>元 harness(meta-harness)</strong>。Databricks 在 2026 年 6 月开源的 Omnigent 是第一个代表作——它不直接干活,而是用一套 API 去编排<strong>别人家的</strong> 11 个 harness,贵的部分自己重新实现,专有的部分做套利。论文把它当作对照样本放进了解剖台,这个"套利者"的存在本身就是行业平台化的证据(§5)。</p>
+</section>
+
+<!-- ================= 2 系统 ================= -->
+<section id="s2">
+  <div class="sec-no">§ 2</div>
+  <h2>解剖台上:11 个系统 + 1 个对照组</h2>
+  <p>先认一下标本。选样逻辑(§4.1):四大模型厂商的"亲儿子"各占一席,开源世界按设计取向挑了七个,再加一个非编程场景的对照(OpenClaw,一个多渠道聊天助手)和一个元 harness 对照(Omnigent)。语言分布:TypeScript 五个、Python 五个、Rust 一个(Codex 独一份)。</p>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>系统</th><th>出品方</th><th>语言</th><th>规模 <span class="dim">(2026.7)</span></th><th>一句话记忆点</th></tr></thead>
+    <tbody>
+      <tr><td><span class="sys">Claude Code</span></td><td>Anthropic</td><td>TS</td><td class="dim">闭源二进制<br><span class="dim">研究用 3 月快照</span></td><td>事实标准。三层权限、递归子 agent、缓存边界 fork;全语料都在抄它</td></tr>
+      <tr><td><span class="sys">Codex CLI</span></td><td>OpenAI</td><td>Rust</td><td>≈1.12M 行<br><span class="dim">89→126 crates</span></td><td>最庞大。四层安全 + Starlark 策略 + 原生跨平台沙箱;单季代码量翻近一倍</td></tr>
+      <tr><td><span class="sys">Gemini CLI</span></td><td>Google</td><td>TS</td><td>≈568K<br><span class="dim">(4 月口径)</span></td><td>免费档最慷慨;PLAN/DEFAULT/YOLO 三模式;A2A 协议的独注一掷者</td></tr>
+      <tr><td><span class="sys">Mistral Vibe</span></td><td>Mistral</td><td>Python</td><td>≈63K<br><span class="dim">(季度 +77%)</span></td><td>中间件管道范式的代表;90 天内从 CLI 长成了 IDE</td></tr>
+      <tr><td><span class="sys">OpenHands</span></td><td>开源</td><td>Python</td><td class="dim">—</td><td>"一切皆事件"的事件溯源引擎;能托管竞品 harness 当后端;自报 SWE-bench 77.6% 全语料最高</td></tr>
+      <tr><td><span class="sys">Aider</span></td><td>P. Gauthier</td><td>Python</td><td class="dim">—</td><td>领域先驱,2026.2 起进入社区维护模式;RelativeIndenter 编辑漂移容忍的祖师爷</td></tr>
+      <tr><td><span class="sys">Mini-SWE-Agent</span></td><td>开源</td><td>Python</td><td>≈100 行</td><td>"循环复杂度 ≠ 性能"的活证据:50 行循环,自报 SWE-bench 74%+</td></tr>
+      <tr><td><span class="sys">Hermes</span></td><td>Nous Research</td><td>Python</td><td>≈642K</td><td>GitHub 增长最快;自我改进的技能循环;lineage compaction(历史永不销毁)</td></tr>
+      <tr><td><span class="sys">Pi</span></td><td>M. Zechner</td><td>TS</td><td class="dim">小</td><td>极简反潮流:7 个工具只暴露 4 个;harness mimicry——伪装成 Claude Code 去蹭 Claude Pro 订阅</td></tr>
+      <tr><td><span class="sys">OpenCode</span></td><td>开源(SST)</td><td>TS</td><td class="dim">—</td><td>星标最多的专职编码 agent;最彻底的 client/server 架构;九级模糊匹配编辑回退</td></tr>
+      <tr><td><span class="sys">OpenClaw</span></td><td>P. Steinberger</td><td>TS</td><td class="dim">大</td><td>非编程对照组:多渠道人格化网关(WhatsApp/Telegram/…),109+ 工具</td></tr>
+      <tr><td><span class="sys">Omnigent</span> <span class="dim">(对照)</span></td><td>Databricks</td><td class="dim">元 harness</td><td class="dim">—</td><td>一套 API 编排 11 个厂商 harness,"重新实现贵的,套利专有的"</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>两处值得停一下:<strong>Claude Code 是唯一闭源的</strong>,论文坦白它的分析基于一份社区流传的 2026 年 3 月源码快照,是全语料里可复现性最弱的一环(§15 有专门交代);<strong>Aider 进入维护模式</strong>被论文拿来论证一个更大的判断——"harness 这一层已经不再是绿地了,它是厂商会收购、贴牌、上锁的<em>战略性基础设施</em>"(§3)。</p>
+  <p>另外别忘了方法论里最讨巧的一笔:其中 8 个系统在 4 月版论文里解剖过,7 月版<em>原封不动重新钉住同一批 commit</em>再做一次,于是白捡了一份受控的纵向对比(§14.5)。读到 §5 你会看到,这 90 天的变化比很多人一年的都多。</p>
+</section>
+
+<!-- ================= 3 两大缺席 ================= -->
+<section id="s3">
+  <div class="sec-no">§ 3</div>
+  <h2>全文最反直觉的发现:两个"没有"</h2>
+  <p class="lead">如果这篇论文只能记住一件事,我会选这个。两个在 LLM 应用圈被当作"标配"甚至"先进"的东西,在 400 万行生产代码里出现次数为——零。</p>
+  <div class="zeros">
+    <div class="zero-card">
+      <div class="n">0<small>/11</small></div>
+      <div class="t">没有框架</div>
+      <div class="d">没有一个 agent 运行时 import LangChain、LangGraph、AutoGen、CrewAI、LlamaIndex、Genkit、ADK……全部是手写的异步循环。</div>
+    </div>
+    <div class="zero-card">
+      <div class="n">0<small>/11</small></div>
+      <div class="t">没有向量 RAG</div>
+      <div class="d">没有一个系统用 embedding 做"检索代码库"。全部用确定性检索:ripgrep、glob、tree-sitter、自动发现的 Markdown 上下文文件。</div>
+    </div>
+  </div>
+  <blockquote>“Two absences survive a threefold corpus expansion: across roughly four million lines of Python, TypeScript, and Rust, no agent runtime imports a general-purpose agentic framework (…Gemini CLI uses neither of Google's own), and none retrieves code with vector embeddings.”<span class="src">—— 摘要。注意括号里那句:连 Gemini CLI 都不用 Google 自家的 Genkit 和 ADK。</span></blockquote>
+
+  <h3>为什么不用框架?</h3>
+  <p>论文(观察 9 + 建议 15)给的理由,概括起来是"抽象税"框架的抽象层会把提示词和响应包起来,反而让你更难调试——这句话论文直接引自 Anthropic 工程师的忠告。而这些系统需要的循环本质上是"SDK 调用 + 一点胶水",手写 500 行以内就够,引入一个框架换不来什么。</p>
+  <p>最有意思的注脚是 LangChain 的反应。论文脚注记录:<strong>LangChain 对"没人用我"的回应不是辩解,而是自己做了一个 harness</strong>——基于 LangGraph 的 Deep Agents。而这个产品"独立收敛到了本语料记录的同一批约定上":SKILL.md 技能、渐进式披露……换句话说:框架厂商最终承认,harness 才是用户真正要买的东西。</p>
+
+  <h3>为什么不用向量检索代码?</h3>
+  <p>论文建议 8 的原文相当不客气:"<strong>不要</strong>在代码上建 RAG"。三个理由,每一个都挺硬:</p>
+  <ol>
+    <li><strong>代码有丰富的确定性结构</strong>——路径、语言服务器、tree-sitter 语法树。这些信号是语义相似度给不了的。</li>
+    <li><strong>代码分钟级地在变</strong>,embedding 索引天然滞后,而 grep 永远是"此刻"的真相。</li>
+    <li><strong>grep 的结果是可复现、可解释的</strong>——agent 说"我是搜到这行才改的",你能验证;embedding 召回则像玄学。</li>
+  </ol>
+  <p>一个常被忽略的细节:语料里<em>确实</em>出现了 embedding,但全部用在<strong>对话记忆</strong>上(OpenClaw 的混合搜索、Hermes 的可选插件),不是代码。而且 Hermes 用 SQLite 全文检索(FTS5)就在 64 万行代码的规模上把记忆搜索扛住了——连"记忆检索"都不一定需要向量。</p>
+
+  <div class="quiz" data-quiz>
+    <div class="q">🤔 思考题:如果你要给 agent 加"找到处理支付的那个文件"的能力,论文的答案是什么?</div>
+    <button>看参考答案</button>
+    <div class="ans">给它 <code>grep</code>/<code>rg</code> 工具加目录树浏览,让它自己搜"payment"、"charge"、"stripe" 这些关键词,顺藤摸瓜。模型的语义理解能力 + 确定性工具的组合,击败了预先建好的向量索引——这也正是这 11 个系统的共同选择。</div>
+  </div>
+</section>
+
+<!-- ================= 4 七大子系统 ================= -->
+<section id="s4">
+  <div class="sec-no">§ 4</div>
+  <h2>七大子系统逐个逛:工程细节与八卦</h2>
+  <p class="lead">这一节对应论文的主体(§6–§12),每个子系统挑最有意思的讲。折叠条里是我在读的时候笑出声的部分——提示词八卦浓度很高,建议都点开看看。</p>
+
+  <h3>4.1 代理循环:最简单的那个跑得最快<span class="en">Agent Loop · 论文 §6</span></h3>
+  <p>所有 agent 的心脏都是同一个形状的循环,画出来大概是这样:</p>
+  <figure class="loopfig">
+    <svg viewBox="0 0 520 240" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#b08a3e"/>
+        </marker>
+      </defs>
+      <!-- 循环箭头 -->
+      <path d="M 150 46 A 88 78 0 1 1 148 200" fill="none" stroke="#d8c9a8" stroke-width="2" marker-end="url(#arr)"/>
+      <path d="M 380 200 A 88 78 0 1 1 382 46" fill="none" stroke="#d8c9a8" stroke-width="2" marker-end="url(#arr)"/>
+      <path d="M 165 30 H 365" fill="none" stroke="#d8c9a8" stroke-width="2" marker-end="url(#arr)"/>
+      <path d="M 365 218 H 165" fill="none" stroke="#d8c9a8" stroke-width="2" marker-end="url(#arr)"/>
+      <!-- 节点 -->
+      <g font-size="13" font-weight="700" text-anchor="middle">
+        <rect x="115" y="92" width="120" height="34" rx="8" fill="#96530f"/>
+        <text x="175" y="114" fill="#f8efdb">① 拼上下文</text>
+        <rect x="285" y="12" width="120" height="34" rx="8" fill="#3d5a80"/>
+        <text x="345" y="34" fill="#e8eef5">② 问模型</text>
+        <rect x="385" y="92" width="120" height="34" rx="8" fill="#96530f"/>
+        <text x="445" y="114" fill="#f8efdb">③ 执行工具</text>
+        <rect x="285" y="196" width="120" height="34" rx="8" fill="#3d5a80"/>
+        <text x="345" y="218" fill="#e8eef5">④ 结果回上下文</text>
+      </g>
+      <!-- 运动的点 -->
+      <circle r="5" fill="#c9411e">
+        <animateMotion dur="7s" repeatCount="indefinite" path="M 260,26 A 96,96 0 1,1 259.9,26.01 Z"/>
+      </circle>
+      <text x="268" y="130" font-size="12" fill="#a3906c" text-anchor="middle" font-style="italic">没有工具调用 = 任务结束</text>
+    </svg>
+    <figcaption>迭代式循环:9/11 系统的形状。模型不再要工具的那一刻,循环退出。</figcaption>
+  </figure>
+  <p>论文观察 1 是个漂亮的悖论:<strong>11 个系统的代码量横跨三个数量级,但循环的"聪明程度"不预测 benchmark 成绩。</strong>Mini-SWE-Agent 那个 50 行的线性循环,自报 SWE-bench Verified 74%+,和 OpenHands 那套事件溯源引擎(每一次交互都是事件日志里的一条记录)在同一档次;而代码量最大的 Codex 自报 69.1%。论文特意加了脚注:这些数字来自各家自己的模型和评测,不能直接对打——但"循环复杂度买不来分数"这个方向是成立的。</p>
+  <p>那几百万行代码在买什么?论文给的说法很直白:生产系统里的大部分代码花在<strong>与"把任务做完"正交</strong>的东西上——安全、用户体验、扩展性,以及越来越重的客户端与传输层。这解释了为什么 Mini-SWE-Agent 能当研究基线,而没人敢拿它上生产。</p>
+  <p>循环家族还有两个少数派:Aider 是<strong>反思式</strong>的,每轮修改后跑三段式 Python lint(语法 → 编译 → flake8),出错就把 git 提交自动回滚,像个自带后悔药的循环;Claude Code 和 Codex 则长成了<strong>协调者-工人</strong>式——主循环思考,子 agent 干活。论文观察 7 注意到"协调者-工人"在四个互不抄袭的系统里独立演化出现,是收敛的又一个信号。</p>
+  <details><summary>📓 折叠:agent 停不下来怎么办?(死循环检测的众生相)</summary>
+    <div class="inner">
+      <p>论文建议 18 的结论有点反直觉:Claude Code 和 Codex <strong>至今没有</strong>自动死循环检测,照样是生产级产品。但"便宜的限制"已经成为标配底座:</p>
+      <p>• Mini-SWE-Agent(50 行循环!)都有 step 上限、成本上限,v2.4 还加了墙钟时间上限和"连续畸形响应"计数。<br>
+      • OpenCode 的 doom-loop 检查就是一个"连续三次一模一样的调用"计数器,触发了就弹权限询问。<br>
+      • Hermes 给调用签名做哈希,但硬停止默认是关的,只报警——它信任警告。<br>
+      • 真正的重型投资:OpenHands 的五场景 StuckDetector、Gemini 的哈希+LLM 混合判断服务。</p>
+      <p>一句话:别过度工程化卡死检测,但那十几行的保险丝必须装。(90 行代码里的 <code>_check_limits</code> 就是这类保险丝,§7 见。)</p>
+    </div>
+  </details>
+
+  <h3>4.2 模型集成:提示词里全是戏<span class="en">LLM Integration · 论文 §7</span></h3>
+  <p>这一章的信息密度极高。两个结构性事实先立住:</p>
+  <ul>
+    <li><strong>提示词跟模型版本走。</strong>Codex 每一代模型配一套提示词,而且现在直接从服务端的模型目录下发——提示词成了模型配置的一部分,不随 CLI 版本走。</li>
+    <li><strong>缓存经济学是真金白银。</strong>Claude Code 把提示词钉在一个 Blake2b 哈希的缓存边界上,静态前缀跨会话全局缓存;派 fork 子 agent 时字节级继承父提示词,就是为了<em>共享</em>这份缓存。Codex 用 <code>thread_id</code> 派生缓存键。Pi 干脆为每家模型维护一套"缓存方言"开关(论文叫 cache-dialect fanout)。</li>
+  </ul>
+  <p>论文观察 3 给这一章下了个很好的判语,大意是:<strong>提示词的措辞在工程经验汇聚的地方收敛,然后变薄</strong>——行为规则正在从提示词散文搬家到配置文件和代码里(hook、策略引擎)。这个"搬家"动作是 §5 平台化叙事的前奏。</p>
+  <details><summary>📓 折叠:提示词八卦合集(论文 §7.3,瓜田浓度预警)</summary>
+    <div class="inner">
+      <p>• <strong>自我介绍卷起来了。</strong>OpenCode 的开场白:"You are OpenCode, the best coding agent on the planet."(你是 OpenCode,星球上最强的编码 agent。)</p>
+      <p>• <strong>禁 emoji 军备竞赛。</strong>Mistral Vibe 拿了最严禁令:"任何 emoji 都不许用。不许笑脸、图标、旗帜或 Unicode 符号……适用于正文、代码注释和 commit 信息。"OpenCode 的 GPT 模式禁 emoji、禁 em dash(——),连"Done —"“Got it,”这类开场白都禁。Claude Code 温和些:用户明确要求才能用。</p>
+      <p>• <strong>禁空话词表。</strong>Mistral Vibe:"不许用填充词:'robust'、'elegant'、'seamless'、'powerful'、'Great!'、'Absolutely!'、'Of course!'、'Happy to help!'"——直接镇压 LLM 的口癖。你读的这份笔记也在努力做到这一点(笑)。</p>
+      <p>• <strong>git commit 政策的钟摆。</strong>4 月的快照里一大堆"永远不要自己 commit"的禁令;到了 7 月,Mistral Vibe 反转了:删掉"Never Commit"硬规则(changelog 原话 "Loosened the no-git-commit constraint"),改为<em>主动教模型怎么写 commit</em>,还强制带 Co-authored-by 尾注;Codex 最新一代提示词干脆把 commit 禁令和防"镀金"条款一起删了。一个月的禁令,下个月的数据就能推翻。</p>
+      <p>• <strong>0/11 的意外。</strong>十一个系统的提示词里,<em>没有一句</em>"如果用户让你做有害的事,拒绝并解释"这类安全话术。唯一"拒绝形状"的文字针对的是操作风险(毁灭性 git 操作、泄密)。安全被放在了 harness 层(权限、沙箱),而不是靠模型自觉。</p>
+    </div>
+  </details>
+
+  <h3>4.3 工具系统:一个 bash 走天下,109 个也都有理<span class="en">Tools · 论文 §8</span></h3>
+  <p>工具数量的光谱两端都站着理直气壮的系统:Mini-SWE-Agent 只给一个 bash(“一切皆命令行”,74%+ 的成绩证明这条路能走);OpenClaw 109+ 个工具(毕竟要处理媒体和多渠道消息)。Pi 把"少"做成了哲学:7 个内置工具,默认只暴露 4 个,其余通过扩展按需加载。</p>
+  <p>共识核心就是五件套:<code>bash</code>、<code>read_file</code>、<code>write_file</code>、<code>search_replace</code>、<code>grep/glob</code>。工具多到一定程度(论文给的阈值是 ~15 个)就必须做<strong>延迟加载</strong>:Claude Code 用 ToolSearch 工具让模型"搜索要用的工具",初始提示词缩水约 40%;Codex 独立收敛到了同款方案(BM25 排序的 tool_search);Hermes 更激进——MCP 工具目录一旦要吃掉上下文窗口的 10%,就折叠成三个"桥接工具"。</p>
+  <p>论文观察 4 说,<strong>文件编辑策略是决定"改代码"能力最重要的因素之一</strong>。这个领域的战争史大致是:整文件重写 → diff/patch → 收敛到"唯一子串替换"。现在的两大阵营:</p>
+  <ul>
+    <li><strong>精确派(前沿模型)</strong>:Claude Code 要求精确匹配;Mistral Vibe 2026 年中直接删掉了自己的 SEARCH/REPLACE 工具改走精确匹配;Pi 只做 Unicode/空白规范化外加字节级保真覆盖层。</li>
+    <li><strong>容错派(更广的模型谱系)</strong>:OpenCode 九级回退串(Levenshtein 相似度 0.65 起步);Hermes 九策略链;Aider 的 RelativeIndenter 专治缩进漂移。</li>
+  </ul>
+  <p>还有个第三条路挺妙:Gemini CLI 匹配失败时,调用一次小 LLM 去<strong>修格式</strong>——用模型修模型。而所有系统都躲着一条路:<strong>按行号编辑</strong>。模型数行号比做上下文匹配更容易漂,这是血泪共识。</p>
+
+  <h3>4.4 记忆与上下文:压缩已谢幕,记忆是新前线<span class="en">Memory · 论文 §9</span></h3>
+  <p>agent 的全部状态就是上下文窗口里的对话,而窗口会满。这个问题的第一阶段解法——<strong>阈值压缩</strong>——已经收敛到"解决了"的程度,7 个系统殊途同归:</p>
+  <ul>
+    <li>Claude Code:token 估算进入窗口下方 13,000 的缓冲区就触发(<code>AUTOCOMPACT_BUFFER_TOKENS = 13000</code>,环境变量可覆盖);</li>
+    <li>Gemini CLI:窗口用到 50% 时压缩,保留最近 30% 原文;</li>
+    <li>Pi / OpenCode:上一次的摘要会传回给模型做<strong>增量合并</strong>,避免从头重总结把早期决策弄丢;</li>
+    <li>Mistral Vibe:压缩后把用户的历史消息重新注入信封,而且同一套例程在中途撞上 <code>ContextTooLong</code> 报错时应急复用。</li>
+  </ul>
+  <p>论文观察 5 判定:2026 年的<strong>前沿已经从压缩转移到持久记忆</strong>。新名词一个比一个有意思:Codex 的"agent 自维护记忆管线"(让沙箱里的子 agent 管理长期记忆文件)、Hermes 的 <strong>lineage compaction</strong>(压缩 = 结束当前会话、开新会话,全部历史进 lineage 库,永不销毁)、Claude Code 私有的 <code>MEMORY.md</code> 项目索引、OpenClaw 按 agent/会话落盘的 JSONL 转录。而记忆检索的天花板,SQLite 全文检索就够(Hermes,64 万行规模)——确定性检索的胜利从代码延伸到了记忆。</p>
+  <p>还有个特别实用的部分:<strong>项目上下文文件的自动发现</strong>,就是那批 <code>AGENTS.md</code>/<code>CLAUDE.md</code>/<code>GEMINI.md</code>。每家的走法都不一样,而且都有明确的取舍:</p>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>系统</th><th>上下文发现策略</th></tr></thead>
+    <tbody>
+      <tr><td><span class="sys">Claude Code</span></td><td>目录信任门控 + 子目录上下文文件通过工具输出 <em>即时注入</em> + 私有 <code>MEMORY.md</code> 索引</td></tr>
+      <tr><td><span class="sys">Codex</span></td><td><code>AGENTS.md</code> 从根目录到当前目录拼接</td></tr>
+      <tr><td><span class="sys">Mistral Vibe</span></td><td>顶层 AGENTS.md 进提示词;嵌套的 AGENTS.md 在 <code>read_file</code> 碰到其子树时才浮出(v2.19+)</td></tr>
+      <tr><td><span class="sys">Hermes</span></td><td>首个命中即停(自家 → AGENTS.md → CLAUDE.md → .cursorrules);<b>每个上下文文件都过注入威胁扫描,命中即整文件拉黑</b></td></tr>
+      <tr><td><span class="sys">Pi</span></td><td>从 cwd 走到根,收进 <code>&lt;project_context&gt;</code> 标签;明说"接受注入面"——不装能防</td></tr>
+      <tr><td><span class="sys">OpenCode</span></td><td>向上走,首个文件名命中即停;支持远程 URL 指令文件;嵌套 AGENTS.md 懒挂载</td></tr>
+      <tr><td><span class="sys">OpenHands</span></td><td>一家读三家:把 AGENTS.md、.cursorrules 等作为 scoped rules 吸收——读别人生态的约定</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>4.5 安全与权限:从"先问后做"到"操作系统级硬隔离"<span class="en">Safety · 论文 §10</span></h3>
+  <p>论文给安全章节画了一条时间线:2024 年的主流思路是<strong>可逆性</strong>(问你一句再动手);2025 年风向变成 <strong>OS 加固</strong>(bash 用户限制、Landlock、各类沙箱)。理由不复杂:agent 获得的自主性越大,权限对话框就越跟不上——而模型永远可以被提示词注入攻破,只有操作系统不会。</p>
+  <p>两个标杆设计值得细看:</p>
+  <ul>
+    <li><strong>Claude Code 三层权限</strong>:静态规则(最快、最少上下文)→ LLM 辅助判断 → 交互式对话框(最慢、最可靠)。后台 agent 和 fork 子 agent 只有前两层可用——它们的"对话框"会直接解析为拒绝,防止无人值守的 agent 卡在等确认上。</li>
+    <li><strong>Codex 四层堆栈</strong>:Starlark 策略引擎 → 生命周期 hooks → 审批门 → 原生跨平台沙箱(Linux 把 Bubblewrap 直接内置进了代码库,macOS 用 Seatbelt)。Starlark 这个选择很讲究——策略文件是<strong>可执行代码</strong>,还带解析时校验的内联测试用例:</li>
+  </ul>
+  <pre class="mini">prefix_rule(
+    pattern = ["git", "status"],
+    decision = "allow",
+    match    = [["git", "status"], ["git", "status", "--short"]],
+    not_match = [["git", "push"]],      # 策略自带反例,加载时就验证
+)</pre>
+  <p>OpenCode 的思路则完全相反:<strong>语法感知的命令权限</strong>——每条 bash 命令用 tree-sitter 解析(bash 和 PowerShell 语法),"always allow" 的授权按命令元数精确到 <code>git commit *</code> 而不是一刀切放行 <code>git</code>;项目目录内默认全放行,只有越出项目、读 <code>.env</code>、死循环才拦。默认宽 Codex 一整头。</p>
+  <p>Pi 的姿态最坦率:论文引用它(大意)<em>"把权限系统误解为安全边界是要出事的"</em>,宣布上下文文件的提示词注入防不住,干脆明说接受这个攻击面,把信任门控只用在仓库控制的配置加载上,审计靠只追加的会话树。</p>
+  <div class="quiz" data-quiz>
+    <div class="q">🤔 思考题:为什么"无人值守的后台 agent"反而不能给它弹窗确认的能力?</div>
+    <button>看参考答案</button>
+    <div class="ans">因为它没人可问。Claude Code 的做法是:后台/分叉子 agent 的交互层直接解析为"拒绝"——宁可任务失败重来,也不能让整个流水线挂在一个永远没人点的对话框上。交互权限只属于前台、有人看着的那个 agent。</div>
+  </div>
+
+  <h3>4.6 多 agent 编排:六种模式,一条警告<span class="en">Orchestration · 论文 §11</span></h3>
+  <p>论文 §11.1 的六种编排模式,从简到繁:</p>
+  <ol>
+    <li><strong>单 agent</strong>(Mini-SWE-Agent、Aider、Pi 核心)——没有分身就是最好的分身;</li>
+    <li><strong>顺序委托</strong>(Mistral Vibe):父 agent 用 <code>task</code> 工具派一个子 agent,原地等结果;</li>
+    <li><strong>并行子会话</strong>(OpenHands、OpenCode):子任务是独立会话,一条消息里的多个调用并发跑;</li>
+    <li><strong>层级线程树 + 扇出</strong>(Codex):专用线程、fork 继承控制、map-reduce 式扇出、父子拓扑持久化;</li>
+    <li><strong>递归组合</strong>(Claude Code):agent 生 agent 可无限嵌套,fork 时字节级继承提示词共享缓存;</li>
+    <li><strong>注册表 + 跨进程协议</strong>(Gemini CLI 的 A2A、OpenClaw 的 ACP、Hermes 的 SQLite 黑板看板群)。</li>
+  </ol>
+  <p>警告来自建议 12:<strong>在能指着具体场景说出"并行上下文隔离确实赢过串行"之前,保持单 agent。</strong>多 agent 系统的 token 消耗大约是单聊基线的 15 倍,而"大多数编码任务里真正可并行的部分比研究任务少得多"。Mistral Vibe 那个顺序委托的 <code>task</code> 工具,论文评价是"对大多数编码工作流已经够用"。</p>
+  <p>跨进程协议这块还有个新剧情:ACP(2026.2 由 Zed 推出)在 6/11 的系统里落地,并且长出了论文所说的第三种角色——<strong>harness 托管</strong>:OpenHands 现在能把 Claude Code、Codex、Gemini CLI 当成可互换的 ACP 后端跑。IDE 之外,harness 之间也开始互相"寄生"了。</p>
+
+  <h3>4.7 扩展机制:Skills 反超 MCP 的那一季<span class="en">Extensibility · 论文 §12</span></h3>
+  <p>4 月的快照里,SKILL.md 技能和 MCP 还打平;7 月的语料打破了平衡——<strong>技能 9/11,MCP 8/11</strong>。决定性一票是 Pi:它实现了 agentskills.io 技能标准,同时<strong>彻底拒绝 MCP</strong>。"技能即 MCP 替代品"从一个怪念头变成了明确立场。</p>
+  <p>两者在论文里的分工建议(建议 14)很清晰:<strong>技能装"能力模板"</strong>(工作流、领域知识、操作配方——本质是结构化的提示词包),<strong>MCP 装"外部集成"</strong>(Slack、数据库、内部 API——本质是进程和协议)。按这个优先级,先技能后 MCP。</p>
+  <p>技能生态已经卷出了新高度:跨厂商发现(OpenCode 直接读 <code>~/.claude/skills</code> 目录——用户给 Claude 装的技能,OpenCode 白嫖)、注册表、信任分级、隔离扫描,以及语料里第一次出现的 <strong>agent 自己写的技能</strong>(Hermes 的自我改进循环:经验沉淀成技能文件,技能带版本演化)。论文提醒:装第三方技能要像装包一样对待——信任分级、扫描、隔离(Hermes 是基线)。</p>
+  <p>至于 hooks——这个概念的原创是 Claude Code,而现在 Codex 的 hooks 事件命名表(PreToolUse、PostToolUse、PreCompact、SubagentStart……)已经和 Claude Code <em>近乎逐字相同</em>,只多了一个 Claude Code 没有的 PostCompact。这是 §5 那个"收敛变模仿"故事最硬的一块化石。</p>
+</section>
+
+<!-- ================= 5 演化与平台 ================= -->
+<section id="s5">
+  <div class="sec-no">§ 5</div>
+  <h2>90 天纵向对比:收敛变成模仿,harness 变成平台</h2>
+  <p class="lead">论文把 4 月解剖过的 8 个系统在 7 月重新钉住同一批 commit 再读一遍,得到一份罕见的"受控演化样本"。结论浓缩成两句话,都值得原味品尝:</p>
+  <blockquote>“The diff shows convergence becoming imitation (Codex adopts Claude Code's hook vocabulary verbatim and ships an importer for its sessions and settings; OpenHands reads Claude Code's plugin format), while behavioral policy migrates from prompt prose to configuration.”<span class="src">—— 摘要。译:差异对比显示,收敛正在变成模仿(Codex 逐字采用 Claude Code 的 hook 词汇表,还发布了它的会话与设置的导入器;OpenHands 读 Claude Code 的插件格式),与此同时,行为策略正从提示词散文迁移到配置。</span></blockquote>
+  <p>先看速度。Codex 的代码量单季度从 62.1 万行涨到约 112 万行 Rust(crate 数 89→126),相当于每几周长出一个中型开源项目;Mistral Vibe 涨了 77%(3.56 万→6.3 万行);OpenHands 直接重新架构成了 SDK。论文为此专门立了个方法论规矩:<strong>清点式结论(inventory)必须标注日期,结构性结论(structure)才敢谈持久</strong>——而且这三个月里,4 月版的 13 条观察中有 3 条被实质性修订。诚实得让人有好感。</p>
+  <p>"收敛变模仿"最直观的三块证据:Codex 的 hooks 词汇表逐字抄 Claude Code;Codex 做了 Claude Code 的<strong>会话与设置导入器</strong>(降低你的切换成本——注意,是往自家导入,不是导出);OpenHands 读 Claude Code 的插件格式。论文的评语很冷:这不是巧合,是围绕一个事实标准的系统性收敛。</p>
+  <h3>平台转向:论文的总论点</h3>
+  <p>论文的最终论点(观察 12):<strong>2026 上半年,coding harness 完成了从"工具"到"平台"的转身。</strong>四条证据链,每条都能在源码里指认:</p>
+  <ol>
+    <li><strong>harness 变成可 import 的 SDK</strong>(Claude Agent SDK、openai-codex、openhands-sdk)——论文建议 15 的 2026 注脚:"框架层"现在就是这些 harness SDK,模式已经内置;而框架厂商反过来做了 harness(LangChain 的 Deep Agents)。</li>
+    <li><strong>市场与切换成本工具出现</strong>:插件市场、会话导入器、格式互通。</li>
+    <li><strong>企业治理层出现</strong>:策略引擎、审计轨迹、遥测——安全从"产品功能"升级为"平台属性"。</li>
+    <li><strong>agent 被当成模型暴露</strong>:OpenAI 兼容端点后面坐着的不再是模型,而是一整个 agent;Omnigent 这种元 harness 用一套 API 编排 11 个厂商 harness,论文的原话是"重新实现昂贵的部分,套利专有的部分"。</li>
+  </ol>
+  <p>结合 Aider 的停更和被收购语境,论文给这个行当下了个定语:harness 这一层"是厂商会<em>收购、贴牌、上锁</em>的战略性基础设施"。个人体会:这一章读完,你对"哪家 CLI 好用"的判断会降维成次要问题——真正的竞争已经上移到"谁成为别人都要兼容的那个标准"。目前看,那个标准长得很像 Claude Code。</p>
+</section>
+
+<!-- ================= 6 十八条建议 ================= -->
+<section id="s6">
+  <div class="sec-no">§ 6</div>
+  <h2>18 条设计建议:论文写给实践者的清单</h2>
+  <p class="lead">论文 §16 从"描述"切换到"开药方"。每条建议都钉在观察证据上。绿色角标表示那个 90 行脚手架已经直接落实(共 10 条,对应论文观察 13)。</p>
+
+  <div class="rec-group">循 环 与 模 型</div>
+  <div class="rec-grid">
+    <div class="rec"><span class="rn">R1</span><b>从线性 while 循环起步</b>;只有当独立的轮次策略(轮数上限、成本帽、自动压缩、只读模式…)长到三个以上,才升级成中间件管道。<span class="done">90行 ✓</span></div>
+    <div class="rec"><span class="rn">R2</span><b>模型厂就深耦合自家 + 通用回退适配器</b>;多供应商 harness 就为每家维护一层"方言"配置(缓存断点、思考档位)——付一次,集中付。<span class="done">90行 ✓</span></div>
+  </div>
+  <div class="rec-group">工 具 设 计</div>
+  <div class="rec-grid">
+    <div class="rec"><span class="rn">R3</span><b>先只给一个 bash</b>,新工具只在实际失败模式出现后加:输出截断烦了加 read/write,bash+find 别扭了加 grep/glob,整文件重写浪费 token 了加 search_replace。<span class="done">90行 ✓</span></div>
+    <div class="rec"><span class="rn">R4</span>工具数超过 ~15 个就上<b>延迟加载</b>(ToolSearch 式按需发现)。低于这个数,间接层不值那个复杂度。</div>
+  </div>
+  <div class="rec-group">文 件 编 辑</div>
+  <div class="rec-grid">
+    <div class="rec"><span class="rn">R5</span><b>编辑契约按模型档位选</b>:前沿模型用精确唯一子串替换,弱模型用模糊回退串;漂移在工具里处理,<b>永远别按行号编辑</b>。<span class="done">90行 ✓</span></div>
+  </div>
+  <div class="rec-group">上 下 文 与 记 忆</div>
+  <div class="rec-grid">
+    <div class="rec"><span class="rn">R6</span><b>自动发现分层的 Markdown 上下文</b>(项目/用户/扩展三个作用域),顺便读邻居家的文件名(AGENTS.md/CLAUDE.md/…);顶层的放系统提示词开头,嵌套的即时浮出。<span class="done">90行 ✓</span></div>
+    <div class="rec"><span class="rn">R7</span><b>阈值压缩</b>:窗口下方留固定缓冲;保留近期原文;摘要增量合并不从头重写;同一例程兼做溢出应急。<span class="done">90行 ✓</span></div>
+    <div class="rec"><span class="rn">R8</span><b>不要在代码上建 RAG</b>。用 ripgrep、glob、tree-sitter、文件系统遍历。<span class="done">90行 ✓</span></div>
+  </div>
+  <div class="rec-group">安 全 架 构</div>
+  <div class="rec-grid">
+    <div class="rec"><span class="rn">R9</span>开发者工具(半信任)场景:<b>三档审批</b>(PLAN / DEFAULT / YOLO)+ 权限作用域模式。</div>
+    <div class="rec"><span class="rn">R10</span>企业/共享/自动化场景:<b>OS 级沙箱 + 策略即代码 + 每 agent 审计轨迹</b>(复用操作系统的沙箱二进制,别自己造 namespace 管道)。</div>
+    <div class="rec"><span class="rn">R11</span>安全规则<b>写成数据或策略文件,不写进命令式代码</b>;YOLO 模式底下必须留一层地板(Hermes 的 12 条硬线规则连 --yolo 都删不掉,旁路标志在模块导入时就冻结)。</div>
+  </div>
+  <div class="rec-group">编 排 与 扩 展</div>
+  <div class="rec-grid">
+    <div class="rec"><span class="rn">R12</span><b>保持单 agent</b>,直到你能指出具体的"并行上下文隔离确实赢"的场景;自家主↔子 agent 协调用进程内原语,别上标准协议。<span class="done">90行 ✓</span></div>
+    <div class="rec"><span class="rn">R13</span><b>对外发一个 ACP server</b>:IDE、托管 harness、元 harness 三类客户一次全接住;自家子 agent 留在进程内。</div>
+    <div class="rec"><span class="rn">R14</span><b>技能管能力模板,MCP 管外部集成</b>,按此优先级;第三方技能按软件包对待(信任分级、扫描、隔离)。</div>
+  </div>
+  <div class="rec-group">反 模 式(不 要 建)</div>
+  <div class="rec-grid">
+    <div class="rec"><span class="rn">R15</span><b>不要用 LangChain / LangGraph / AutoGen / CrewAI / LlamaIndex / Genkit / ADK / Semantic Kernel 做 agent 运行时</b>——0/11;要用就从 harness SDK 起步。<span class="done">90行 ✓</span></div>
+    <div class="rec"><span class="rn">R16</span><b>不要建向量 embedding 代码检索层</b>——0/11;真觉得领域需要,先证明它赢过 ripgrep+tree-sitter 再建。<span class="done">90行 ✓</span></div>
+    <div class="rec"><span class="rn">R17</span><b>不要把上游 SaaS API 一比一包成工具</b>("常见错误:工具只是包了一层现有功能");要合并。</div>
+    <div class="rec"><span class="rn">R18</span><b>别过度工程化卡死检测,但便宜的限制必须装</b>:十几行的轮数/成本/墙钟保险丝是底线。</div>
+  </div>
+  <p>数一下绿色角标:正好 10 条。论文观察 13 的原话是:这个 90 行脚手架"直接实现了 18 条里的 10 条,与剩下 8 条兼容——没有框架依赖、没有 RAG、没有向量库、没有多 agent 编排、没有沙箱,正好对上两大缺席"。而且作者们还大胆猜想(并注明无证明):<em>把它跑在前沿模型上,SWE-bench 成绩应该能追平 Mini-SWE-Agent;再往上走,主要是模型能力问题,不是脚手架问题。</em>那么——是时候见见这 90 行本行了。</p>
+</section>
+
+<!-- ================= 7 90行精讲 ================= -->
+<section id="s7">
+  <div class="sec-no">§ 7 · 重 头 戏</div>
+  <h2>90 行最小 Harness 逐行精讲</h2>
+  <p class="lead">83 页论文的最后,作者把全部结论压缩成了一份可以复制进编辑器的礼物:论文 §16.10、Listing 3,一个约 90 行 Python 的<strong>最小可用 harness</strong>。零第三方依赖,零框架,零 RAG——却直接落实了 §6 那 18 条建议里的 10 条。这一节我们把它彻底拆碎。</p>
+  <blockquote>“It is not a drop-in library; it is a scaffold to be copied and specialized. … Start here, measure, add the minimum that your observed failure modes demand.”<span class="src">—— 论文 §16.10。译:它不是拿来即用的库,是一份供你复制并改造的脚手架。……从这里起步,去测量,只添加你的失败模式所要求的最小东西。</span></blockquote>
+  <p>先整体看一遍代码(下面每张讲解卡都对应一段行号,<strong>点卡片,上方代码会高亮对应行</strong>。行号沿用论文 PDF 里的原始编号,共 82 行——论文口径"~90 行"包含了排版折行):</p>
+
+  <div class="codewrap">
+    <div class="codehead">
+      <span class="fname">minimum_viable_harness.py</span>
+      <span class="hint">📌 点击下方讲解卡 → 高亮对应代码段 · 滚动可看全文</span>
+    </div>
+    <pre class="code" id="code-mvh"></pre>
+  </div>
+  <script type="text/plain" id="src-mvh">from __future__ import annotations
+import asyncio, json, pathlib, subprocess
+from dataclasses import dataclass, field
+from typing import Any, Protocol
+
+# ---- Provider abstraction (Recommendation 2): provider-first fallback ----
+class Model(Protocol):
+    async def complete(self, messages: list[dict], tools: list[dict]) -> dict: ...
+
+# ---- Tools (Recommendation 3): bash + 3 file tools ----
+def _truncate(s: str, n: int = 25_000) -> str:
+    return s if len(s) <= n else s[:n] + "\n\n...[truncated]"
+
+def tool_bash(cmd: str) -> str:
+    r = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=120)
+    return _truncate(f"exit={r.returncode}\nstdout:\n{r.stdout}\nstderr:\n{r.stderr}")
+
+def tool_read_file(path: str, offset: int = 0, limit: int = 2000) -> str:
+    lines = pathlib.Path(path).read_text().splitlines()
+    return _truncate("\n".join(f"{i+1:4}: {ln}" for i, ln in enumerate(lines[offset:offset+limit])))
+
+def tool_write_file(path: str, content: str) -> str:
+    pathlib.Path(path).write_text(content); return f"wrote {len(content)} bytes"
+
+def tool_search_replace(path: str, search: str, replace: str) -> str:
+    p = pathlib.Path(path); text = p.read_text()
+    if text.count(search) != 1: return f"ERROR: search string occurs {text.count(search)}x; must be unique"
+    p.write_text(text.replace(search, replace, 1)); return "OK"
+TOOLS = {"bash": tool_bash, "read_file": tool_read_file,
+         "write_file": tool_write_file, "search_replace": tool_search_replace}
+
+# ---- Hierarchical Markdown context (Recommendation 6) ----
+def discover_context(cwd: pathlib.Path = pathlib.Path.cwd()) -> str:
+    parts = []
+    for p in reversed([cwd, *cwd.parents]):  # root-to-leaf
+        md = p / "AGENTS.md"
+        if md.exists(): parts.append(f"<ctx path='{md}'>\n{md.read_text()}\n</ctx>")
+    return "\n".join(parts)
+
+# ---- Middleware pipeline (Recommendation 1) ----
+@dataclass
+class Agent:
+    model: Model
+    messages: list = field(default_factory=list)
+    n_turns: int = 0
+    cost: float = 0.0
+    max_turns: int = 50
+    max_cost: float = 5.00
+    compact_at_tokens: int = 120_000
+
+    def _token_estimate(self) -> int:
+        return sum(len(json.dumps(m)) for m in self.messages) // 4
+
+    async def _check_limits(self):
+        if self.n_turns >= self.max_turns: raise StopIteration(f"max_turns={self.max_turns}")
+        if self.cost >= self.max_cost: raise StopIteration(f"max_cost=${self.max_cost:.2f}")
+
+    async def _maybe_compact(self):  # Recommendation 7
+        if self._token_estimate() < self.compact_at_tokens: return
+        summary = await self.model.complete(
+            self.messages + [{"role": "user",
+            "content": "Summarize the conversation. Preserve decisions and unresolved issues."}], tools=[])
+        # Preserve system + last 30% of turns verbatim, drop the middle (Gemini pattern)
+        keep = max(4, int(len(self.messages) * 0.30))
+        self.messages = [self.messages[0], {"role": "assistant", "content": summary["content"]}] + self.messages[-keep:]
+
+    async def run(self, task: str) -> str:
+        self.messages = [
+            {"role": "system", "content": f"You are a SWE agent.\n\n{discover_context()}"},
+            {"role": "user", "content": task},
+        ]
+        tool_schemas = [{"name": n, "description": f.__doc__ or n} for n, f in TOOLS.items()]
+        while True:
+            await self._check_limits(); await self._maybe_compact()
+            resp = await self.model.complete(self.messages, tools=tool_schemas)
+            self.n_turns += 1; self.cost += resp.get("cost", 0.0)
+            self.messages.append(resp)
+            if not resp.get("tool_calls"): return resp.get("content", "")
+            for call in resp["tool_calls"]:  # serial execution
+                try: out = TOOLS[call["name"]](**call["args"])
+                except Exception as e: out = f"ERROR: {type(e).__name__}: {e}"
+                self.messages.append({"role": "tool", "tool_call_id": call["id"], "content": _truncate(str(out))})
+</script>
+
+  <h3>逐段精讲</h3>
+  <p><span class="badge b-r">R·n</span> = 对应 §6 的第 n 条建议 <span class="badge b-mine">我补的</span> = 非论文内容(笔记作者的注解)</p>
+
+  <div class="wt" data-range="1-9">
+    <div class="wt-head"><span class="wt-tag">行 1–9</span><h4>A · 骨架:一个 Protocol 吃遍所有模型</h4><span class="badge b-r">R2</span></div>
+    <div class="wt-body">
+      <p>前四行全是标准库。<code>from __future__ import annotations</code> 让类型注解延迟求值(库代码的肌肉记忆);真正干活的是 <code>pathlib</code>/<code>subprocess</code>(后面工具的原料)和 <code>json</code>(压缩时序列化消息用)。注意 <strong>asyncio 其实没被用到</strong>——它是留给扩展的空位,也在提醒你:这个 agent 的一切都是单协程串行的。</p>
+      <pre class="mini">class Model(Protocol):
+    async def complete(self, messages: list[dict], tools: list[dict]) -> dict: ...</pre>
+      <p>第 7–8 行是全篇最值钱的两行。<code>Protocol</code> 是"结构化鸭子类型":<strong>任何拥有 <code>complete</code> 方法的对象,都是模型</strong>。这 90 行代码对 GPT、Claude、本地 Qwen 一无所知,它只认识这个签名。换供应商 = 写一个几十行的适配器类(见 G 卡),agent 代码零改动——这就是 R2"provider-first + generic fallback"的骨架形态,也是 11/11 系统共有的第一道抽象。</p>
+      <p>为什么返回 <code>dict</code> 而不是某个 Response 类?因为工具调用的表示各家都不同,dict 是最小公分母,适配器负责把厂商格式归一化成 <code>{content, tool_calls:[{id, name, args}], cost}</code>。契约越薄,越不容易过时。</p>
+    </div>
+  </div>
+
+  <div class="wt" data-range="10-31">
+    <div class="wt-head"><span class="wt-tag">行 10–31</span><h4>B · 四个工具和一把裁纸刀</h4><span class="badge b-r">R3</span></div>
+    <div class="wt-body">
+      <p><code>_truncate</code> 先看,它是上下文经济学的第一课:工具输出不设上限,模型一句 <code>cat 巨型文件.json</code> 就能把窗口撑爆。25,000 字符 ≈ 6K token,超出就截断加省略号。论文建议 16 的"输出截断"对应的就是这里——11 个系统,无一例外都有输出预算。</p>
+      <p>四个工具按出场顺序:</p>
+      <p>• <code>tool_bash</code>(行 14–16):<code>subprocess.run(shell=True)</code>,120 秒超时,退出码 + stdout + stderr 打包返回。<strong>没有沙箱、没有权限检查</strong>——这是刻意的,论文原话:沙箱是 R9–10 的事,"deployment-specific"。120 秒超时是防工具挂死的唯一防线,再往里的安全要你自己补。</p>
+      <p>• <code>tool_read_file</code>(行 18–20):带 <code>offset/limit</code> 分页;<code>f"{i+1:4}"</code> 给每行编号并右对齐——行号让模型能精确引用"第 37 行",而不是"大概在中间那一片"。</p>
+      <p>• <code>tool_write_file</code>(行 22–23):一行完事。注意<strong>所有工具的返回值都是写给模型看的确认文本</strong>("wrote 230 bytes"),不是给人看的 UI。</p>
+      <p>• <code>tool_search_replace</code>(行 25–28):全场最佳。看这个判断——</p>
+      <pre class="mini">if text.count(search) != 1: return f"ERROR: search string occurs {text.count(search)}x; must be unique"</pre>
+      <p>匹配串必须在文件里<strong>恰好出现一次</strong>:0 次(模型记错了文件内容)或 ≥2 次(不知道该改哪处)都拒绝,而且把出错次数告诉模型,逼它回去读文件、给出更长的唯一上下文再试。这就是 R5"精确唯一子串替换"的完整实现——Aider 十几种编辑格式、OpenCode 九级模糊回退打了一整年仗之后,全行业收敛到的那个答案。错误信息本身就是反馈回路。</p>
+      <p>行 29–30 的 <code>TOOLS</code> 字典是整个工具系统:没有工具基类、没有装饰器、没有 schema 对象,<strong>名字 → 函数,完毕</strong>。R3 的"先只给一个 bash,按失败模式加工具"在这里已经加到了第 4 个——恰好是论文说的共识五件套砍掉 grep(因为 bash 里就能 rg)。</p>
+    </div>
+  </div>
+
+  <div class="wt" data-range="32-39">
+    <div class="wt-head"><span class="wt-tag">行 32–39</span><h4>C · AGENTS.md 层级发现:规范的注入顺序有讲究</h4><span class="badge b-r">R6</span></div>
+    <div class="wt-body">
+      <pre class="mini">for p in reversed([cwd, *cwd.parents]):  # root-to-leaf
+    md = p / "AGENTS.md"
+    if md.exists(): parts.append(f"&lt;ctx path='{md}'&gt;\n{md.read_text()}\n&lt;/ctx&gt;")</pre>
+      <p><code>reversed([cwd, *cwd.parents])</code> 把路径链倒过来,从文件系统根一路走到当前目录:<code>/AGENTS.md</code>(公司全局规范)先注入,用户主目录的其次,项目里的最后。<strong>为什么这个顺序?</strong>因为后注入的在上下文里离任务更"近",注意力权重更高——等于允许项目级规范自然覆盖全局规范,而且不用写一行优先级代码。论文里 Codex 就是这么实现的("AGENTS.md root-to-cwd concatenation")。</p>
+      <p>还有一个容易错过的细节:<code>&lt;ctx path='...'&gt;</code> 包裹标签。模型不但看到规范内容,还看到<strong>它来自哪个文件</strong>。带出处的知识,幻觉率肉眼可见地下降。</p>
+      <p>这个 90 行版没有 Hermes 的注入威胁扫描、没有 Pi 的信任门控——和 Pi 一样,它坦率地接受了这个攻击面。安全在这里明确让位于教学。</p>
+    </div>
+  </div>
+
+  <div class="wt" data-range="40-57">
+    <div class="wt-head"><span class="wt-tag">行 40–57</span><h4>D · Agent 的全部家当:9 个字段 + 两条保险丝</h4><span class="badge b-r">R1</span></div>
+    <div class="wt-body">
+      <p><code>@dataclass</code> 一展开,agent 的<strong>全部可变状态</strong>就摆在眼前:一个模型引用、一份消息历史、两个计数器、三个上限。对比 OpenHands 那种事件溯源日志,这是"状态最小主义"的示范——能放进一个 dataclass 的状态,才好测试、好序列化、好恢复。</p>
+      <p>行 40 的注释写着 <em>Middleware pipeline (Recommendation 1)</em>:<code>_check_limits</code> 和 <code>_maybe_compact</code> 是两个<strong>互相独立的轮次策略</strong>,它们是 Agent 上可组合的方法,而不是 while 循环体里的两个 if 分支。R1 说"策略攒到三个以上再升级成中间件链",这个形状就是在给升级预留接口。</p>
+      <p>行 51–52 的 token 估算值得盯十秒:</p>
+      <pre class="mini">def _token_estimate(self) -&gt; int:
+    return sum(len(json.dumps(m)) for m in self.messages) // 4</pre>
+      <p><strong>故意不用真 tokenizer。</strong>这个函数每一轮都要跑,必须便宜;"粗略但免费"胜过"精确但昂贵"。4 字符 ≈ 1 token 是英文经验值——对中文会明显低估(一个汉字常常就是 1–2 个 token),实验清单里会让你亲手改它。生产版(Claude Code)用 API 返回的真实用量,那是"有钱人的精确"。</p>
+      <p>行 54–56,两行保险丝:50 轮、5 美元,超了就抛 <code>StopIteration</code>(借用迭代器协议里"该停了"的语义)。放在<strong>循环顶部</strong>,每轮先检查。<code>cost</code> 从哪来?看 F 卡——是适配器在每次响应里自报的(<code>resp["cost"]</code>),harness 只管记账不问价目表。为什么保险丝如此重要?因为 agent 最大的风险从来不是"不干活",是<strong>停不下来</strong>地烧钱。</p>
+    </div>
+  </div>
+
+  <div class="wt" data-range="58-66">
+    <div class="wt-head"><span class="wt-tag">行 58–66</span><h4>E · 压缩:让模型自己总结自己(含金量最高的一段)</h4><span class="badge b-r">R7</span></div>
+    <div class="wt-body">
+      <p>先看它怎么触发:估算超过 <code>compact_at_tokens = 120_000</code> 就动手——"窗口下方留固定缓冲"的阈值压缩,R7 的标准形态。</p>
+      <p>最妙的是行 60–62:压缩用的就是 <code>self.model.complete</code> 自己,<code>tools=[]</code>,把整段对话加一句指令("总结这次对话,保留决策和未解决的问题")发回去。<strong>不需要第二个模型,不需要特殊 API</strong>——Protocol 的复利。</p>
+      <p>然后是行 63–65,论文注释亲自点名这是 <em>Gemini pattern</em>(Gemini CLI:窗口用到 50% 时压缩,保留最近 30% 原文):</p>
+      <pre class="mini">keep = max(4, int(len(self.messages) * 0.30))
+self.messages = [self.messages[0], {"role": "assistant", "content": summary["content"]}] + self.messages[-keep:]</pre>
+      <p>翻译成人话,新历史 = <strong>system prompt + 一条摘要 + 最近 30% 的原文</strong>(至少 4 条),中间全丢。三个决策各有道理:</p>
+      <ul>
+        <li><code>messages[0]</code> 永远保留:system prompt 里有身份和 AGENTS.md,是 agent 的"宪法",丢了就失忆;</li>
+        <li>近期轮次保原文:近因优先——最新的报错和文件内容是下一步行动最可能引用的事实,摘要替代不了;</li>
+        <li>中间靠摘要活下来:早期的探索和决策,有总比没有强。</li>
+      </ul>
+      <p>R7 的完整版还要求两件事:摘要<strong>增量合并</strong>(Pi/OpenCode:上次摘要传回参与下次总结,防止从头重写弄丢早期决策)和<strong>溢出应急</strong>(Mistral Vibe:中途撞上 ContextTooLong 时复用同一例程)。90 行版是这门课的及格线实现——但及格线已经覆盖了 80% 的实际收益。</p>
+    </div>
+  </div>
+
+  <div class="wt" data-range="67-82">
+    <div class="wt-head"><span class="wt-tag">行 67–82</span><h4>F · run():16 行讲完"什么是 agent"</h4><span class="badge b-r">R1</span><span class="badge b-r">R12</span></div>
+    <div class="wt-body">
+      <p>主循环开始,先造历史:<code>system</code>("你是一个 SWE agent"+ 层级 AGENTS.md)+ <code>user</code>(任务)。没有更多仪式。行 72 顺手把工具表变成 schema——<code>f.__doc__ or n</code>:<strong>工具的 docstring 就是给模型看的说明书</strong>(这版工具没写 docstring,于是回退到函数名;给工具补 docstring 是论文留给读者的第一个作业,直接提升工具调用质量)。</p>
+      <p>然后是那 9 行 <code>while True</code>,五拍一个循环:</p>
+      <ol>
+        <li><strong>自检</strong>(行 74):保险丝 + 压缩,先确认还活得起,再干活;</li>
+        <li><strong>问模型</strong>(行 75):<code>await self.model.complete(...)</code>——整个系统唯一的智能来源,就一行;</li>
+        <li><strong>记账</strong>(行 76):轮数 +1,成本累加;</li>
+        <li><strong>判停</strong>(行 78):响应里没有 <code>tool_calls</code> → 返回 <code>content</code>,循环结束。<strong>模型开口说话而不动手的那一刻,就是任务完成的那一刻</strong>——agent 的终止条件,朴素到让人想笑;</li>
+        <li><strong>执行</strong>(行 79–82):逐个调用工具,结果包成 <code>role="tool"</code> 消息塞回历史,进入下一轮。</li>
+      </ol>
+      <p>两个设计决策值得单独点名。注释 <em>serial execution</em>:工具<strong>串行</strong>执行,不并行——并行会引入顺序依赖、竞态、部分失败语义,没有具体需求就别上(R12 的精神延伸到了工具层)。行 80–81 的 <code>try/except</code>:工具崩了 harness 不崩,异常类型和消息本身作为观察喂回模型——模型读到栈回溯会自我修正路线。<strong>错误是上下文,不是事故。</strong></p>
+      <p>所以"agent"到底是什么?剥掉营销话术,就是这 16 行:一个会调用工具、会把结果记下来、知道该停的 while 循环。你现在的每一次 Claude Code / Codex 会话,内核都是它的富贵版本。</p>
+    </div>
+  </div>
+
+  <div class="wt" data-range="">
+    <div class="wt-head"><span class="wt-tag">附 · 行外</span><h4>G · 让它真的跑起来:一个 OpenAI 兼容适配器</h4><span class="badge b-mine">我补的(非论文内容)</span></div>
+    <div class="wt-body">
+      <p>论文故意没给适配器(它是"骨架",不是库),但留了两处明示的作业:① 工具 schema 缺参数定义(OpenAI 端点需要 JSON Schema);② 响应里的 <code>cost</code> 得有人填。下面是我补的最小实现,约 50 行,接任何 OpenAI 兼容端点(含 Ollama / vLLM 本地模型,传 <code>base_url</code> 即可):</p>
+      <pre class="mini" id="code-adapter"></pre>
+      <script type="text/plain" id="src-adapter">import inspect
+from openai import AsyncOpenAI          # pip install openai
+
+def _schema(f):
+    """从函数签名自动生成参数 JSON Schema(论文版省略了这一步)"""
+    params, tmap = {}, {"str": "string", "int": "integer", "float": "number"}
+    for name, a in inspect.signature(f).parameters.items():
+        params[name] = {"type": tmap.get(getattr(a.annotation, "__name__", ""), "string")}
+    return {"type": "object", "properties": params}
+
+class OpenAIModel:
+    """Model 协议的最小实现:任何 OpenAI 兼容端点都能接"""
+    def __init__(self, model="gpt-4o", base_url=None):
+        self.client = AsyncOpenAI(base_url=base_url)   # 自动读 OPENAI_API_KEY
+        self.model = model
+
+    async def complete(self, messages, tools):
+        schemas = [{"type": "function", "function": {
+            "name": n, "description": f.__doc__ or n,
+            "parameters": _schema(f)}} for n, f in TOOLS.items()]
+        r = await self.client.chat.completions.create(
+            model=self.model, messages=self._clean(messages), tools=schemas)
+        m = r.choices[0].message
+        return {"role": "assistant", "content": m.content or "",
+                "tool_calls": [{"id": c.id, "name": c.function.name,
+                                "args": json.loads(c.function.arguments or "{}")}
+                               for c in (m.tool_calls or [])],
+                "cost": (r.usage.prompt_tokens * 2.5 +        # 粗略计价,按你家价目表改
+                         r.usage.completion_tokens * 10) / 1e6}
+
+    def _clean(self, msgs):
+        """harness 的 dict 协议 -> OpenAI 线上格式"""
+        out = []
+        for m in msgs:
+            if m["role"] == "assistant" and m.get("tool_calls"):
+                out.append({"role": "assistant", "content": m.get("content") or "",
+                    "tool_calls": [{"id": c["id"], "type": "function",
+                        "function": {"name": c["name"],
+                                     "arguments": json.dumps(c["args"], ensure_ascii=False)}}
+                                    for c in m["tool_calls"]]})
+            elif m["role"] == "tool":
+                out.append({"role": "tool", "tool_call_id": m["tool_call_id"],
+                            "content": m["content"]})
+            else:
+                out.append({"role": m["role"], "content": m["content"]})
+        return out
+
+# ===== 用法 =====
+# agent = Agent(model=OpenAIModel("gpt-4o"), max_cost=1.0)
+# print(asyncio.run(agent.run("读一下当前目录的 README.md,开头加一段项目简介")))
+# 本地模型:OpenAIModel("qwen3:32b", base_url="http://localhost:11434/v1")</script>
+      <p>跑通之后建议干的第一件事:在 <code>run()</code> 的 while 循环里加一行 <code>print(self.n_turns, self.cost, len(self.messages))</code>——你会亲眼看到那个五拍循环怎么转,比读十篇博客都清楚。</p>
+    </div>
+  </div>
+
+  <h3>10/18 是怎么数出来的</h3>
+  <p>论文观察 13 说它"直接实现了 10 条,与剩下 8 条兼容"。对着代码数:正向实现的有 <code>R1</code>(线性循环 + 可组合策略)、<code>R2</code>(Protocol)、<code>R3</code>(bash 起步的四工具)、<code>R5</code>(唯一子串替换)、<code>R6</code>(AGENTS.md 层级发现)、<code>R7</code>(阈值压缩);以"缺席"遵守的有 <code>R8 / R15 / R16</code>(不建 RAG、不用框架、不上向量库)和 <code>R12</code>(保持单 agent)——正好十条。保险丝那两行还顺手沾了 <code>R18</code> 的边。</p>
+  <p><strong>它故意不做什么,和它做了什么同样重要。</strong>论文点名的三个"故意缺席":沙箱(R9–10,部署相关,你的部署环境说了算)、多 agent(R12,明确推迟)、MCP/Skills(R14,那是扩展性,不是内核)。剩下的 8 条建议它都"兼容"——意思是:等你的失败模式要求时,再一条条加回来。</p>
+  <p>最后是论文那个大胆的猜想(作者自己标注了"无证明"):<em>把这个脚手架跑在前沿模型上,SWE-bench 成绩应该能追平 Mini-SWE-Agent;再往上走,瓶颈是模型能力,不是脚手架。</em>这句话你可以在 §4.1 找到完整的呼应——毕竟 Mini-SWE-Agent 自己就是用"50 行循环 + 74% 成绩"证明了同一件事。</p>
+
+  <h3>动手实验清单</h3>
+  <p>光看不动手,这 90 行就白给了。按顺序做完,你对 agent 的理解会超过绝大多数只读过文章的人:</p>
+  <ol>
+    <li><strong>跑通最小回路</strong>:用最便宜的模型,给一个会失败的小任务(比如"修复当前目录某个文件里的 typo"),配合上面那行 print 观察循环五拍。</li>
+    <li><strong>弄断唯一性</strong>:造一个包含两处相同文本的文件,让模型编辑它。看 <code>search_replace</code> 拒绝后,模型如何自救(通常会去 <code>read_file</code>,然后给出带更多上下文的搜索串)。</li>
+    <li><strong>触发压缩</strong>:把 <code>compact_at_tokens</code> 改到 5000,给它一个长任务,打印压缩前后的 <code>len(self.messages)</code>,亲眼看着"中间消失,两头保留"。</li>
+    <li><strong>修中文的 token 估算</strong>:<code>// 4</code> 对中文严重低估(一个汉字 ≈ 1–2 token),改成 <code>// 2</code> 试试,观察压缩触发时机的差异——顺便体会"估算精度"和"成本"的取舍。</li>
+    <li><strong>加第五个工具</strong>:照猫画虎写一个 <code>tool_glob(pattern)</code>,在 TOOLS 里注册一行。体会"加工具"有多简单,然后理解 R3 为什么劝你忍住。</li>
+    <li>(进阶)<strong>把串行改并行</strong>:用 <code>asyncio.gather</code> 并发执行工具调用,然后观察什么时候会出事——用事故理解 R12,比读十遍文字都牢。</li>
+  </ol>
+</section>
+
+<!-- ================= 8 读后感 ================= -->
+<section id="s8">
+  <div class="sec-no">§ 8</div>
+  <h2>读完之后:我的三点想法</h2>
+  <p class="lead">论文部分到此结束。剩下的是我自己的读后感,和论文立场无关,欢迎不同意。</p>
+  <h3>1. 方法论本身比结论耐放</h3>
+  <p>这个领域三个月一换脸,论文的两条做法特别值得偷师:一是<strong>读源码不读文档</strong>(文档是愿望,源码是事实);二是<strong>固定样本做纵向对比</strong>,并且把结论分成"清点式"(标注日期,默认会过期)和"结构性"(期望持久)两类。任何人想认真跟进 agent 工程,都可以照这个方法每季度自己跑一遍 diff——论文甚至把 commit 钉得足够死,让你能复现。</p>
+  <h3>2. 竞争已经上移,"哪家好用"是次要问题</h3>
+  <p>功能层面在快速拉平(收敛),差异化的战场搬到了:缓存经济学的精打细算、企业治理层、生态兼容(谁成为别人都要兼容的标准——目前看,那个标准的形状长得像 Claude Code,hooks 词汇表都被人逐字抄了)。选型建议随之变味:与其问"哪个 agent 强",不如问"我的工作流数据沉淀在谁的格式里"。顺带一提,论文给 Aider 的悼词式判词——harness 是"会被收购、贴牌、上锁的战略基础设施"——放在任何一家你现在依赖的开源 harness 身上,都值得想一想。</p>
+  <h3>3. 对做东西的人来说,90 行是最好的解毒剂</h3>
+  <p>这 90 行的价值不在"能跑",在于它给了一个<strong>校准直觉的基准</strong>:agent 的内核小到可以装进脑子,那外面的几百万行都是在买可靠性、安全和经济性——而且是<em>按需</em>买。反过来,它也是对"框架依赖"的解毒剂:当 11 家最懂行的公司全部选择手写,你上 LangChain 之前至少该问一句为什么。"从这里起步,去测量,只添加失败模式所要求的最小东西"——这句话值得贴在显示器上。</p>
+  <div class="quiz" data-quiz>
+    <div class="q">🤔 最后一题:如果这个 90 行 agent 在你眼皮底下陷入死循环烧钱,代码里哪一行救了你?它最多烧掉多少?</div>
+    <button>看参考答案</button>
+    <div class="ans">行 74 的 <code>await self._check_limits()</code>,每轮循环开头先执行;保险丝在行 54–56:<code>max_turns=50</code>、<code>max_cost=5.00</code>,取先到者——最多 50 轮或 5 美元。前提是你的适配器老老实实把 <code>cost</code> 填进 <code>resp["cost"]</code>(见 G 卡),否则成本保险丝就是个摆设——这也是"harness 只记账,适配器管价格"这个分工的脆弱点。</div>
+  </div>
+  <p>写到这里正好可以坦白:这份笔记的初稿也是在一个 coding agent 里打磨的——现在你知道它肚子里那个 while 循环长什么样了。祝玩得开心。</p>
+</section>
+
+
+</main>
+</div>
+
+<footer>
+  <p>笔记基于本地 PDF《Harness Engineering: Anatomy, Architecture, and Evolution of Coding Agents》(arXiv:2609.00006v1, 2026-07)整理 · 所有引文均已对照原文核实<br>
+  单文件离线页面 · 字体走系统栈 · <a href="https://arxiv.org/abs/2609.00006" target="_blank">论文原址 ↗</a></p>
+</footer>
+
+<script>
+/* ============ 交互脚本 ============ */
+(function () {
+  "use strict";
+
+  /* ---- 1. 阅读进度条 ---- */
+  var bar = document.getElementById("bar");
+  function onScroll() {
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + "%";
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ---- 2. 目录 scrollspy ---- */
+  var links = Array.prototype.slice.call(document.querySelectorAll("nav.toc a"));
+  var sections = links
+    .map(function (a) { return document.getElementById(a.getAttribute("data-t")); })
+    .filter(Boolean);
+  function spy() {
+    var pos = window.scrollY + 140, cur = sections[0];
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].offsetTop <= pos) cur = sections[i];
+    }
+    links.forEach(function (a) {
+      a.classList.toggle("active", a.getAttribute("data-t") === (cur && cur.id));
+    });
+  }
+  window.addEventListener("scroll", spy, { passive: true });
+  spy();
+
+  /* ---- 3. 七子系统卡片开合 ---- */
+  document.querySelectorAll(".sub-card").forEach(function (c) {
+    c.addEventListener("click", function () { c.classList.toggle("open"); });
+  });
+
+  /* ---- 4. 思考题 ---- */
+  document.querySelectorAll(".quiz").forEach(function (q) {
+    var btn = q.querySelector("button");
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      q.classList.toggle("show");
+      btn.textContent = q.classList.contains("show") ? "收起答案" : "看参考答案";
+    });
+  });
+
+  /* ---- 5. Python 语法高亮(手写,零依赖) ---- */
+  function esc(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  var RE = new RegExp(
+    '((?:[frbFRB]{0,2})?(?:"""[\\s\\S]*?"""|\'\'\'[\\s\\S]*?\'\'\'' +  // 三引号
+    '|"(?:\\\\.|[^"\\\\])*"|\'(?:\\\\.|[^\'\\\\])*\'))' +                // 普通字符串
+    '|(#[^\\n]*)' +                                                            // 注释
+    '|(@[A-Za-z_]\\w*)' +                                                      // 装饰器
+    '|\\b(async|await|def|class|return|if|elif|else|for|while|in|not|and|or|is|None|True|False|from|import|try|except|finally|raise|with|as|pass|yield|lambda)\\b' +
+    '|\\b(\\d[\\d_]*(?:\\.\\d+)?)\\b' +                                        // 数字
+    '|\\b(self|cls)\\b',                                                       // self
+    "g"
+  );
+  function hlLine(raw) {
+    var s = esc(raw), out = "", last = 0, m;
+    RE.lastIndex = 0;
+    while ((m = RE.exec(s))) {
+      out += s.slice(last, m.index);
+      var cls = m[1] ? "tk-s" : m[2] ? "tk-c" : m[3] ? "tk-d" : m[4] ? "tk-k" : m[5] ? "tk-n" : "tk-v";
+      out += '<span class="' + cls + '">' + m[0] + "</span>";
+      last = m.index + m[0].length;
+    }
+    return out + s.slice(last);
+  }
+
+  /* ---- 6. 渲染 90 行主代码(带行号) ---- */
+  var src = document.getElementById("src-mvh");
+  var pre = document.getElementById("code-mvh");
+  if (src && pre) {
+    var lines = src.textContent.replace(/\n+$/, "").split("\n");
+    pre.innerHTML = lines
+      .map(function (ln, i) {
+        return '<div class="cl" data-l="' + (i + 1) + '"><span class="no">' + (i + 1) +
+               '</span><span class="tx">' + (hlLine(ln) || "&nbsp;") + "</span></div>";
+      })
+      .join("");
+  }
+
+  /* ---- 7. 渲染适配器与所有 mini 代码块 ---- */
+  var adSrc = document.getElementById("src-adapter");
+  var adPre = document.getElementById("code-adapter");
+  if (adSrc && adPre) {
+    adPre.innerHTML = adSrc.textContent.replace(/\n+$/, "").split("\n")
+      .map(function (ln) { return hlLine(ln) || "&nbsp;"; }).join("\n");
+  }
+  document.querySelectorAll("pre.mini:not(#code-adapter)").forEach(function (p) {
+    p.innerHTML = p.textContent.replace(/\n+$/, "").split("\n")
+      .map(function (ln) { return hlLine(ln) || "&nbsp;"; }).join("\n");
+  });
+
+  /* ---- 8. 讲解卡 ↔ 代码行联动 ---- */
+  document.querySelectorAll(".wt").forEach(function (card) {
+    card.addEventListener("click", function () {
+      document.querySelectorAll(".wt").forEach(function (c) { c.classList.remove("active"); });
+      card.classList.add("active");
+      var range = card.getAttribute("data-range");
+      document.querySelectorAll("#code-mvh .cl").forEach(function (l) { l.classList.remove("on"); });
+      if (!range) return;
+      var ab = range.split("-");
+      var a = parseInt(ab[0], 10), b = parseInt(ab[1] || ab[0], 10);
+      var first = null;
+      document.querySelectorAll("#code-mvh .cl").forEach(function (l) {
+        var n = parseInt(l.getAttribute("data-l"), 10);
+        var on = n >= a && n <= b;
+        l.classList.toggle("on", on);
+        if (on && !first) first = l;
+      });
+      if (first) first.scrollIntoView({ block: "center", behavior: "smooth" });
+    });
+  });
+
+  /* ---- 9. 默认高亮第一段(不触发滚动) ---- */
+  var firstCard = document.querySelector(".wt");
+  if (firstCard) {
+    firstCard.classList.add("active");
+    var r = firstCard.getAttribute("data-range");
+    if (r) {
+      var ab = r.split("-"), fa = parseInt(ab[0], 10), fb = parseInt(ab[1] || ab[0], 10);
+      document.querySelectorAll("#code-mvh .cl").forEach(function (l) {
+        var n = parseInt(l.getAttribute("data-l"), 10);
+        l.classList.toggle("on", n >= fa && n <= fb);
+      });
+    }
+  }
+})();
+</script>
+</body>
+</html>
